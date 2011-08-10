@@ -1,1 +1,4 @@
-tmp/
+app/tmp/
+app/webroot/img
+app/media
+
