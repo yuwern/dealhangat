@@ -1,25 +1,5 @@
 <?php /* SVN: $Id: do_payment.ctp 54285 2011-05-23 10:16:38Z aravindan_111act10 $ */ 
 
-//define globally cause we need to ensure every instance has the same timestamp
-
-function iPay88_signature($source) {
-    return base64_encode(hex2bin(sha1($source)));
-}
-
-function hex2bin($hexSource) {
-
-    for ($i=0;$i<strlen($hexSource);$i=$i+2) {
-        $bin .= chr(hexdec(substr($hexSource,$i,2))); 
-    }
-    return $bin;
-}
-
-function iPay88hash($gateway_options){
-        $string = '2fOUVQq4FmM03648'.$gateway_options['refno'].$gateway_options['amount'].'00'.$gateway_options['currency_code'];
-        return iPay88_signature($string);
-}
-
-
 
 ?>
 <h2><?php echo sprintf(__l('Buy %s Deal'),$deal['Deal']['name']);?></h2>
@@ -53,7 +33,7 @@ function iPay88hash($gateway_options){
 <INPUT type="hidden" name="UserContact" value="">
 <INPUT type="hidden" name="Remark"  value="">
 <INPUT type="hidden" name="Lang" value="UTF-8">
-<INPUT type="hidden" name="Signature"  value="<?php echo iPay88hash($gateway_options, $refno) ?>">
+<INPUT type="hidden" name="Signature"  value="<?php echo $gateway_options['request_signature'] ?>">
 <INPUT type="hidden" name="ResponseURL" value="http://www.dealhangat.com/deals/processpayment/creditcard"> 
 <INPUT type="submit" value="Proceed with Payment" name="Submit">
 </FORM>

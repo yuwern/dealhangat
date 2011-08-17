@@ -17,9 +17,13 @@ class ipay88Component extends Component
         return $bin;
     }
 
-    function iPay88hash($gateway_options){
+    function generateRequestSignature($gateway_options){
+        
+        //must add stupid handling for amount - what if there are decimal places ??
+        
+        
         $string = self::merchantKey.self::merchantCode.$gateway_options['refno'].$gateway_options['amount'].'00'.$gateway_options['currency_code'];
-        return iPay88_signature($string);
+        return $this->iPay88_signature($string);
     }
     
     function validateResponseSignature($request)

@@ -3613,6 +3613,8 @@ class DealsController extends AppController
                                 'is_purchase_with_wallet_amount' => $is_purchase_with_wallet_amount
                             ) 
                         );
+                        //need to add the request_signature
+                        $gateway_options['request_signature'] = $this->ipay88->generateRequestSignature($gateway_options);
                         $transaction_data['TempPaymentLog'] = array(
                             'trans_id' => $refno,
                             'payment_type' => 'Buy deal',
