@@ -4409,7 +4409,7 @@ class DealsController extends AppController
 
                         //$deal_data['Deal']['is_process_payment'] = 1;
                         
-                        //$this->TempPaymentLog->delete($transaction_data['id']);
+                        $this->TempPaymentLog->delete($transaction_data['id']);
                         // For affiliates ( //
                         if (!empty($transaction_data['referred_user_id'])) {
                             $deal_data['DealUser']['referred_user_id'] = $transaction_data['referred_user_id'];
