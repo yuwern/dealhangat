@@ -4263,6 +4263,7 @@ class DealsController extends AppController
         $this->Email->sendAs = ($email['is_html']) ? 'html' : 'text';
         $this->Email->send(strtr($email['email_content'], $emailFindReplace));
     }
+    
     public function processpayment($gateway_name, $return_details = null)
     {
         
@@ -4293,6 +4294,7 @@ class DealsController extends AppController
             'recursive' => 1
         ));
 
+        
         switch ($gateway_name) {
          case 'creditcard':
              /*if (!empty($paymentGateway['PaymentGatewaySetting'])) {
@@ -4324,20 +4326,7 @@ class DealsController extends AppController
                     'admin' => false
                 ));
             }
-            //$this->ipay88->init();
-            //die('me here');
-            /*$this->PagSeguro->init(array(
-                'pagseguro' => array(
-                    'email' => $email,
-                    'token' => $token,
-                ) ,
-                'format' => array(
-                    'item_id' => $transaction_data['deal_id'],
-                    'item_descr' => 'Bought Deal',
-                    'item_quant' => $transaction_data['quantity'],
-                    'item_valor' => $transaction_data['amount_needed'],
-                )
-            ));*/
+
             if (empty($transaction_data['deal_id'])) {
                 $this->redirect(array(
                     'controller' => 'transactions',
@@ -4361,6 +4350,9 @@ class DealsController extends AppController
                 $log_data = array_merge($return_details, $transaction_data);
                 //$pagseguro_transaction_log_id = $this->Deal->DealUser->PagseguroTransactionLog->logPagSeguroTransactions($log_data);
             }
+            
+            $cc_transaction_log_id = $this->ipay88->logTransaction($post_array, $transaction_data);          
+            
             if ($transaction_data['payment_type'] == 'Buy deal' && $verified == 1) {
                 
                 $conditions = array();
@@ -4412,7 +4404,7 @@ class DealsController extends AppController
                         $deal_data['Deal']['message'] = $transaction_data['message'];
                         $deal_data['Deal']['user_id'] = $transaction_data['user_id'];
                         $deal_data['Deal']['payment_gateway_id'] = ConstPaymentGateways::PagSeguro;
-                        $deal_data['Deal']['pagseguro_transaction_log_id'] = $pagseguro_transaction_log_id;
+                        $deal_data['Deal']['cc_transaction_log_id'] = $cc_transaction_log_id;
                         //MOHAN - commented out the following line , otherwise page does not redirect after purchase  - which is odd
 
                         //$deal_data['Deal']['is_process_payment'] = 1;
@@ -4915,9 +4907,7 @@ class DealsController extends AppController
             }
             $this->Deal->DealUser->create();
             $this->Deal->DealUser->set($deal_user);
-         
-     
-               
+  
             //for credit card doDirectPayment function call in paypal component
             if ($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
                 if (!empty($paymentGateway['PaymentGatewaySetting'])) {
@@ -5035,15 +5025,6 @@ class DealsController extends AppController
                         'PaypalTransactionLog.id' => $data['Deal']['paypal_transaction_log_id']
                     ));
                 } else {
-                    if ($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::PagSeguro) {
-                        //update deal user id in PaypalTransactionLog table
-                        //MOHAN - Need to figure out where to log this
-                        /*$this->Deal->DealUser->PagseguroTransactionLog->updateAll(array(
-                            'PagseguroTransactionLog.deal_user_id' => $last_inserted_id
-                        ) , array(
-                            'PagseguroTransactionLog.id' => $data['Deal']['pagseguro_transaction_log_id']
-                        ));*/
-                    }
                     //buy deal through wallet
                     $transaction['Transaction']['user_id'] = $deal_user['DealUser']['user_id'];
                     $transaction['Transaction']['foreign_id'] = $last_inserted_id;
@@ -5051,7 +5032,18 @@ class DealsController extends AppController
                     $transaction['Transaction']['amount'] = $total_deal_amount;
                     $transaction['Transaction']['transaction_type_id'] = (!empty($data['Deal']['is_gift'])) ? ConstTransactionTypes::DealGift : ConstTransactionTypes::BuyDeal;
                     //original_amount_needed
-                    $this->Deal->User->Transaction->log($transaction);
+                    $tbl_transaction_id = $this->Deal->User->Transaction->log($transaction);
+                    if ($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::PagSeguro) {
+                        //update deal user id in PaypalTransactionLog table
+                        //MOHAN - Need to figure out where to log this
+                        $this->Deal->DealUser->PaypalTransactionLog->updateAll(array(
+                            'PaypalTransactionLog.deal_user_id' => $last_inserted_id,
+                            'PaypalTransactionLog.transaction_id' => $tbl_transaction_id
+                        ) , array(
+                            'PaypalTransactionLog.id' => $data['Deal']['cc_transaction_log_id']
+                        ));
+                    }
+                   
                     //user update
                     $this->Deal->User->updateAll(array(
                         'User.available_balance_amount' => 'User.available_balance_amount -' . $total_deal_amount,
