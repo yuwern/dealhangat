@@ -1081,9 +1081,61 @@ return false;});$('form input.js-buy-confirm').livequery('click',function(){var 
 $('#'+$(this).metadata().update).html(value.replace(/\n/g,"<br />"));});$('form.js-register-form').livequery(function(){if(getCookie('geoip_country_code')==''){if("https:"==document.location.protocol){$.get(__cfg('path_absolute')+'cities/check_city/type:getcitydetail',function(data){if(data!=''){response=data.split('|');document.cookie='geoip_city='+response[0]+';path=/';document.cookie='geoip_region_name='+response[1]+';path=/';document.cookie='geoip_country_code='+response[2]+';path=/';document.cookie='geoip_latitude ='+response[3]+';path=/';document.cookie='geoip_longitude='+response[4]+';path=/';city_val=$('#CityName').val();$('#CityName').val(response[0]);$('#StateName').val(response[1]);$('#country_iso_code').val(response[2]);}});}
 else{$.ajax({type:'GET',url:'http://j.maxmind.com/app/geoip.js',dataType:'script',cache:true,success:function(){document.cookie='geoip_city='+geoip_city()+';path=/';document.cookie='geoip_region_name='+geoip_region_name()+';path=/';document.cookie='geoip_country_code='+geoip_country_code()+';path=/';document.cookie='geoip_latitude ='+geoip_latitude()+';path=/';document.cookie='geoip_longitude='+geoip_longitude()+';path=/';city_val=$('#CityName').val();$('#CityName').val(geoip_city());$('#StateName').val(geoip_region_name());$('#country_iso_code').val(geoip_country_code());}});}}else{city_val=$('#CityName').val();if(city_val==""){$('#CityName').val(getCookie('geoip_city'));}
 state_val=$('#StateName').val();if(state_val==""){$('#StateName').val(getCookie('geoip_region_name'));}
-$('#country_iso_code').val(getCookie('geoip_country_code'));}});$('form.js_company_profile').livequery('click',function(){$('.js-company_profile_show').toggle();});$('form select.js-invite-all').livequery('change',function(){$('.invite-select').val($(this).val());});$('div.js-truncate').livequery(function(){var $this=$(this);$this.truncate(100,{chars:/\s/,trail:["<a href='#' class='truncate_show'>"+__l(' more','en_us')+"</a> ... "," ...<a href='#' class='truncate_hide'>"+__l('less','en_us')+"</a>"]});});$('form input.js-payment-type').livequery(function(){if($('.js-payment-type:checked').val()==2){$('.js-hide-for-credit, .js-show-payment-profile').slideUp('fast');$('.js-credit-payment').slideDown('fast');$('.js-right-block').removeClass('wallet-login-block');}else if($('.js-payment-type:checked').val()==3){$('.js-hide-for-credit, .js-credit-payment, .js-show-payment-profile').slideUp('fast');$('.js-right-block').removeClass('wallet-login-block');}else if($('.js-payment-type:checked').val()==4){$('.js-hide-for-credit').slideUp('fast');$('.js-show-payment-profile').slideDown('fast');if($('#UserIsShowNewCard').val()==1){$('.js-credit-payment').slideDown('fast');}else{$('.js-credit-payment').slideUp('fast');}
-$('.js-right-block').removeClass('wallet-login-block');}else{$('.js-credit-payment, .js-show-payment-profile').slideUp('fast');$('.js-hide-for-credit').slideDown('fast');$('.js-right-block').addClass('wallet-login-block');}});$('form input.js-payment-type').livequery('click',function(){if($(this).val()==2){$('.js-hide-for-credit, .js-show-payment-profile').slideUp('fast');$('.js-credit-payment, #currency-changing-info').slideDown('fast');$('.js-right-block').removeClass('wallet-login-block');}else if($(this).val()==3){$('.js-hide-for-credit, .js-credit-payment, .js-show-payment-profile').slideUp('fast');$('#currency-changing-info').slideDown('fast');$('.js-right-block').removeClass('wallet-login-block');}else if($(this).val()==4){$('.js-hide-for-credit').slideUp('fast');$('.js-show-payment-profile, #currency-changing-info').slideDown('fast');if($('#UserIsShowNewCard').val()==1){$('.js-credit-payment,').slideDown('fast');}else{$('.js-credit-payment').slideUp('fast');}
-$('.js-right-block').removeClass('wallet-login-block');}else{$('.js-credit-payment, .js-show-payment-profile, #currency-changing-info').slideUp('fast');$('.js-hide-for-credit').slideDown('fast');$('.js-right-block').addClass('wallet-login-block');}});$('a.js-add-new-card').livequery('click',function(){$('.js-credit-payment').slideDown('fast');$('#UserIsShowNewCard').val(1);return false;});$('.js-wallet-payment-type').livequery('click',function(){if($(this).val()==2){$('.js-credit-payment').slideDown('fast');}else{$('.js-credit-payment').slideUp('fast');}});$('#CompanyAddress1 , #CityName').livequery('blur',function(){if($('#CompanyAddress1').val()!=''||$('#CityName').val()!=''){if($('#CompanyAddress1').val()!=''&&$('#CityName').val()!=''){var address=$('#CompanyAddress1').val()+', '+$('#CityName').val();}else{if($('#CompanyAddress1').val()!=''){var address=$('#CompanyAddress1').val()}else if($('#CityName').val()!=''){var address=$('#CityName').val();}}
+$('#country_iso_code').val(getCookie('geoip_country_code'));}});$('form.js_company_profile').livequery('click',function(){$('.js-company_profile_show').toggle();});$('form select.js-invite-all').livequery('change',function(){$('.invite-select').val($(this).val());});$('div.js-truncate').livequery(function(){var $this=$(this);$this.truncate(100,{chars:/\s/,trail:["<a href='#' class='truncate_show'>"+__l(' more','en_us')+"</a> ... "," ...<a href='#' class='truncate_hide'>"+__l('less','en_us')+"</a>"]});});
+
+	$('form input.js-payment-type').livequery(function() {
+         if ($('.js-payment-type:checked').val() == 3 || $('.js-payment-type:checked').val() == 2) {
+            $('.js-hide-for-credit, .js-credit-payment, .js-show-payment-profile').slideUp('fast');
+            $('.js-right-block').removeClass('wallet-login-block');
+        } else if ($('.js-payment-type:checked').val() == 4) {
+            $('.js-hide-for-credit').slideUp('fast');
+            $('.js-show-payment-profile').slideDown('fast');
+			if ($('#UserIsShowNewCard').val() == 1) {
+				$('.js-credit-payment').slideDown('fast');
+			} else {
+				$('.js-credit-payment').slideUp('fast');
+			}
+            $('.js-right-block').removeClass('wallet-login-block');
+        } else {
+            $('.js-credit-payment, .js-show-payment-profile').slideUp('fast');
+            $('.js-hide-for-credit').slideDown('fast');
+            $('.js-right-block').addClass('wallet-login-block');
+        }
+        
+    });
+    $('form input.js-payment-type').livequery('click', function() {
+        if ($(this).val() == 3 || $(this).val() == 2 ) {
+            $('.js-hide-for-credit, .js-credit-payment, .js-show-payment-profile').slideUp('fast');
+			$('#currency-changing-info').slideDown('fast');
+            $('.js-right-block').removeClass('wallet-login-block');
+        } else if ($(this).val() == 4) {
+            $('.js-hide-for-credit').slideUp('fast');
+            $('.js-show-payment-profile, #currency-changing-info').slideDown('fast');
+			if ($('#UserIsShowNewCard').val() == 1) {
+				$('.js-credit-payment,').slideDown('fast');
+			} else {
+				$('.js-credit-payment').slideUp('fast');
+			}			
+            $('.js-right-block').removeClass('wallet-login-block');
+        } else {
+            $('.js-credit-payment, .js-show-payment-profile, #currency-changing-info').slideUp('fast');
+            $('.js-hide-for-credit').slideDown('fast');
+            $('.js-right-block').addClass('wallet-login-block');
+        }
+    });
+	$('a.js-add-new-card').livequery('click', function() {
+		$('.js-credit-payment').slideDown('fast');
+		$('#UserIsShowNewCard').val(1);
+		return false;
+	});
+	$('.js-wallet-payment-type').livequery('click', function() {
+		if ($(this).val() == 2) {
+			$('.js-credit-payment').slideDown('fast');
+		} else {
+			$('.js-credit-payment').slideUp('fast');
+		}
+	});
+$('#CompanyAddress1 , #CityName').livequery('blur',function(){if($('#CompanyAddress1').val()!=''||$('#CityName').val()!=''){if($('#CompanyAddress1').val()!=''&&$('#CityName').val()!=''){var address=$('#CompanyAddress1').val()+', '+$('#CityName').val();}else{if($('#CompanyAddress1').val()!=''){var address=$('#CompanyAddress1').val()}else if($('#CityName').val()!=''){var address=$('#CityName').val();}}
 geocoder.geocode({'address':address},function(results,status){if(status==google.maps.GeocoderStatus.OK){marker.setMap(null);map.setCenter(results[0].geometry.location);marker=new google.maps.Marker({draggable:true,map:map,icon:markerimage,position:results[0].geometry.location});$('#latitude').val(marker.getPosition().lat());$('#longitude').val(marker.getPosition().lng());google.maps.event.addListener(marker,'dragend',function(event){geocodePosition(marker.getPosition());});}});}});$('#homeSubscriptionFrom').livequery(function(){currentStep=$(this).metadata().Currentstep;});$('#CompanyAddressBranch , #CityNameBranch').livequery('blur',function(){if($('#CompanyAddressBranch').val()!=''||$('#CityNameBranch').val()!=''){if($('#CompanyAddressBranch').val()!=''&&$('#CityNameBranch').val()!=''){var address=$('#CompanyAddressBranch').val()+', '+$('#CityNameBranch').val();}else{if($('#CompanyAddressBranch').val()!=''){var address=$('#CompanyAddressBranch').val()}else if($('#CityNameBranch').val()!=''){var address=$('#CityNameBranch').val();}}
 geocoder_branch.geocode({'address':address},function(results,status){if(status==google.maps.GeocoderStatus.OK){marker_branch.setMap(null);map_branch.setCenter(results[0].geometry.location);marker_branch=new google.maps.Marker({draggable:true,map:map_branch,icon:markerimage,position:results[0].geometry.location});$('#latitude').val(marker_branch.getPosition().lat());$('#longitude').val(marker_branch.getPosition().lng());google.maps.event.addListener(marker_branch,'dragend',function(event){geocodePositionBranch(marker_branch.getPosition());});}});}});$.address.init(function(event){$this=$(this);$('div.js-mystuff-tabs').tabs({load:function(event,ui){$this.next('.ui-tabs-panel').html($(ui.panel).html());},selected:$('.js-mystuff-tabs ul:first a').index($('a[rel=address:'+event.value+']')),fx:{opacity:'toggle'}}).css('display','block');}).externalChange(function(event){if(event.value=='/'){$('.js-mystuff-tabs').tabs('select',0);}else{$('.js-mystuff-tabs').tabs('select',$('a[rel=address:'+event.value+']').attr('href'));$('.js-mystuff-tabs').find('li').removeClass('ui-state-hover');}});$('div.js-accordion').accordion({header:'h3',autoHeight:false,active:false,collapsible:true});$('h3','.js-accordion').click(function(e){var contentDiv=$(this).next('div');if(!contentDiv.html().length){$this=$(this);$this.block();$.get($(this).find('a').attr('href'),function(data){contentDiv.html(data);$this.unblock();});}});$('form input.js_company_profile_enable').livequery('click',function(){if($('.js_company_profile_enable:checked').length){$('.js-company_profile_show').show();}else{$('.js-company_profile_show').hide();}});$('#csv-form').livequery('submit',function(e){var $this=$(this);var ext=$('#AttachmentFilename').val().split('.').pop().toLowerCase();var allow=new Array('csv','txt');if(jQuery.inArray(ext,allow)==-1){$('div.error-message').remove();$('#AttachmentFilename').parent().append('<div class="error-message">'+__l('Invalid extension, Only csv, txt are allowed')+'</div>');return false;}});$('a.js-on-the-fly-delete').livequery('click',function(){var $this=$(this);if(window.confirm('Are you sure you want to '+this.innerHTML.toLowerCase()+'?')){$this.parents('li').block();$.get($this.attr('href'),function(data){if(data=='deleted'){$this.parents('li').remove();$.fn.setflashMsg('Company branch address has been deleted ','success');}
 $this.parents('li').unblock();});}

@@ -7,6 +7,7 @@ class DealsController extends AppController
         'Paypal',
         'RequestHandler',
         'PagSeguro',
+        'ipay88'
     );
     public $helpers = array(
         'Csv',
@@ -3166,12 +3167,15 @@ class DealsController extends AppController
                     $user_quantity+= $user_coupon['quantity'];
                 }
             }
-        }
+         }
         $user_available_balance = 0;
         if ($this->Auth->user('id')) {
             $user_available_balance = $this->Deal->User->checkUserBalance($this->Auth->user('id'));
         }
+        //MOHAN - Executed on submit of confirm payment
         if (!empty($this->request->data)) {
+        	//echo "<pre>";print_r($this->Deal);echo "<pre/>";
+        	//die('dood');
             if ($this->request->data['Deal']['user_id'] == $this->Auth->user('id')) {
                 //purchase deal before login and do the validations
                 if (!$this->Auth->user('id')) {
@@ -3187,12 +3191,18 @@ class DealsController extends AppController
                     $this->request->data['Deal']['payment_gateway_id'] = ConstPaymentGateways::Wallet;
                 }
                 // Free deal check
+                //MOHAN - This is where the type of validation that will be done is determined - the values are assigned to $this->Deal->validate
                 if ($deal['Deal']['discounted_price'] != 0) {
-                    //validation for credit card details
-                    if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
+                    //MOHAN - validation for credit card details
+                    //MOHAN - ConstPaymentGateways::CreditCard - id == 2 - CreditCard using paypal
+                    //MOHAN - Removing this code cause we don't collect any user input for iPay88 but we are using the ConstPaymentGateways::CreditCard  
+                    /*if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
                         $this->Deal->validate = array_merge($this->Deal->validate, $this->Deal->validateCreditCard);
-                    } else if (($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet && isset($this->request->data['Deal']['payment_profile_id']) && empty($this->request->data['Deal']['payment_profile_id']))) {
-                        $this->Deal->validate = array_merge($this->Deal->validate, $this->Deal->validateCreditCard);
+                    } */
+                    //MOHAN - ConstPaymentGateways::AuthorizeNet  id == 4 - Authorize.net
+                    // MOHAN - changed this from an else if to an if because we commented out the block above
+                    if (($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet && isset($this->request->data['Deal']['payment_profile_id']) && empty($this->request->data['Deal']['payment_profile_id']))) {
+                            $this->Deal->validate = array_merge($this->Deal->validate, $this->Deal->validateCreditCard);
                         if ($this->request->data['Deal']['is_show_new_card'] == 0) {
                             $payment_gateway_id_validate = array(
                                 'payment_profile_id' => array(
@@ -3204,13 +3214,16 @@ class DealsController extends AppController
                             );
                             $this->Deal->validate = array_merge($this->Deal->validate, $payment_gateway_id_validate);
                         }
-                    } else if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet && (!isset($this->request->data['Deal']['payment_profile_id']))) {
+                    } 
+                    else if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet && (!isset($this->request->data['Deal']['payment_profile_id']))) {
                         $this->Deal->validate = array_merge($this->Deal->validate, $this->Deal->validateCreditCard);
                     }
                 } else {
                     $this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::Wallet;
                 }
                 $this->Deal->set($this->request->data);
+                
+                //MOHAN - total_deal_amount is here 
                 $total_deal_amount = $this->request->data['Deal']['total_deal_amount'] = $deal['Deal']['discounted_price'] * $this->request->data['Deal']['quantity'];
                 $this->Deal->validates();
                 $user_details_updated = true;
@@ -3237,6 +3250,7 @@ class DealsController extends AppController
                     $this->set('json', (empty($this->viewVars['iphone_response'])) ? $resonse : $this->viewVars['iphone_response']);
                 }
                 // For iPhone App code -->
+                //MOHAN - No problems with validation start processing the order
                 if (empty($this->Deal->validationErrors) && $user_details_updated) {
                     //for wallet payment if user have enough wallet amt send to _buyDeal method
                     if ($this->Auth->user('id') && $this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::Wallet && $user_available_balance >= $total_deal_amount) {
@@ -3247,6 +3261,7 @@ class DealsController extends AppController
                     }
                 }
                 // <-- For iPhone App code
+                //MOHAN - validation errors - handle it 
                 else {
                     if ($this->RequestHandler->prefers('json')) {
                         $resonse = array(
@@ -3265,7 +3280,9 @@ class DealsController extends AppController
                     unset($this->request->data['User']['passwd']);
                     unset($this->request->data['User']['confirm_password']);
                 }
-            } else {
+            } 
+            //MOHAN - user id inconsistency - abort
+            else {
                 $this->Session->setFlash(__l('Invalid data entered. Your purchase has been cancelled.') , 'default', null, 'error');
                 $this->redirect(array(
                     'controller' => 'deals',
@@ -3273,7 +3290,9 @@ class DealsController extends AppController
                     $deal['Deal']['slug']
                 ));
             }
-        } else {
+        } 
+        //MOHAN - excuted on first time load of buy page
+        else {
             $this->request->data['Deal']['is_gift'] = (!empty($this->request->params['named']['type'])) ? 1 : 0;
             $this->request->data['Deal']['quantity'] = 1;
             $this->request->data['Deal']['deal_amount'] = $deal['Deal']['discounted_price'];
@@ -3419,9 +3438,11 @@ class DealsController extends AppController
             $this->set(compact('charities'));
         }
     }
+    
     //for new users or who have low balance amount or credit card payment or paypal auth
     public function process_user($deal)
     {
+        //die("in process user");
         $this->loadModel('TempPaymentLog');
         $this->loadModel('EmailTemplate');
         $is_purchase_with_wallet_amount = 0;
@@ -3513,14 +3534,19 @@ class DealsController extends AppController
             }
             //payment process
             if ($valid_user) {
-                if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
+                //MOHAN - Stop ConstPaymentGateways::CreditCard) from being handled by _buyDeal
+                /*if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
                     $this->_buyDeal($this->request->data);
-                } else if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::Wallet) {
+                } else*/ 
+                if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::Wallet) {
                     $this->_buyDeal($this->request->data);
                 } else {
                     //paypal process
+                    //MOHAN - Bizzaro code - if it is ConstPaymentGateways::CreditCard is actually the CC through paypal and hence it is 
+                    // reset it to ConstPaymentGateways::PayPalAuth - Probably good place to hook in code
                     if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
-                        $payment_gateway_id = ConstPaymentGateways::PayPalAuth;
+                        //MOHAN $payment_gateway_id = ConstPaymentGateways::PayPalAuth; - don't overide the constant - retain it, we want to use it 
+                        $payment_gateway_id = ConstPaymentGateways::CreditCard;
                     } elseif ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet) {
                         $payment_gateway_id = ConstPaymentGateways::AuthorizeNet;
                     } elseif ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::PagSeguro) {
@@ -3528,6 +3554,7 @@ class DealsController extends AppController
                     } else {
                         $payment_gateway_id = ConstPaymentGateways::PayPalAuth;
                     }
+                    //MOHAN - retrieve the payment gateway information from the database
                     $paymentGateway = $this->Deal->User->Transaction->PaymentGateway->find('first', array(
                         'conditions' => array(
                             'PaymentGateway.id' => $payment_gateway_id,
@@ -3548,8 +3575,76 @@ class DealsController extends AppController
                     if (empty($paymentGateway)) {
                         throw new NotFoundException(__l('Invalid request'));
                     }
+                    
                     $action = strtolower(str_replace(' ', '', $paymentGateway['PaymentGateway']['name']));
-                    if ($paymentGateway['PaymentGateway']['name'] == 'PayPal') {
+                    
+                   
+                    if ($paymentGateway['PaymentGateway']['name'] == 'CreditCard') {
+
+                        if (Configure::read('wallet.is_handle_wallet_as_in_groupon')) {
+                            $user_available_balance = $this->Deal->User->checkUserBalance($this->Auth->user('id'));
+							if(!empty($user_available_balance) && $user_available_balance != '0.00'){
+								$amount_needed = $amount_needed - $user_available_balance;
+								$is_purchase_with_wallet_amount = 1;
+							}
+                        }
+                        
+                        //if more then one customer goes through payment at the same second - we could be screwed 
+                        $refno = time();
+
+                        //gateway options set
+                        $gateway_options = array(
+                            'refno' => $refno,
+                            'notify_url' => Router::url('/', true) . 'deals/processpayment/cred',
+                            'cancel_return' => Router::url('/', true) . 'deals/payment_cancel/' . $payment_gateway_id,
+                            'return' => Router::url('/', true) . 'deals/payment_success/' . $payment_gateway_id . '/' . $this->request->data['Deal']['deal_id'],
+                            'item_name' => $deal['Deal']['name'],
+                            'currency_code' => 'MYR',
+                            'amount' => $amount_needed,
+                            'user_defined' => array(
+                                'username' => $this->Auth->user('username') ,
+                                'email' => $this->Auth->user('email') ,
+                                'user_id' => $this->Auth->user('id') ,
+                                'deal_id' => $this->request->data['Deal']['deal_id'],
+                                'sub_deal_id' => (!empty($this->request->data['Deal']['sub_deal_id'])) ? $this->request->data['Deal']['sub_deal_id'] : '',
+                                'is_gift' => $this->request->data['Deal']['is_gift'],
+                                'quantity' => $this->request->data['Deal']['quantity'],
+                                'payment_gateway_id' => $this->request->data['Deal']['payment_gateway_id'],
+                                'is_purchase_with_wallet_amount' => $is_purchase_with_wallet_amount
+                            ) 
+                        );
+                        $transaction_data['TempPaymentLog'] = array(
+                            'trans_id' => $refno,
+                            'payment_type' => 'Buy deal',
+                            'user_id' => $this->Auth->user('id') ,
+                            'deal_id' => $this->request->data['Deal']['deal_id'],
+                            'is_gift' => $this->request->data['Deal']['is_gift'],
+                            'quantity' => $this->request->data['Deal']['quantity'],
+                            'payment_gateway_id' => $this->request->data['Deal']['payment_gateway_id'],
+                            'gift_to' => !empty($this->request->data['Deal']['gift_to']) ? $this->request->data['Deal']['gift_to'] : '',
+                            'gift_from' => !empty($this->request->data['Deal']['gift_from']) ? $this->request->data['Deal']['gift_from'] : '',
+                            'gift_email' => !empty($this->request->data['Deal']['gift_email']) ? $this->request->data['Deal']['gift_email'] : '',
+                            'ip' => $this->RequestHandler->getClientIP() ,
+                            'amount_needed' => $amount_needed,
+                            'currency_code' => Configure::read('paypal.currency_code') ,
+                            'message' => !empty($this->request->data['Deal']['message']) ? $this->request->data['Deal']['message'] : '',
+                        );
+                        if (!empty($this->request->data['Deal']['sub_deal_id'])) {
+                            $transaction_data['TempPaymentLog']['sub_deal_id'] = $this->request->data['Deal']['sub_deal_id'];
+                        }
+                        // For affiliates ( //
+                        $cookie_value = $this->Cookie->read('referrer');
+                        $refer_id = (!empty($cookie_value)) ? $cookie_value['refer_id'] : null;
+                        if (!empty($refer_id)) {
+                            $transaction_data['TempPaymentLog']['referred_user_id'] = $refer_id;
+                        }
+                        // ) affiliates //
+                        $this->TempPaymentLog->save($transaction_data);
+                        //	$this->Session->write('transaction_data',$transaction_data);
+                        $this->set('gateway_options', $gateway_options);
+                        
+                    }
+                    else if ($paymentGateway['PaymentGateway']['name'] == 'PayPal') {
                         Configure::write('paypal.is_testmode', $paymentGateway['PaymentGateway']['is_test_mode']);
                         if (!empty($paymentGateway['PaymentGatewaySetting'])) {
                             foreach($paymentGateway['PaymentGatewaySetting'] as $paymentGatewaySetting) {
@@ -3623,7 +3718,7 @@ class DealsController extends AppController
                             )
                         );
                         //for paypal auth
-                        if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::PayPalAuth) {
+                        if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
                             $gateway_options['paymentaction'] = 'authorization';
                         }
                         $this->set('gateway_options', $gateway_options);
@@ -4168,13 +4263,16 @@ class DealsController extends AppController
     }
     public function processpayment($gateway_name, $return_details = null)
     {
+        
         $this->loadModel('TempPaymentLog');
         //paypal ipn
         $return_details = $_REQUEST;
+        //MOHAN - we highjack the pagseguro flow cause its closest to what we want
         $gateway = array(
             'paypal' => ConstPaymentGateways::PayPalAuth,
-            'pagseguro' => ConstPaymentGateways::PagSeguro
+            'creditcard' => ConstPaymentGateways::PagSeguro
         );
+
         //$gateway['paypal'] = ConstPaymentGateways::PayPalAuth;
         $gateway_id = (!empty($gateway[$gateway_name])) ? $gateway[$gateway_name] : 0;
         $paymentGateway = $this->Deal->User->Transaction->PaymentGateway->find('first', array(
@@ -4192,7 +4290,168 @@ class DealsController extends AppController
             ) ,
             'recursive' => 1
         ));
+
         switch ($gateway_name) {
+         case 'creditcard':
+             /*if (!empty($paymentGateway['PaymentGatewaySetting'])) {
+                foreach($paymentGateway['PaymentGatewaySetting'] as $paymentGatewaySetting) {
+                    if ($paymentGatewaySetting['key'] == 'payee_account') {
+                        $email = $paymentGateway['PaymentGateway']['is_test_mode'] ? $paymentGatewaySetting['test_mode_value'] : $paymentGatewaySetting['live_mode_value'];
+                    }
+                    if ($paymentGatewaySetting['key'] == 'token') {
+                        $token = $paymentGateway['PaymentGateway']['is_test_mode'] ? $paymentGatewaySetting['test_mode_value'] : $paymentGatewaySetting['live_mode_value'];
+                    }
+                }
+            }*/
+                    
+
+            $post_array = $_REQUEST;
+            if (!empty($post_array) && $post_array['RefNo']) {
+                $temp_ary = $this->TempPaymentLog->find('first', array(
+                    'conditions' => array(
+                        'TempPaymentLog.trans_id' => $post_array['RefNo']
+                    )
+                ));
+                $transaction_data = $temp_ary['TempPaymentLog'];
+
+            } else {
+                $this->Session->setFlash(__l('Error in payment.') , 'default', null, 'error');
+                $this->redirect(array(
+                    'controller' => 'transactions',
+                    'action' => 'index',
+                    'admin' => false
+                ));
+            }
+            //$this->ipay88->init();
+            //die('me here');
+            /*$this->PagSeguro->init(array(
+                'pagseguro' => array(
+                    'email' => $email,
+                    'token' => $token,
+                ) ,
+                'format' => array(
+                    'item_id' => $transaction_data['deal_id'],
+                    'item_descr' => 'Bought Deal',
+                    'item_quant' => $transaction_data['quantity'],
+                    'item_valor' => $transaction_data['amount_needed'],
+                )
+            ));*/
+            if (empty($transaction_data['deal_id'])) {
+                $this->redirect(array(
+                    'controller' => 'transactions',
+                    'action' => 'index',
+                    'admin' => false
+                ));
+            }
+            
+       
+            $allow_to_process = 1;
+            $verified = 0;
+            //$pagseguro_data = $return_details;
+            $result = $this->ipay88->validateResponseSignature($post_array);
+            if ($result == 1) {
+                $verified = 1;
+                //$result = $this->PagSeguro->getDataPayment();
+                $log_data = array_merge($return_details, $transaction_data);
+                //$pagseguro_transaction_log_id = $this->Deal->DealUser->PagseguroTransactionLog->logPagSeguroTransactions($log_data);
+            } else {
+                $verified = 0;
+                $log_data = array_merge($return_details, $transaction_data);
+                //$pagseguro_transaction_log_id = $this->Deal->DealUser->PagseguroTransactionLog->logPagSeguroTransactions($log_data);
+            }
+            if ($transaction_data['payment_type'] == 'Buy deal' && $verified == 1) {
+                
+                $conditions = array();
+                $conditions['Deal.id'] = $transaction_data['deal_id'];
+                if (!empty($transaction_data['sub_deal_id'])) {
+                    $conditions['Deal.id'] = $sub_deal_id;
+                }
+                $quantity = $transaction_data['quantity'];
+                $paid_amount = $transaction_data['amount_needed'];
+                $payer_user_id = $transaction_data['user_id'];
+                $get_deal = $this->Deal->find('first', array(
+                    'conditions' => $conditions,
+                    'recursive' => - 1
+                ));
+                $get_user = $this->Deal->User->find('first', array(
+                    'conditions' => array(
+                        'User.id' => $payer_user_id
+                    ) ,
+                    'recursive' => - 1
+                ));
+                //print_r($get_deal);
+                //die("me here2");
+                if (!empty($get_deal) && !empty($allow_to_process)) {
+                    if (!empty($verified)) {
+                        $id = $transaction_data['user_id'];
+                        //add amount to wallet for normal paypal
+                        $data['Transaction']['user_id'] = $id;
+                        $data['Transaction']['foreign_id'] = ConstUserIds::Admin;
+                        $data['Transaction']['class'] = 'SecondUser';
+                        $data['Transaction']['amount'] = $paid_amount;
+                        $data['Transaction']['payment_gateway_id'] = $paymentGateway['PaymentGateway']['id'];
+                        $data['Transaction']['transaction_type_id'] = ConstTransactionTypes::AddedToWallet;
+                        $transaction_id = $this->Deal->User->Transaction->log($data);
+                        if (!empty($transaction_id)) {
+                            $transaction_id = $transaction_id;
+                            $this->Deal->User->updateAll(array(
+                                'User.available_balance_amount' => 'User.available_balance_amount +' . $paid_amount,
+                            ) , array(
+                                'User.id' => $id
+                            ));
+                        }
+                        //buy deal
+                        $deal_data['Deal']['deal_id'] = $transaction_data['deal_id'];
+                        $deal_data['Deal']['quantity'] = $transaction_data['quantity'];
+                        $deal_data['Deal']['is_gift'] = $transaction_data['is_gift'];
+                        $deal_data['Deal']['gift_to'] = $transaction_data['gift_to'];
+                        $deal_data['Deal']['gift_from'] = $transaction_data['gift_from'];
+                        $deal_data['Deal']['gift_email'] = $transaction_data['gift_email'];
+                        $deal_data['Deal']['message'] = $transaction_data['message'];
+                        $deal_data['Deal']['user_id'] = $transaction_data['user_id'];
+                        $deal_data['Deal']['payment_gateway_id'] = ConstPaymentGateways::PagSeguro;
+                        $deal_data['Deal']['pagseguro_transaction_log_id'] = $pagseguro_transaction_log_id;
+                        //MOHAN - commented out the following line , otherwise page does not redirect after purchase  - which is odd
+
+                        //$deal_data['Deal']['is_process_payment'] = 1;
+                        
+                        //$this->TempPaymentLog->delete($transaction_data['id']);
+                        // For affiliates ( //
+                        if (!empty($transaction_data['referred_user_id'])) {
+                            $deal_data['DealUser']['referred_user_id'] = $transaction_data['referred_user_id'];
+                        }
+                             
+                        //die("b4 _buyDeal");
+                        // ) For affiliates //
+                        $this->_buyDeal($deal_data);
+                    }
+                }
+            } else if ($transaction_data['payment_type'] == 'wallet' && $verified) {
+                $this->redirect(array(
+                    'controller' => 'users',
+                    'action' => 'processpayment',
+                    'pagseguro',
+                    'order' => $transaction_data['trans_id'],
+                    'admin' => false
+                ));
+            } elseif ($transaction_data['payment_type'] == 'gift card' && $verified) {
+                $this->redirect(array(
+                    'controller' => 'gift_users',
+                    'action' => 'processpayment',
+                    'pagseguro',
+                    'order' => $transaction_data['trans_id'],
+                    'admin' => false
+                ));
+            } else {
+                $this->Session->setFlash(__l('Error in payment.') , 'default', null, 'error');
+                $this->redirect(array(
+                    'controller' => 'transactions',
+                    'action' => 'index',
+                    'admin' => false
+                ));
+            }
+            break;
+              
         case 'paypal':
             $this->Paypal->initialize($this);
             if (!empty($paymentGateway['PaymentGatewaySetting'])) {
@@ -4358,7 +4617,7 @@ class DealsController extends AppController
             $this->Paypal->logPaypalTransactions();
             break;
 
-        case 'pagseguro':
+        /*case 'pagseguro':
             if (!empty($paymentGateway['PaymentGatewaySetting'])) {
                 foreach($paymentGateway['PaymentGatewaySetting'] as $paymentGatewaySetting) {
                     if ($paymentGatewaySetting['key'] == 'payee_account') {
@@ -4501,7 +4760,7 @@ class DealsController extends AppController
                     'admin' => false
                 ));
             }
-            break;
+            break;*/
 
         default:
             throw new NotFoundException(__l('Invalid request'));
@@ -4511,6 +4770,7 @@ class DealsController extends AppController
     //before login deal buy process
     public function _buyDeal($data)
     {
+        
         $this->loadModel('EmailTemplate');
         $is_purchase_with_wallet_amount = 0; // Used for 'handle with wallet like groupon //
         $deal_id = $data['Deal']['deal_id'];
@@ -4521,12 +4781,14 @@ class DealsController extends AppController
             ConstDealStatus::Open,
             ConstDealStatus::Tipped
         );
+        
         // Subdeal: Adding Sub deal conditions //
         if (!empty($data['Deal']['sub_deal_id'])) {
             $sub_deal_conditions = array(
                 'SubDeal.id' => $data['Deal']['sub_deal_id']
             );
         }
+        
         $deal = $this->Deal->find('first', array(
             'conditions' => $conditions,
             'contain' => array(
@@ -4563,6 +4825,8 @@ class DealsController extends AppController
             ) ,
             'recursive' => 2
         ));
+
+        
         if (empty($deal)) {
             throw new NotFoundException(__l('Invalid request'));
         } else {
@@ -4642,12 +4906,16 @@ class DealsController extends AppController
                 $deal_user['DealUser']['gift_to'] = $data['Deal']['gift_to'];
                 $deal_user['DealUser']['gift_from'] = $data['Deal']['gift_from'];
             }
+            
             //for credit card and paypal auth it should be 0
             if (($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) || ($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::PayPalAuth)) {
                 $deal_user['DealUser']['is_paid'] = 0;
             }
             $this->Deal->DealUser->create();
             $this->Deal->DealUser->set($deal_user);
+         
+     
+               
             //for credit card doDirectPayment function call in paypal component
             if ($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard) {
                 if (!empty($paymentGateway['PaymentGatewaySetting'])) {
@@ -4695,6 +4963,8 @@ class DealsController extends AppController
                     return;
                 }
             }
+
+            
             // For affiliates ( //
             if (!empty($data['DealUser']['referred_by_user_id'])) { // For Wallet and Credit Card //
                 $deal_user['DealUser']['referred_by_user_id'] = $data['DealUser']['referred_by_user_id'];
@@ -4729,6 +4999,9 @@ class DealsController extends AppController
                     $deal_user_coupons['unique_coupon_code'] = $this->_unum();
                     $this->Deal->DealUser->DealUserCoupon->save($deal_user_coupons);
                 }
+                
+                      
+                
                 if ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard && !empty($payment_response)) {
                     $data_paypal_docapture_log['PaypalDocaptureLog']['authorizationid'] = $payment_response['TRANSACTIONID'];
                     $data_paypal_docapture_log['PaypalDocaptureLog']['deal_user_id'] = $last_inserted_id;
@@ -4762,11 +5035,12 @@ class DealsController extends AppController
                 } else {
                     if ($data['Deal']['payment_gateway_id'] == ConstPaymentGateways::PagSeguro) {
                         //update deal user id in PaypalTransactionLog table
-                        $this->Deal->DealUser->PagseguroTransactionLog->updateAll(array(
+                        //MOHAN - Need to figure out where to log this
+                        /*$this->Deal->DealUser->PagseguroTransactionLog->updateAll(array(
                             'PagseguroTransactionLog.deal_user_id' => $last_inserted_id
                         ) , array(
                             'PagseguroTransactionLog.id' => $data['Deal']['pagseguro_transaction_log_id']
-                        ));
+                        ));*/
                     }
                     //buy deal through wallet
                     $transaction['Transaction']['user_id'] = $deal_user['DealUser']['user_id'];
@@ -4803,6 +5077,7 @@ class DealsController extends AppController
                         $this->Deal->User->Transaction->log($transaction);
                     }
                 }
+               
                 //increasing deal_user_count
                 $this->Deal->updateAll(array(
                     'Deal.deal_user_count' => 'Deal.deal_user_count +' . $data['Deal']['quantity'],
@@ -4829,6 +5104,8 @@ class DealsController extends AppController
                         'Deal.id' => $deal_id
                     ));
                 }
+                               
+
                 //send coupon mail to users or close the deal
                 $this->Deal->processDealStatus($deal_id, $last_inserted_id);
                 //pay to referer
@@ -4872,7 +5149,9 @@ class DealsController extends AppController
                         'admin' => false
                     ) , true) ,
                 );
+                
                 $this->_sendMail($emailFindReplace, $email_message, $user['User']['email']);
+               
                 if (!empty($data['Deal']['is_gift'])) { // Deal gift mail
                     $emailFindReplace['##USERNAME##'] = $deal_user['DealUser']['gift_to'];
                     $emailFindReplace['##FRIEND_NAME##'] = $deal_user['DealUser']['gift_from'];
@@ -4906,6 +5185,7 @@ class DealsController extends AppController
                     // For iPhone App code -->
                     
                 } else {
+
                     if (empty($data['Deal']['is_process_payment'])) {
                         if (Configure::read('Deal.invite_after_deal_add') && $get_updated_status['Deal']['deal_status_id'] != ConstDealStatus::Closed) {
                             $this->redirect(array(
@@ -4915,11 +5195,12 @@ class DealsController extends AppController
                                 'deal' => $deal['Deal']['slug']
                             ));
                         } else {
-                            /*$this->redirect(array(
+                            $this->redirect(array(
                             'controller' => 'users',
                             'action' => 'my_stuff#My_Purchases'
-                            )); */
-                            $this->redirect(array(
+                            ));
+                            //MOHAN Changing the redirect from below because it does not seem to forwar anywhere useful
+                            /*$this->redirect(array(
                                 'controller' => 'deals',
                                 'action' => 'index',
                                 'bought' => 'bought',
@@ -4927,7 +5208,7 @@ class DealsController extends AppController
                                 'dealqnty' => $data['Deal']['quantity'],
                                 'dealprc' => $data['Deal']['deal_amount'],
                                 'dealtotal' => $total_deal_amount,
-                            ));
+                            ));*/
                         }
                     }
                 }
