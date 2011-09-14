@@ -55,39 +55,49 @@ class UsersController extends AppController
             'is_public_url' => true
         ) ,
     );
+
+    /* 
+     * BEGIN Fix for Issue 3
+     * by Suthen Thomas suthen@gmail.com
+     */
+    public $disabledFields = array(
+        'City.id',
+        'City.name',
+        'State.id',
+        'State.name',
+        'Company.name',
+        'Company.phone',
+        'Company.url',
+        'Company.address1',
+        'Company.address2',
+        'Company.country_id',
+        'Company.zip',
+        'Company.latitude',
+        'Company.longitude',
+        'Company.map_zoom_level',
+        'User.referer_name',
+        'UserProfile.country_id',
+        'UserProfile.state_id',
+        'UserProfile.city_id',
+        'User.geobyte_info',
+        'User.maxmind_info',
+        'User.referred_by_user_id',
+        'User.type',
+        'User.is_agree_terms_conditions',
+        'User.country_iso_code',
+        'User.is_requested',
+        'User.is_remember',
+        'User.is_show_new_card',
+        'User.f',
+        'User.profile_image_id',
+    );
+
     public function beforeFilter()
     {
-        $this->Security->disabledFields = array(
-            'City.id',
-            'City.name',
-            'State.id',
-            'State.name',
-            'Company.name',
-            'Company.phone',
-            'Company.url',
-            'Company.address1',
-            'Company.address2',
-            'Company.country_id',
-            'Company.zip',
-            'Company.latitude',
-            'Company.longitude',
-            'Company.map_zoom_level',
-            'User.referer_name',
-            'UserProfile.country_id',
-            'UserProfile.state_id',
-            'UserProfile.city_id',
-            'User.geobyte_info',
-            'User.maxmind_info',
-            'User.referred_by_user_id',
-            'User.type',
-            'User.is_agree_terms_conditions',
-            'User.country_iso_code',
-            'User.is_requested',
-            'User.is_remember',
-            'User.is_show_new_card',
-            'User.f',
-			'User.profile_image_id',
-        );
+        $this->Security->disabledFields = $this->disabledFields;
+        /*
+         * END Fix for Issue 3
+         */
         parent::beforeFilter();
         $this->disableCache();
     }
@@ -1764,6 +1774,20 @@ class UsersController extends AppController
                     $this->request->data['User']['f'] = $this->request->params['named']['f'];
                 }
                 if (!empty($this->request->params['requested'])) {
+                    /* 
+                     * BEGIN Fix for Issue 3
+                     * by Suthen Thomas suthen@gmail.com
+                     * It appears that the AJAX login wasn't working because
+                     * the incorrect disabled fields were being passed to the
+                     * security controller.
+                     */
+                    $token = $this->Session->read('_Token');
+                    $token['disabledFields'] = $this->disabledFields;
+                    $this->request['_Token'] = $token;
+                    $this->Session->write('_Token', $token);
+                    /*
+                     * END Fix for Issue 3
+                     */
                     $this->request->data['User']['is_requested'] = 1;
                 }
             }
