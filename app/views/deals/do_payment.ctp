@@ -35,7 +35,7 @@
 <INPUT type="hidden" name="Lang" value="UTF-8">
 <INPUT type="hidden" name="Signature"  value="<?php echo $gateway_options['request_signature'] ?>">
 <INPUT type="hidden" name="ResponseURL" value="http://www.dealhangat.com/deals/processpayment/creditcard"> 
-<INPUT type="submit" value="Proceed with Payment" name="Submit">
+<INPUT type="submit" name="Submit" value="<?php echo __l("Proceed with Payment"); ?>"> 
 </FORM>
 </BODY> 
 </HTML>	     
