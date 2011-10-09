@@ -550,8 +550,8 @@ class UsersController extends AppController
                                         $this->redirect(Router::url('/', true) . $redirectUrl);
                                     } else {
                                         $this->redirect(array(
-                                            'controller' => 'users',
-                                            'action' => 'my_stuff#My_Purchases'
+                                            'controller' => 'deals',
+                                            'action' => 'index'
                                         ));
                                     }
                                 }
@@ -610,8 +610,8 @@ class UsersController extends AppController
                                     ));
                                 } else {
                                     $this->redirect(array(
-                                        'controller' => 'users',
-                                        'action' => 'my_stuff#My_Purchases'
+                                        'controller' => 'deals',
+                                        'action' => 'index'
                                     ));
                                 }
                             }
@@ -663,8 +663,8 @@ class UsersController extends AppController
         // When already logged user trying to access the registration page we are redirecting to site home page
         if ($this->Auth->user()) {
             $this->redirect(array(
-                'controller' => 'users',
-                'action' => 'my_stuff#My_Purchases'
+                'controller' => 'deals',
+                'action' => 'index'
             ));
         }
         //for user referral system
@@ -1321,8 +1321,8 @@ class UsersController extends AppController
 						$this->redirect(Router::url('/', true) . $redirectUrl);
 					} else {
 						$this->redirect(array(
-							'controller' => 'users',
-							'action' => 'my_stuff#My_Purchases',
+							'controller' => 'deals',
+							'action' => 'index',
 						));
 					}
 				}
@@ -1416,8 +1416,8 @@ class UsersController extends AppController
                     $this->redirect(Router::url('/', true) . $redirectUrl);
                 } else {
                     $this->redirect(array(
-                        'controller' => 'users',
-                        'action' => 'my_stuff#My_Purchases',
+                        'controller' => 'deals',
+                        'action' => 'index',
                     ));
                 }
             }
@@ -1449,8 +1449,8 @@ class UsersController extends AppController
                         ));
                     } else {
                         $this->redirect(array(
-                            'controller' => 'users',
-                            'action' => 'my_stuff#My_Purchases',
+                            'controller' => 'deals',
+                            'action' => 'index',
                         ));
                     }
                 }
@@ -1737,8 +1737,8 @@ class UsersController extends AppController
 										));
 									}else{
 									$this->redirect(array(
-										'controller' => 'users',
-										'action' => 'my_stuff#My_Purchases',
+										'controller' => 'deals',
+										'action' => 'index',
 										'admin' => false
 									));
 								}
@@ -1966,8 +1966,8 @@ class UsersController extends AppController
 							$this->redirect(Router::url('/', true) . $redirectUrl);
 						} else {
 							$this->redirect(array(
-								'controller' => 'users',
-								'action' => 'my_stuff#My_Purchases',
+								'controller' => 'deals',
+								'action' => 'index',
 							));
 						}
 					}
