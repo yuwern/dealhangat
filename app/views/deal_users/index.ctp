@@ -155,7 +155,11 @@
 					<td>
 						<?php
 							echo $this->Html->link(__l('View Coupon'),array('controller' => 'deal_users', 'action' => 'view', 'filter_id' => (!empty($this->request->params['named']['type'])) ? $this->request->params['named']['type'] : '', $dealUser['DealUser']['id'],'admin' => false),array('title' => __l('View Coupon'), 'class'=>'js-thickbox','target' => '_blank', 'class'=>'view-icon js-thickbox'));
-							echo $this->Html->link(__l('Print'),array('controller' => 'deal_users', 'action' => 'view', 'filter_id' => (!empty($this->request->params['named']['type'])) ? $this->request->params['named']['type'] : '', $dealUser['DealUser']['id'],'type' => 'print'),array('target'=>'_blank', 'title' => __l('Print'), 'class'=>'print-icon'));
+                            /*
+                             * Commented out by Tate on 2011-10-10
+                             * This was removed due to a business requirement.
+                             */
+							//echo $this->Html->link(__l('Print'),array('controller' => 'deal_users', 'action' => 'view', 'filter_id' => (!empty($this->request->params['named']['type'])) ? $this->request->params['named']['type'] : '', $dealUser['DealUser']['id'],'type' => 'print'),array('target'=>'_blank', 'title' => __l('Print'), 'class'=>'print-icon'));
 						?>
 					</td>
                 <?php } ?>
