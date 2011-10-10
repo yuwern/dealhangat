@@ -1,4 +1,4 @@
 app/tmp/
 app/webroot/img
 app/media
-
+app/config/database.php

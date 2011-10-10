@@ -298,7 +298,8 @@ class DealsController extends AppController
                 ConstDealStatus::Closed,
                 ConstDealStatus::Expired,
                 ConstDealStatus::Canceled,
-                ConstDealStatus::PaidToCompany
+                ConstDealStatus::PaidToCompany,
+                ConstDealStatus::Refunded
             );
             $conditions['Deal.end_date <'] = _formatDate('Y-m-d H:i:s', date('Y-m-d H:i:s') , true);
             $this->pageTitle = __l('Recent Deals');
