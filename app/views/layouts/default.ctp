@@ -99,6 +99,11 @@ endif;
 	$bgattachment =  !empty($_SESSION['city_attachment']) ? 'background:url('.$_SESSION['city_attachment'].') '.$align.'':''.';'; 
 	$bgcolor =	 !empty($city_bgcolor) ? 'background-color:#'.$city_bgcolor.'':''.';';	 
 ?>
+
+<script src="http://connect.facebook.net/en_US/all.js#xfbml=1">
+</script>
+
+
 <body style="<?php echo $bgattachment.' '.$bgcolor;?>">
 	<div class="js-morecities1 top-slider1  hide">
 	<div class="cities-index-block">
