@@ -1498,7 +1498,7 @@ $('#CompanyAddressBranch , #CityNameBranch').livequery('blur', function() {
     });
 	$('#js-gallery').livequery(function() {
 		$("#js-gallery").showcase({
-			animation: { autoCycle: false},
+			animation: { autoCycle: true},
 			css: {  width: __cfg('medium_big_thumb.width'), height: __cfg('medium_big_thumb.height') },   
 			navigator: { 
 							 css: { padding: "0px 300px" },   
@@ -1516,7 +1516,7 @@ $('#CompanyAddressBranch , #CityNameBranch').livequery('blur', function() {
 	$("#js-gallery").css("width", __cfg('medium_big_thumb.width')).css("height", __cfg('medium_big_thumb.height'));
 	$('#js-mobile-gallery').livequery(function() {
 		$("#js-mobile-gallery").showcase({
-			animation: { autoCycle: false},
+			animation: { autoCycle: true},
 			css: {  width: __cfg('small_big_thumb.width'), height: __cfg('small_big_thumb.height')},   
 			navigator: { 
 							 css: { padding: "0px 100px" },   
