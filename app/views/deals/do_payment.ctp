@@ -1,7 +1,7 @@
 <?php /* SVN: $Id: do_payment.ctp 54285 2011-05-23 10:16:38Z aravindan_111act10 $ */ 
-
-
 ?>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->Html->image('payment\step2.png') ?>
+
 <h2><?php echo sprintf(__l('Buy %s Deal'),$deal['Deal']['name']);?></h2>
     <div class="wallet-amount-block">
 		<?php echo __l('Amount: '); ?><?php echo $this->Html->siteCurrencyFormat($this->Html->cCurrency($amount)); ?>
