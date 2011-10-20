@@ -434,38 +434,48 @@
         				<div class="big-text"><?php echo $this->Html->cHtml($deal['Deal']['review']);?></div>
 			      <?php }?>
                  <?php if($deal['Deal']['deal_status_id'] != ConstDealStatus::Upcoming && $deal['Deal']['deal_status_id'] != ConstDealStatus::Draft && $deal['Deal']['deal_status_id'] != ConstDealStatus::PendingApproval): ?>
-	           	 <div class="join-discussion-block">
-			     	<?php if(!empty($deal['Topic'][0]['topic_discussion_count'])):?>
-					<div class="deal-area clearfix">
+                   
+                   
+          <!--
+          <div class="join-discussion-block">
+		     	<?php if(!empty($deal['Topic'][0]['topic_discussion_count'])):?>
+			     	  
+					<div class="deal-area">
 						<div class="deal-l">
-                        	<?php echo $this->Html->getUserAvatarLink($deal['Topic'][0]['LastRepliedUser'], 'small_thumb');?>
-						</div> <!-- /deal-l -->
+              <?php echo $this->Html->getUserAvatarLink($deal['Topic'][0]['LastRepliedUser'], 'small_thumb');?>
+						</div>
 						<p class="deal-r">
 							<?php echo $this->Html->truncate($deal['Topic'][0]['TopicDiscussion'][0]['comment'],50, array('ending' => '...')); ?>
 							<?php echo $this->Html->link(__l(' more'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id'])); ?>
 						</p>
-					</div> <!-- /deal-r -->
-					<div class="discussion-block">
+					</div>
 					
-                        <div class="clearfix">
-                        	<p class="first-comment">
-    							<?php echo $this->Html->link(__l('Join the discussion!'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id']),array('title'=>__l('Join the discussion!'),'class'=>'joing-link')); ?>
-    						</p>
-						</div> <!-- /cleafix -->
-						<p class="comment-info">
-							<?php echo  $this->Html->cInt($deal['Topic'][0]['topic_discussion_count']).' Comments';?>
-                        </p>
-                	</div> <!-- /discussion-block -->
+					<div class="discussion-block">                  
+            <p class="first-comment">
+              <?php echo $this->Html->link(__l('Join the discussion!'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id']),array('title'=>__l('Join the discussion!'),'class'=>'joing-link')); ?>
+            </p>
+						<p class="comment-info"><?php echo  $this->Html->cInt($deal['Topic'][0]['topic_discussion_count']).' Comments';?></p>
+        	</div>
+      	
 				<?php else: ?>
-				 <div class="clearfix">
 					<p class="first-comment">
 						<?php echo $this->Html->link(__l('Be the first to comment!'), array('controller' => 'topic_discussions', 'action' => 'index', (!empty($deal['Topic'][0]['id'])?$deal['Topic'][0]['id']:'')),array('title'=>__l('Be the first to comment!'),'class'=>'joing-link')); ?>
 					</p>
-					</div> <!-- /clearfix -->
+					
 				<?php endif; ?>
-				
-        		</div> <!-- /join-discussion-block -->
+    		</div>
+        -->
+      
+      
+      
+          	
     	   <?php endif; ?>
+    	   
+    	   
+    	   
+    	   
+    	   
+    	   
     	   
     	   <div class="fb-comments" data-href="<?php echo $canonical_url; ?>" data-num-posts="2" data-width="450"></div>     	  
      	  
