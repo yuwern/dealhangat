@@ -477,17 +477,10 @@
     	   <?php endif; ?>
     	  
     	  
-    	  
-    	  <div id="fb-comments">
-    	   <div id="fb-root"></div>
-        
-    	  <?php
-    	  
-    	  $canonical_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    	  
-    	  ?>
-    	   <fb:comments href="<?php echo $canonical_url; ?>"></fb:comments>
-         </div> <!-- /fb-comments -->
+    	   
+    	   <div class="fb-comments" data-href="<?php echo $canonical_url; ?>" data-num-posts="2" data-width="450"></div>
+    	   
+    	   
          
                        </div> <!-- /review-block -->
                   <?php if(!empty($deal['Deal']['comment'])) {?>

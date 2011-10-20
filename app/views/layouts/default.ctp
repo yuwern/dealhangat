@@ -100,11 +100,22 @@ endif;
 	$bgcolor =	 !empty($city_bgcolor) ? 'background-color:#'.$city_bgcolor.'':''.';';	 
 ?>
 
-<script src="http://connect.facebook.net/en_US/all.js#xfbml=1">
-</script>
-
 
 <body style="<?php echo $bgattachment.' '.$bgcolor;?>">
+  
+  
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=147267432014750";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
 	<div class="js-morecities1 top-slider1  hide">
 	<div class="cities-index-block">
 		<?php 
