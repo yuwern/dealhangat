@@ -439,34 +439,48 @@
 					<div class="deal-area clearfix">
 						<div class="deal-l">
                         	<?php echo $this->Html->getUserAvatarLink($deal['Topic'][0]['LastRepliedUser'], 'small_thumb');?>
-						</div>
+						</div> <!-- /deal-l -->
 						<p class="deal-r">
 							<?php echo $this->Html->truncate($deal['Topic'][0]['TopicDiscussion'][0]['comment'],50, array('ending' => '...')); ?>
 							<?php echo $this->Html->link(__l(' more'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id'])); ?>
 						</p>
-					</div>
+					</div> <!-- /deal-r -->
 					<div class="discussion-block">
 					
                         <div class="clearfix">
                         	<p class="first-comment">
     							<?php echo $this->Html->link(__l('Join the discussion!'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id']),array('title'=>__l('Join the discussion!'),'class'=>'joing-link')); ?>
     						</p>
-						</div>
+						</div> <!-- /cleafix -->
 						<p class="comment-info">
 							<?php echo  $this->Html->cInt($deal['Topic'][0]['topic_discussion_count']).' Comments';?>
                         </p>
-                	</div>
+                	</div> <!-- /discussion-block -->
 				<?php else: ?>
 				 <div class="clearfix">
 					<p class="first-comment">
 						<?php echo $this->Html->link(__l('Be the first to comment!'), array('controller' => 'topic_discussions', 'action' => 'index', (!empty($deal['Topic'][0]['id'])?$deal['Topic'][0]['id']:'')),array('title'=>__l('Be the first to comment!'),'class'=>'joing-link')); ?>
 					</p>
-					</div>
+					</div> <!-- /clearfix -->
 				<?php endif; ?>
 				
-        		</div>
+        		</div> <!-- /join-discussion-block -->
     	   <?php endif; ?>
-                       </div>
+    	   
+    	   <div id="fb-comments">
+     	   <div id="fb-root"></div>
+
+     	  <?php
+
+     	  $canonical_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+
+     	  ?>
+     	   <fb:comments href="<?php echo $canonical_url; ?>"></fb:comments>
+          </div> <!-- /fb-comments -->
+     	  
+     	  
+     	  
+                       </div> <!-- /review-block -->
                   <?php if(!empty($deal['Deal']['comment'])) {?>
 						<h3><?php echo Configure::read('site.name').' '.__l('says');?></h3>
                        <?php echo $this->Html->cHtml($deal['Deal']['comment']);?>
