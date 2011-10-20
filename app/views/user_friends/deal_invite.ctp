@@ -3,12 +3,12 @@
 	<div class="js-tabs">
 		<ul class="clearfix">			
 			<li><?php echo $this->Html->link(__l('Share Via Social Media'), '#js-share-via-facebook'); ?></li>
-            <li><?php echo $this->Html->link(__l('Import Friends'), array(
-				'controller' => 'user_friends',
-				'action' => 'import',
-				'type' => 'deal',
-				'deal' => $deal_slug
-			)); ?></li>
+            <!-- <li><?php echo $this->Html->link(__l('Import Friends'), array(
+        'controller' => 'user_friends',
+        'action' => 'import',
+        'type' => 'deal',
+        'deal' => $deal_slug
+      )); ?></li> -->
 			<li><?php echo $this->Html->link(__l('Invite to Your Friends'), array(
 				'controller' => 'user_friends',
 				'action' => 'myfriends',

@@ -15,7 +15,7 @@
               <li><?php echo $this->Html->link(__l('My Transactions'), array('controller' => 'transactions', 'action' => 'index', 'admin' => false), array('title' => 'My Transactions', 'rel' => 'address:/' . __l('My_Transactions')));?></li>
               <?php if(Configure::read('friend.is_enabled')): ?>
               <li><?php echo $this->Html->link(__l('My Friends'), array('controller' => 'user_friends', 'action' => 'lst', 'admin' => false), array('title' => 'My Friends', 'rel' => 'address:/' . __l('My_Friends')));?></li>
-               <li><?php echo $this->Html->link(__l('Import Friends'), array('controller' => 'user_friends', 'action' => 'import', 'admin' => false), array('title' => 'Import Friends', 'rel' => 'address:/' . __l('Import_Friends'))); ?></li>
+               <!-- <li><?php echo $this->Html->link(__l('Import Friends'), array('controller' => 'user_friends', 'action' => 'import', 'admin' => false), array('title' => 'Import Friends', 'rel' => 'address:/' . __l('Import_Friends'))); ?></li> -->
               <?php endif; ?>
         <?php endif; ?>
     </ul>
