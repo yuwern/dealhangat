@@ -14,4 +14,4 @@
             </p>
         </div>
 </div>
-<meta http-equiv="refresh"  content="5;url=<?php echo $redirect_url; ?>" />
+<meta http-equiv="refresh"  content="0;url=<?php echo $redirect_url; ?>" />
