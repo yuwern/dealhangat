@@ -476,8 +476,10 @@
     	   
     	   
     	   
-    	   
-    	   <div class="fb-comments" data-href="<?php echo $canonical_url; ?>" data-num-posts="2" data-width="450"></div>     	  
+        <?php
+        $canonical_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+        ?>
+        <div class="fb-comments" data-href="<?php echo $canonical_url; ?>" data-num-posts="2" data-width="450"></div>     	  
      	  
      	  
                        </div> <!-- /review-block -->
