@@ -1,8 +1,11 @@
 /* SVN:$Id:blue-theme.css 16996 2010-08-02 11:32:49Z josephine_065at09 $ */
+/* revision by SZE @ GMAIL DOT COM */
 /* GLOBAL STYLE */
 body {
-	background:#27b33a url(../img/bg.png) repeat-x left top;
-	font-family:Arial, Helvetica, sans-serif;
+	background:#27b33b;
+	background-image: url(../img/body-bg.png'); 
+	background-repeat: repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
 }
 div.content {
 	color:#4c4c4c;
@@ -158,7 +161,8 @@ div.city-info-block {
 	position:relative;
 }
 .city-block h2 {
-	color:#000;
+	color:#ff0000;
+	/*color:#36404B;*/
 	margin:0;
 	padding:0;
 }

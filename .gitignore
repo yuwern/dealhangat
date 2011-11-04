@@ -1,5 +1,6 @@
 app/tmp/
 app/media
+app/webroot/img/big_thumb
 app/webroot/img/medium_thumb
 app/webroot/img/medium_big_thumb
 app/webroot/img/micro_thumb
