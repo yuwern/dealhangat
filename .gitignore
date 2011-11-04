@@ -1,4 +1,9 @@
 app/tmp/
-app/webroot/img
 app/media
+app/webroot/img/medium_thumb
+app/webroot/img/medium_big_thumb
+app/webroot/img/micro_thumb
+app/webroot/img/small_big_thumb
+app/webroot/img/small_thumb
+app/webroot/img/normal_thumb
 app/config/database.php
