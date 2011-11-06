@@ -8,3 +8,6 @@ app/webroot/img/small_big_thumb
 app/webroot/img/small_thumb
 app/webroot/img/normal_thumb
 app/config/database.php
+app/webroot/cache/
+app/webroot/img/facebook/
+app/webroot/img/original/AffiliateWidgetSize/
