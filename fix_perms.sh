@@ -1,5 +1,6 @@
 mkdir app/media
 mkdir app/tmp
+mkdir app/tmp/cache
 mkdir app/webroot/js
 mkdir app/webroot/img
 mkdir app/webroot/css
