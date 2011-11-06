@@ -1,29 +1,32 @@
 /* SVN:$Id:blue-theme.css 16996 2010-08-02 11:32:49Z josephine_065at09 $ */
+/*
+revised by: SZE
+11052011 : 1800
+/*
+
 /* GLOBAL STYLE */
 body {
 	background:#27b33a url(../img/bg.png) repeat-x left top;
 	font-family:Arial, Helvetica, sans-serif;
 }
+
+/* CONTAINER */
 div.content {
-	color:#4c4c4c;
 	font-size:12px;
 	line-height:18px;
 	margin:0 auto;
 	width:990px;
 }
-div.admin-content {
-	width:990px;
-}
-a {
-	color:#66cc33;
-	text-decoration:none;
-}
-a:hover {
-	color:#000;
-}
-img {
-	vertical-align:middle;
-}
+div.admin-content	{ width:990px; }
+
+/* LINK IMAGE STYLES */
+a			{ color:#1fad32;text-decoration:none; }
+a:hover		{ color:#000; }
+img			{ vertical-align:middle; }
+.hidden-info{ display: none; }
+
+/* HEADER STYLES */
+
 /* DH HEADER LOGO */
 h1 {
 	float:left;
@@ -37,151 +40,99 @@ h1 a {
 	text-indent:-99999em;
 }
 h2 {
+	color:#33cc33;
 	font-size:22px;
-	color:#39b54a;
 	padding:10px 0;
 }
 h3 {
-	color:#39b54a;
+	color:#33cc33;
 	font-size:14px;
-	padding:10px 0 10px;
+	padding:10px 0;
 }
 h5 {
-	color:#39b54a;
-	font-size:12px;
-	padding:0;
-}
-h5 a {
+	color:#33cc33;
 	font-size:12px;
 }
-.hidden-info {
-	display: none;
-}
-/* CONTENT SIDEBAR ADDRESS */
-address {
-	color:#4c4c4c;
-	font-style:normal;
-	font-size:12px;
-	margin:0;
-}
-address span {
-	display:block;
-}
-/** header style begin*/
+
+/* HEADER STYLES BEGIN */
 div#header {
 	position:relative;
-	margin:0px 0px 15px 0px;
+	margin:0 0 15px 0;
 }
+/* HEADER RIGHT */
 .header-r {
 	float:right;
-	width:704px;
+	width:700px;
 }
-.header-bot-r {
-	border:1px dashed #63a4e8;
-	float:right;
-	padding:0 0 7px;
-	width:200px;
-	line-height:19px;
-	font-size:12px;
-	margin:5px 0 0 0;
-}
-div.add-amount {
-	float:right;
-	margin:3px 4px 0 0;
-}
-div.add-amount a {
-	font-size:12px;
-	margin:0px 4px 0px 0px;
-	text-decoration:underline;
-}
-
-/** HEADER - global links **/
-
+/* HEADER - STACK01 - GLOBAL-BLOCK */
 .global-block {
 	float:right;
-	padding:5px 15px 0 0;
 	width:auto;
 }
 div.global-links {
 	background:url(../img/blue-theme/l-edge.png) no-repeat left top;
 	float:left;
-	height:35px;
-	margin:0;
-	padding:0 0 0 22px;
-}
-.round-edge {
-	background:transparent url(../img/blue-theme/r-edge.png) no-repeat scroll left top;
-	float:right;
-	height:35px;
-	width:12px;
-	margin:-35px 0 0;
 }
 ul.global-links-r {
-	margin:0 3px 0 0;
+	margin:0;
 }
 ul.global-links-r li {
-	float:left;
-	padding:3px 10px 0px 5px;
-}
-ul.global-links-r li a {
-	color:#22b536;
-	/*color:#2E547C;*/
 	font-size:11px;
-	font-weight:bold;
+	float:left;
+	padding:8px;
 }
-ul.global-links li a:hover,ul.global-links-r li a:hover {
-	color:#000;
-	/*color:#4798dc;*/
+ul.global-links-r li a { 
+	color:#009900; 
+	font-weight:bold; 
 }
-ul.global-links-r li.down-arrow a {
-	background:url("../img/top-arrow.png") no-repeat scroll right 6px transparent;
-	padding:0 11px 0 0;
+ul.global-links-r li.down-arrow a { 
+	background:url("../img/top-arrow.png") no-repeat scroll right 6px transparent; 
+	padding:0 10px 0 0; 
 }
-ul.global-links-r li.active a,ul.global-links-r li:hover {
-	color:#4798dc;
+ul.global-links li a:hover,ul.global-links-r li a:hover, ul.global-links-r li.active a,ul.global-links-r li:hover { 
+	color:#006600; 
 }
 
-/* TODAY'S BEST DEAL IN CITY ... */
+/* HEADER - STACK002 - TODAY'S BEST DEAL IN... */
 .city-block {
-	margin:10px 0 0 0px;
-	padding:7px 0 0 0;
-	background:#FF0 url(../img/top-menu-border.png) no-repeat right top;
+	background:url(../img/top-menu-border.png) no-repeat right top;
 }
+/* "TODAY'S BEST DEAL IN..." */
 .city-block h2,.city-block h3 {
+	color:#555;
 	font-size:11px;
 	line-height:14px;
 	text-transform: uppercase;
-	text-align:right;
 }
+/* "CITY NAME" */
+.city-desc-block {
+	float:right;
+	text-align:right;
+	padding: 10px;
+}
+div.city-desc-block a {
+	color:#0099cc;
+	font-weight:bold;
+	font-size:16px;
+	padding: 8px 0 0 6px;
+	vertical-align:middle;
+}
+.city-block h2, div.city-desc-block a { float:left; }
+
+
+/* TOFIX - MYSTERY */
 div.city-info-block {
 	float:left;
 	position:relative;
 }
-.city-block h2 {
-	color:#000;
-	margin:0;
-	padding:0;
-}
-.city-block {
-	font-size:12px;
-	font-weight:bold;
-}
 .city-block div.city-info-block {
+	background-color:#F00;
 	margin:14px 0 0 5px;
 	padding:0 0 10px 0;
 }
 div.city-info-block a.city-name {
-	width:auto;
-	color:#22b536;
-	font-size:20px;
-	float:right;
-	line-height:27px;
-}
-div.city-desc-block a {
-	color:#257F82;
-	font-size:25px;
-	line-height:30px;
-	padding:0 0px 0 0;
+	color:#0099cc;
+	font-size:16px;
 }
 div.city-info-block span.cities-link {
 	background:url("../img/city-arrow.png") no-repeat scroll left top transparent;
@@ -197,12 +148,6 @@ div.city-info-block span.cities-link {
 	color:#66cc33;
 	padding:0 0 0 4px;
 }
-.city-desc-block {
-	float:right;
-	text-align:right;
-}
-
-/* */
 dl.total-list {
 	float:right;
 	padding:3px 0 0 0;
@@ -222,40 +167,39 @@ dl.total-list dd span {
 	font-weight:bold;
 }
 
-/* main navigation - menu buttons */
+/* MAIN NAVIGATION BUTTONS */
 .menu-block {
-	padding:5px 0 5px 0;
+	padding:5px 0;
 }
 ul.menu {
 	float:left;
 }
 ul.menu li {
-	background:url(../img/menu-left.png) no-repeat left top;
+	background:url("../img/menu-left.png") no-repeat left top;
 	float:left;
 	font-size:16px;
 	padding:0 0 0 8px;
 }
 ul.menu li a {
-	background:url(../img/menu-right.png) no-repeat right top;
+	background:url("../img/menu-right.png") no-repeat right top;
 	color:#FFFFFF;
 	display:block;
 	font-size:14px;
 	font-weight:700;
 	padding:12px 12px 13px 5px;
-	text-transform:capitalize;
 }
 ul.menu li.active,ul.menu li:hover {
-	background:url(../img/menu-left-h.png) no-repeat left top;
+	background:url("../img/menu-left-h.png") no-repeat left top;
 }
 ul.menu li.active a,ul.menu li:hover a {
-	background:url(../img/menu-right-h.png) no-repeat right top;
+	background:url("../img/menu-right-h.png") no-repeat right top;
 }
 ul.menu-link {
 	float:right;
 	margin:10px 0 0;
 }
 ul.menu-link li {
-	background:url(../img/login-bg-left.png) no-repeat left top;
+	background:url("../img/login-bg-left.png") no-repeat left top;
 	float:left;
 	margin:0 0 0 5px;
 	padding:0 0 0 5px;
@@ -270,8 +214,8 @@ ul.menu-link li a {
 }
 ul.menu-link li.fconnect,ul.menu-link li.fconnect a,ul.menu-link li.fconnect:hover,ul.menu-link li.fconnect:hover a {
 	background:none;
-	margin:0px 0px 0px 2px;
-	padding:0px;
+	margin:0 0 0 2px;
+	padding:0;
 }
 ul.menu-link li.fconnect a {
 	background:url("../img/f-connect.png") no-repeat scroll right top transparent;
@@ -292,62 +236,46 @@ ul.menu-link li.active a,ul.menu-link li:hover a {
 	background:url(../img/login-bg-right-h.png) no-repeat right top;
 }
 
-/* */
 
+/* COLLAPSIBLE HEADER SLIDER */
+/* UNKNOWN */
 .top-slider {
-	border-bottom:3px solid #00B5C8;
-	width:171px;
-	position:absolute;
 	background:#00B5C8;
-	top:28px;
-	right:0px;
+	border-bottom:2px solid #22b536;
 	height:110px;
 	overflow:auto;
+	position:absolute;
+	right:0px;
+	top:28px;
+	width:170px;
 }
+
+/* SLIDER - CITIES LIST */
 div.top-slider1 {
-	background:#616261;
-	border-bottom:4px solid #A0CA4E;
+	background:#666;
+	border-bottom:2px solid #22b536;
 	font-size:13px;
 }
 div.top-slider1 form.subscription,div.cities-index-block {
-	width:973px;
+	width:970px;
 	margin:0px auto;
 }
 div.top-slider1 ol.cities-list {
-	border-bottom:none;
-	border-left:1px dashed #fff;
+	border-left:1px dashed #FFF;
 }
 div.top-slider1 ol.cities-list li {
-	border-bottom:1px dashed #FFFFFF;
-	border-right:1px dashed #FFFFFF;
-	width:179px;
-	padding:7px;
+	border-bottom:1px dashed #FFF;
+	border-right:1px dashed #FFF;
+	width:175px;
+	padding:8px;
 }
-div.top-slider1 form.subscription div.input label {
-	display:block;
-	text-align:right;
-	width:auto;
-	color:#fff;
-	margin:7px 0 0;
-}
-div.top-slider1 form.subscription div.input input {
-	margin-left:50px;
-}
+/* HEADER - COLLAPSIBLE CITY LIST */
 div.cities-info-block {
 	width:auto;
 	margin:0px auto;
-	border-left:1px dashed #63a4e8;
-}
-ol.cities-list {
-	border-bottom:1px dashed #fff;
-	width:auto;
-}
-.cities-index-block {
-	width:auto;
-	margin:auto 10px;
 }
 div.js-morestates ol.cities-list li {
-	border:medium none;
+	border:none;
 	padding:5px 0 5px 17px;
 	width:447px;
 }
@@ -361,11 +289,11 @@ div.js-morestates ol.cities-list li:hover {
 	background:none;
 }
 div.js-morestates ol.cities-list li span.callout {
-	margin:-10 0 0 20px;
+	margin:-10px 0 0 20px;
 }
 ol.cities-list li {
-	border-bottom:1px dashed #FFFFFF;
-	border-right:1px dashed #FFFFFF;
+	border-bottom:1px dashed #FFF;
+	border-right:1px dashed #FFF;
 	float:left;
 	padding:5px;
 	text-align:left;
@@ -374,36 +302,41 @@ ol.cities-list li {
 ol.cities-list li a {
 	color:#fff;
 	float:left;
-	color:#fff;
 }
 ol.cities-list li span.callout {
+	background:transparent url(../img/icon-call-out.png) no-repeat scroll left top;
 	color:#000;
 	float:left;
 	font-size:9px;
 	height:17px;
 	margin-top:-10px;
-	text-align:center;
-	width:24px;
 	padding-top:6px;
-	background:transparent url(../img/icon-call-out.png) no-repeat scroll left top;
+	text-align:center;
+	width:25px;
 }
-ol.cities-list li.active,ol.cities-list li:hover {
-	background:#A4C85F;
-}
-ol.cities-list li.active a,ol.cities-list li:hover a {
-	color:#fff;
-}
+ol.cities-list li.active,ol.cities-list li:hover	{ background:#999; }
+ol.cities-list li.active a,ol.cities-list li:hover a{ color:#fff; }
+
+/* COLLAPSIBLE - TDK LIHAT BANDAR? */
 p.suggestion-link {
-	height:15px;
-	padding:5px 10px;
+	font-size:11px;
+	font-weight:bold;
+	padding:10px;
 	text-align:right;
 	width:auto;
 }
-p.suggestion-link a {
+p.suggestion-link a			{ color:#FFF; }
+p.suggestion-link a:hover	{ color:#00ccff; }
+
+div.top-slider1 form.subscription div.input label {
+	display:block;
+	text-align:right;
+	width:auto;
 	color:#fff;
+	margin:8px 0 0;
 }
-p.suggestion-link a:hover {
-	text-decoration:underline;
+div.top-slider1 form.subscription div.input input {
+	margin-left:50px;
 }
 .subscription {
 	margin:0px auto;
@@ -452,11 +385,12 @@ p.user-login-info a {
 	font-weight:bold;
 	font-size:15px;
 }
-/* header style ends */
+/* HEADER STYLES END */
 
-/* main style is begin */
+/* MAIN CONTENT STYLES BEGIN */
 #main {
-	padding-bottom:20px;
+	margin: 0 0 15px 0;
+	/*padding-bottom:20px;*/
 	min-height:247px;
 	position:relative;
 }
@@ -512,7 +446,9 @@ div#gift_users-view_gift_card .block2 {
 }
 /* SIDEBAR STYLES */
 
-/** round corner style begins*/
+/* ROUND CORNER STYLES 
+TOFIX to be replaced with moz-border
+*/
 .side1-tl {
 	background:url(../img/side-1-bg-tl.png) no-repeat left top;
 }
@@ -857,7 +793,7 @@ p.copy a {
     margin: 10px 0 0 0;
 }
 #footer dl.total-list dd{
-    background:#39b54a;
+    background:#33cc33;
     -moz-border-radius:5px;
     padding:1px 5px;
 }
@@ -1326,14 +1262,14 @@ div.deal-view-inner-block div.side1 {
 
 /* DEAL TITLE */
 .block1 h2.title {
-	color:#39b54a;
+	color:#33cc33;
 	font-size:24px;
 	font-weight:bold;
 	line-height:28px;
 	letter-spacing:-1px;
 	padding:15px 0 0 0;
 }
-h2.title a 			{color:#39b54a;}
+h2.title a 			{color:#33cc33;}
 h2.title a:hover	{color:#66cc33;}
 
 /* COMPANY NAME BELOW DEAL TITLE */
@@ -3856,11 +3792,13 @@ div.ajax-login-block form#UserLoginForm div.input div.error-message,#gift_users-
 .register-block .deal .openid-block {
 	margin:0 15px 0 0;
 }
+/* GLOBAL-BLOCK - SUBSCRIBE EMAIL */
 div.header-subscription-block {
 	width:990px;
 	margin:0px auto;
 }
 div.header-subscription-left-block {
+	background-color:#ff0; 
 	float:left;
 	width:500px;
 }
@@ -5611,7 +5549,7 @@ span.add-more-deal {
 span.delete-deal {
 	background: url(../img/delete-icon.png) no-repeat 0 0;
 }
-/* users profile page style is begin */
+/* USERS PROFILE PAGE STYLES BEGIN */
 div.profile-image p {
 	text-align:center;
 	margin:5px 0px 0px 0px;
@@ -5929,41 +5867,39 @@ div.show-map-block1  div#js-map-container{
 margin:0 0 0 180px;
 }
 
-/*pre launch page style is begin */
-
-div.pre-launch-block{
-     margin: 0 auto;
-    padding: 10px 30px;
-    text-align: center;
-    width: 804px;
+/* PRE LAUNCH PAGE STYLES BEGIN */
+div.pre-launch-block {
+    margin:0 auto;
+    padding:10px 30px;
+    text-align:center;
+    width:804px;
 }
 div.pre-launch-inner-block{
-    padding:0px 0px 50px 0px;
+    padding:0 0 50px 0;
 }
 div.pre-launch-block .subscriptions-content ,div.pre-launch-inner-block div.subscriptions-content-form{
-    margin:0px auto;
+    margin:0 auto;
 }
 div.pre-launch-block div.submit-block {
     margin: 5px 0 5px 241px;
 }
-div.pre-launch-block h2.welcome-head{
-    color:#fff;
+div.pre-launch-block h2.welcome-head {
+    color:#FFF;
 }
-div.pre-launch-block form.normal{
-padding:0px;
-width:100%;
-
+div.pre-launch-block form.normal {
+	padding:0px;
+	width:100%;
 }
 div.pre-launch-block form.normal div.error-message{
     margin:5px 0 0 234px;
 }
-.transparent-bg{	
+
+/* CLEARFIX STYLES */
+.transparent-bg {	
 	background:#FFF;
 	border:1px solid #ddd;
 	padding:0 10px 10px 10px;	
 }
-
-/* CLEARFIX STYLES */
 .clearfix:after {
 	clear:both;
 	content:'.';
@@ -5983,3 +5919,42 @@ div.pre-launch-block form.normal div.error-message{
 *+html .clearfix {
 	display:inline-block;
 }
+
+/* MYSTERY TOFIX */
+address		{ color:#4c4c4c; }
+address span{ display:block; }
+
+/* header */
+.header-bot-r {
+	border:1px dashed #63a4e8;
+	float:right;
+	padding:0 0 7px;
+	width:200px;
+	line-height:19px;
+	font-size:12px;
+	margin:5px 0 0 0;
+}
+div.add-amount {
+	float:right;
+	margin:3px 4px 0 0;
+}
+div.add-amount a {
+	font-size:12px;
+	margin:0px 4px 0px 0px;
+	text-decoration:underline;
+}
+.round-edge {
+	background:transparent url(../img/blue-theme/r-edge.png) no-repeat scroll left top;
+	float:right;
+	height:35px;
+	width:12px;
+	margin:-35px 0 0;
+}
+/* header */
+
+/*
+.cities-index-block {
+	width:auto;
+	margin:auto 10px;
+}*/
+/* MYSTERY TOFIX */
