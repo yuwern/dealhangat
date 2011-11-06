@@ -2,16 +2,22 @@ mkdir app/media
 find app/media -type d -exec chmod 777 {} \;
 
 mkdir app/tmp
+mkdir app/tmp/logs
 mkdir app/tmp/cache
 mkdir app/tmp/cache/views
 mkdir app/tmp/cache/persistent
 mkdir app/tmp/cache/models
 find app/tmp -type d -exec chmod 777 {} \;
 
+mkdir app/tmp/logs/error.log
+mkdir app/tmp/logs/debug.log
+find app/tmp/logs -type f -exec chmod 777 {} \;
+
 mkdir app/webroot/js
 mkdir app/webroot/img
 mkdir app/webroot/css
 mkdir app/webroot/files
+
 
 mkdir core/cake/console/cake
 find core/cake/console/cake -type d -exec chmod 777 {} \;
