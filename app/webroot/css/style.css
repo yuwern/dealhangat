@@ -40,17 +40,17 @@ h1 a {
 	text-indent:-99999em;
 }
 h2 {
-	color:#33cc33;
+	color:#00cc00;
 	font-size:22px;
 	padding:10px 0;
 }
 h3 {
-	color:#33cc33;
+	color:#00cc00;
 	font-size:14px;
 	padding:10px 0;
 }
 h5 {
-	color:#33cc33;
+	color:#00cc00;
 	font-size:12px;
 }
 
@@ -586,7 +586,7 @@ TOFIX to be replaced with moz-border
 	height: 61px;
 }
 
-/**footer style begin*/
+/* FOOTER STYLES BEGIN */
 #footer {
 	font-size:11px;
 }
@@ -653,7 +653,7 @@ TOFIX to be replaced with moz-border
 	float:left;
 }
 
-/* footer */
+/* FOOTER MOBILE STYLES */
 #footer a.mobile, #footer a.touch-mobile {
 	background:url("../img/mobile.png") no-repeat scroll left top transparent;
 	color:#FFFFFF;
@@ -788,7 +788,7 @@ p.copy a {
 	color: #00b5c8;
 }
 
-/* total saved */
+/* FOOTER - TOTAL SAVED */
 #footer dl.total-list {
     margin: 10px 0 0 0;
 }
@@ -800,7 +800,7 @@ p.copy a {
 #footer dl.total-list dd span{
       color:#fff;
 }
-/** footer style ends*/
+/* FOOTER STYLES END */
 
 /** form */
 form.normal {
@@ -1253,7 +1253,7 @@ a.captcha-reload {
 }
 /* FORM STYLE end */
 
-/* DEAL VIEW PAGE begin */
+/* DEAL VIEW PAGE STYLES BEGIN */
 div.deal-view-inner-block div.side1 {
 	float:left;
 	margin:0px 0 0 0;
@@ -1262,14 +1262,14 @@ div.deal-view-inner-block div.side1 {
 
 /* DEAL TITLE */
 .block1 h2.title {
-	color:#33cc33;
+	color:#009900;
 	font-size:24px;
 	font-weight:bold;
 	line-height:28px;
 	letter-spacing:-1px;
 	padding:15px 0 0 0;
 }
-h2.title a 			{color:#33cc33;}
+h2.title a 			{color:#009900;}
 h2.title a:hover	{color:#66cc33;}
 
 /* COMPANY NAME BELOW DEAL TITLE */
@@ -1772,29 +1772,54 @@ a.buy {
 a.buy:hover {
 	color:#00b5c8;
 }
+/* DEAL VIEW PAGE - BUY BOX */
 .buy-block {
 	background:#f6f0d8;
-	padding:8px 0 6px 0;
+	padding:10px;
 }
 .deal-block {
 	float:left;
 }
+/* BUY BOX - VALUE, DISCOUNT, SAVE */
+dl.deal-value,dl.deal-discount,dl.deal-save {
+	background:url("../img/value-box.png") no-repeat scroll left top transparent;
+	color:#333;
+	float:left;
+	font-size:12px;
+	height:65px;
+	position:relative;
+	text-align:center;
+	width:105px;
+}
+/* BUY BOX - TITLE */
+dl.deal-value dt,dl.deal-discount dt,dl.deal-save dt {
+	padding:12px 0 0 0;
+	text-align:center;
+}
+/* BUY BOX - VALUE */
+dl.deal-value dd,dl.deal-discount dd,dl.deal-save dd {
+	color:#cc6600;
+	font-size:16px;
+	font-weight:bold;
+	text-align:center;
+	padding:3px 0 0 0;
+}
+/* BUY BOX - BUY BUTTON */
 .tag {
 	float:right;
-	margin:0 0 0 20px;
-	width:327px;
+	width:325px;
 }
+/* BUY BOX - PRICE TAG */
 p.price {
-	color:#E46A1A;
+	color:#ed5e00;
 	float:left;
-	font-size:31px;
-	font-weight:700;
-	line-height:20px;
-	padding:21px 4px 0 0;
+	font-size:28px;
+	font-weight:bold;
+	padding:15px 0 0 0;
 	width:auto;
 }
 p.payment-price{
-    padding:0px 0px 0px 0px;
+    padding:0;
 }
 p.price span.pay-advance {
 	color:#000000;
@@ -1812,6 +1837,44 @@ p.price span {
 	margin:0;
 	vertical-align:text-top;
 }
+/* BUY BOX - BUY BUTTON */
+.button,.no-available {
+	background:url("../img/buy-button.png") no-repeat scroll left top transparent;
+	color:#FFFFFF;
+	display:block;
+	float:left;
+	font-size:24px;
+	font-weight:700;
+	height:31px;
+	margin:5px 0 0 20px;
+	padding:18px 0 9px;
+	text-align:center;
+	text-transform:capitalize;
+	width:162px;
+}
+a.button1 {
+	background:url("../img/buy-button2.png") no-repeat scroll left top transparent;
+	padding:18px 0 9px 8px;
+	font-size:25px;
+	text-align:left;
+}
+a.button1:hover {
+	background:url("../img/buy-button2.png") no-repeat scroll left bottom transparent;
+}
+.no-available {
+	font-size:12px;
+	font-weight:700;
+	height:31px;
+	padding:18px 0 9px;
+}
+.no-available {
+	background:url(../img/buy-button.png) no-repeat scroll left bottom;
+}
+.button:hover {
+	background-position:left bottom;
+	text-decoration:none;
+}
+
 .comment-top {
 	background:url(../img/blue-theme/comment-top.png) no-repeat left top;
 	width:462px;
@@ -1846,42 +1909,7 @@ p.deal-link {
 	margin:5px 10px 10px 0;
 	text-align:right
 }
-.button,.no-available {
-	background:url("../img/buy-button.png") no-repeat scroll left top transparent;
-	color:#FFFFFF;
-	display:block;
-	float:left;
-	font-size:28px;
-	font-weight:700;
-	height:31px;
-	margin:5px 10px 0;
-	padding:18px 0 9px;
-	text-align:center;
-	text-transform:capitalize;
-	width:162px;
-}
-a.button1 {
-	background:url("../img/buy-button2.png") no-repeat scroll left top transparent;
-	padding:18px 0 9px 8px;
-	font-size:25px;
-	text-align:left;
-}
-a.button1:hover {
-	background:url("../img/buy-button2.png") no-repeat scroll left bottom transparent;
-}
-.no-available {
-	font-size:12px;
-	font-weight:700;
-	height:31px;
-	padding:18px 0 9px;
-}
-.no-available {
-	background:url(../img/buy-button.png) no-repeat scroll left bottom;
-}
-.button:hover {
-	background-position:left bottom;
-	text-decoration:none;
-}
+
 div.pay-remaing-block {
    font-size: 11px;
     margin: 4px 0 6px 353px;
@@ -1905,30 +1933,8 @@ a.read-more {
 	margin:6px 0 0 30px;
 	padding:0 20px 0 0;
 }
-dl.deal-value,dl.deal-discount,dl.deal-save {
-	background:url("../img/value-box.png") no-repeat scroll left top transparent;
-	color:#333333;
-	float:left;
-	font-size:12px;
-	margin:0px 0 0px 5px;
-	height:64px;
-	text-align:center;
-	width:104px;
-	position:relative;
-}
-dl.deal-value dd,dl.deal-discount dd,dl.deal-save dd {
-	color:#C96F06;
-	font-size:20px;
-	font-weight:normal;
-	text-align:center;
-	padding:14px 0px 0px 0px;
-}
-dl.deal-value dt,dl.deal-discount dt,dl.deal-save dt {
-	padding:41px 0 0 0;
-	font-size:12px;
-	position:absolute;
-	left:29px;
-}
+
+
 .deal-bot-bg {
 	background:url(../img/connect-arrow.png) no-repeat left top;
 	height:37px;
@@ -1984,7 +1990,8 @@ ol.side-deal-list li {
 	border-top:1px solid #fff;
 	padding: 5px 0px 5px 0px;
 }
-/* deal view page style end */
+/* DEAL VIEW STYLES END */
+
 /** twitter plugin styles */
 .twtr-widget {
 	border:none;
@@ -2444,10 +2451,11 @@ div.add-block1 {
 div.add-block1 a {
 	padding: 1px 2px 1px 20px;
 }
-/* admin style is begin */
+/* ADMIN BAR STYLES BEGIN */
 div.admin-content .menu-block {
 	margin:10px auto 0;
 }
+/* "YOU ARE LOGGED IN AS ADMIN" */
 .admin-bar {
 	background:#00B5C8;
 	border:1px solid #fff;
