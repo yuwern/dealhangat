@@ -25,7 +25,7 @@ class AssetHelper extends Helper
     var $md5FileName = true;
     //you can change this if you want to store the files in a different location.
     //this is relative to your webroot/js and webroot/css paths
-    var $cachePath = '';
+    var $cachePath = '../cache/';
     //set the css compression level
     //options: default, low_compression, high_compression, highest_compression
     //default is no compression
