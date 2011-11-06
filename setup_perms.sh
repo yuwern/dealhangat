@@ -1,6 +1,9 @@
 mkdir app/media
 find app/media -type d -exec chmod 777 {} \;
 
+# You might have to edit this
+sudo chown -hR `whoami`:staff ./app/tmp
+
 mkdir app/tmp
 mkdir app/tmp/logs
 mkdir app/tmp/cache
