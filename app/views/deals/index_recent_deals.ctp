@@ -50,7 +50,7 @@
                            <p class="bought-count">
         					   <?php echo $this->Html->cInt($deal['Deal']['deal_user_count']); ?>
                             </p>
-							 <p class="deals-time"> <?php echo $this->Html->cDateTimeHighlight($deal['Deal']['end_date']); ?></p>
+							 <p class="deals-time"><?php echo __l("Ended on"); ?> <?php echo $this->Html->cDateTimeHighlight($deal['Deal']['end_date']); ?></p>
                         </div>
                        
                        <div class="bought-details">

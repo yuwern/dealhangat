@@ -428,60 +428,60 @@
                         <?php endif; ?>
                     </div>
 				 	<?php endif; ?>                  
-				 	
-				 	
                     <div class="review-block clearfix">
-                      
-                      
-                      
-                      
                     <?php if(!empty($deal['Deal']['review'])){?>
         				<h3><?php echo __l('Reviews');?></h3>
         				<div class="big-text"><?php echo $this->Html->cHtml($deal['Deal']['review']);?></div>
 			      <?php }?>
-			      
                  <?php if($deal['Deal']['deal_status_id'] != ConstDealStatus::Upcoming && $deal['Deal']['deal_status_id'] != ConstDealStatus::Draft && $deal['Deal']['deal_status_id'] != ConstDealStatus::PendingApproval): ?>
                    
                    
-	           	 <div class="join-discussion-block">
-			     	<?php if(!empty($deal['Topic'][0]['topic_discussion_count'])):?>
-					<div class="deal-area clearfix">
+          <!--
+          <div class="join-discussion-block">
+		     	<?php if(!empty($deal['Topic'][0]['topic_discussion_count'])):?>
+			     	  
+					<div class="deal-area">
 						<div class="deal-l">
-                        	<?php echo $this->Html->getUserAvatarLink($deal['Topic'][0]['LastRepliedUser'], 'small_thumb');?>
-						</div><!-- /deal-l -->
+              <?php echo $this->Html->getUserAvatarLink($deal['Topic'][0]['LastRepliedUser'], 'small_thumb');?>
+						</div>
 						<p class="deal-r">
 							<?php echo $this->Html->truncate($deal['Topic'][0]['TopicDiscussion'][0]['comment'],50, array('ending' => '...')); ?>
 							<?php echo $this->Html->link(__l(' more'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id'])); ?>
 						</p>
-						
-					</div> <!-- /deal-area -->
-					<div class="discussion-block">
-                        <div class="clearfix">
-                        	<p class="first-comment">
-    							<?php echo $this->Html->link(__l('Join the discussion!'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id']),array('title'=>__l('Join the discussion!'),'class'=>'joing-link')); ?>
-    						</p>
-						</div> <!-- /clearfix -->
-						<p class="comment-info">
-							<?php echo  $this->Html->cInt($deal['Topic'][0]['topic_discussion_count']).' Comments';?>
-                        </p>
-                	</div> <!-- /discussion-block -->
+					</div>
+					
+					<div class="discussion-block">                  
+            <p class="first-comment">
+              <?php echo $this->Html->link(__l('Join the discussion!'), array('controller' => 'topic_discussions', 'action' => 'index', $deal['Topic'][0]['id']),array('title'=>__l('Join the discussion!'),'class'=>'joing-link')); ?>
+            </p>
+						<p class="comment-info"><?php echo  $this->Html->cInt($deal['Topic'][0]['topic_discussion_count']).' Comments';?></p>
+        	</div>
+      	
 				<?php else: ?>
-				 <div class="clearfix">
 					<p class="first-comment">
 						<?php echo $this->Html->link(__l('Be the first to comment!'), array('controller' => 'topic_discussions', 'action' => 'index', (!empty($deal['Topic'][0]['id'])?$deal['Topic'][0]['id']:'')),array('title'=>__l('Be the first to comment!'),'class'=>'joing-link')); ?>
 					</p>
-					</div> <!-- /clearfix -->
+					
 				<?php endif; ?>
-				
-        		</div> <!-- /join-discussion-block -->
+    		</div>
+        -->
+      
+      
+      
+          	
     	   <?php endif; ?>
-    	  
-    	  
-    	   
-    	   <div class="fb-comments" data-href="<?php echo $canonical_url; ?>" data-num-posts="2" data-width="450"></div>
     	   
     	   
-         
+    	   
+    	   
+    	   
+    	   
+        <?php
+        $canonical_url = (!empty($_SERVER['HTTPS'])) ? "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'] : "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+        ?>
+        <div class="fb-comments" data-href="<?php echo $canonical_url; ?>" data-num-posts="2" data-width="450"></div>     	  
+     	  
+     	  
                        </div> <!-- /review-block -->
                   <?php if(!empty($deal['Deal']['comment'])) {?>
 						<h3><?php echo Configure::read('site.name').' '.__l('says');?></h3>

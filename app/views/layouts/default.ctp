@@ -113,9 +113,8 @@ endif;
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
-
-
-
+  
+  
 	<div class="js-morecities1 top-slider1  hide">
 	<div class="cities-index-block">
 		<?php 

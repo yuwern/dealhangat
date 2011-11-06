@@ -3,4 +3,5 @@
 	RewriteBase	/app/
 	RewriteRule	^$	webroot/	[L]
 	RewriteRule	(.*) webroot/$1	[L]
+	#RewriteRule (.*) www.dealhangat.com/$1 [L]
 </IfModule>

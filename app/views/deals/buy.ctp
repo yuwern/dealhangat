@@ -1,5 +1,8 @@
 <?php /* SVN: $Id: buy.ctp 54596 2011-05-25 12:35:27Z arovindhan_144at11 $ */ ?>
-	<h2><?php echo __l('Your Purchase'); ?></h2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $this->Html->image('payment\step1.png') ?>
+	
+
+<h2><?php echo __l('Your Purchase'); ?></h2>
 	<div class="buying-form">
 	<?php echo $this->Form->create('Deal', array('action' => 'buy', 'class' => 'normal')); ?>
     	<table class="list">
@@ -207,7 +210,11 @@
 							else{
 					  echo $this->Form->input('payment_gateway_id', array('legend' => __l('Payment Type'), 'type' => 'radio', 'options' => $gateway_options['paymentGateways'], 'class' => 'js-payment-type {"is_show_credit_card":"' . $is_show_credit_card . '"}'));?>
                      
-					<div class="user-payment-profile js-show-payment-profile <?php echo (!empty($gateway_options['paymentGateways'][ConstPaymentGateways::AuthorizeNet]) && (empty($this->request->data['Deal']['payment_gateway_id']) || $this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet)) ? '' : 'hide'; ?>">
+						&nbsp;<?php echo $this->Html->image('payment/banner1.png')?><br></br>
+						&nbsp;<?php echo $this->Html->image('payment/banner2.png')?>
+
+
+						<div class="user-payment-profile js-show-payment-profile <?php echo (!empty($gateway_options['paymentGateways'][ConstPaymentGateways::AuthorizeNet]) && (empty($this->request->data['Deal']['payment_gateway_id']) || $this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::AuthorizeNet)) ? '' : 'hide'; ?>">
 						<?php 
 							if (!empty($gateway_options['Paymentprofiles'])):
 								echo $this->Form->input('payment_profile_id', array('legend' => __l('Pay with this card(s)'), 'type' => 'radio', 'options' => $gateway_options['Paymentprofiles']));
