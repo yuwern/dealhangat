@@ -32,7 +32,7 @@
 /**
  * Include needed files
  */
-require_once("Numbers/Words.php");
+//require_once("Numbers/Words.php");
 
 /**
  * Class for translating numbers into American English.
