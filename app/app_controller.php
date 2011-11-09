@@ -55,12 +55,21 @@ class AppController extends Controller
         'Time',
         'RestXml',
         'RestJson',
+        'Block',
+    );
+    public $uses = array (
+        'Block',
     );
     var $cookieTerm = '+4 weeks';
     //    var $view = 'Theme';
     //    var $theme = 'default';
     function beforeRender()
     {
+
+        $this->set('blocks_left', $this->Block->find('all', array('conditions' => array('Block.region' => 0))));
+        $this->set('blocks_right', $this->Block->find('all', array('conditions' => array('Block.region' => 1))));
+        $this->set('blocks_bottom', $this->Block->find('all', array('conditions' => array('Block.region' => 2))));
+
         $this->set('meta_for_layout', Configure::read('meta'));
         $this->set('js_vars_for_layout', (isset($this->js_vars)) ? $this->js_vars : '');
 		if (Configure::read('site.is_api_enabled')) {

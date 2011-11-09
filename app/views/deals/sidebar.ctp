@@ -149,6 +149,14 @@
   </div>
   <?php endif; ?>
   <?php echo $this->element('deals-nearby_simple', array('deal_id' => $deal['Deal']['id'], 'cache' => array('config' => 'site_element_cache', 'key' => $deal['Deal']['id']))); ?>
+
+
+    <?php foreach ($blocks_right as $block): ?>
+        <?php echo $this->Block->display($block); ?>
+    <?php endforeach; ?>
+
+
+  
   <div class="blue-bg clearfix">
     <div class="business-tl">
       <div class="business-tr">
@@ -171,6 +179,10 @@
       </div>
     </div>
   </div>
+
+
+
+  
  <?php
 $facebook_like_box = Configure::read('facebook.like_box');
 if(!empty($facebook_like_box)):?>
