@@ -500,21 +500,32 @@ endif;
 				</div>
 
  <div id="footer">
-    <div class="footer-tl">
+ 
+    <!-- <div class="footer-tl">
       <div class="footer-tr">
         <div class="footer-tm"> </div>
       </div>
     </div>
+    
     <div class="footer-cl">
       <div class="footer-cr">
+      -->
+      
+        	<div class="clearfix">
+                <dl class="total-list clearfix">
+                <?php echo $this->element('total_saved', array('key' => Configure::read('lang_code'), 'cache' => array('config' => 'site_element_cache_2_min')));?>
+                 </dl>
+            </div>
+      
         <div class="footer-inner clearfix">
           <div class="footer-wrapper-inner clearfix">
+          
             <div class="footer-section1">
-              <div class="footer-left">
-                <div class="footer-right">
+              <!-- <div class="footer-left">
+                <div class="footer-right"> -->
                  <h6><?php echo __l('Company'); ?></h6>
-                </div>
-              </div>
+                <!-- </div>
+              </div> -->
               <ul class="footer-nav">
                 <?php $class = ($this->request->params['controller'] == 'pages' && $this->request->params['action'] == 'view' && $this->request->params['pass'][0] == 'about') ? ' class="active"' : null; ?>
                	<li <?php echo $class;?>><?php echo $this->Html->link(__l('About'), array('controller' => 'pages', 'action' => 'view', 'about', 'admin' => false), array('title' => __l('About')));?> </li>
@@ -582,12 +593,10 @@ endif;
     			     <li class="rss2"><?php echo $this->Html->link(__l('RSS'), array_merge(array('controller'=>'deals', 'action'=>'index', 'ext'=>'rss'), $cityArray), array('target' => '_blank','title'=>__l('RSS Feed'))); ?></li>
                </ul>
             </div>
+            
+            <!-- FIX -->
             <div class="mobile-left-block">
-            <div class="clearfix">
-                <dl class="total-list clearfix">
-                <?php echo $this->element('total_saved', array('key' => Configure::read('lang_code'), 'cache' => array('config' => 'site_element_cache_2_min')));?>
-                 </dl>
-            </div>
+
               <div class="clearfix">
 			  <?php
 				if (Configure::read('site.is_touch_app')): ?>
@@ -613,15 +622,21 @@ endif;
 			<?php endif; ?>
 			</div>
 			</div>
-        
+			<!-- END OF FIX -->
+			
           </div>
-          <div id="agriya" class="clearffix">
+          <div id="agriya" class="clearfix">
           	<p class="copy">&copy;<?php echo date('Y');?> <?php echo $this->Html->link(Configure::read('site.name'), Router::Url('/',true), array('title' => Configure::read('site.name'), 'escape' => false));?>. <?php echo __l('All rights reserved');?>.</p>
           </div>
         </div>
-      </div>
+      
+    <!--  </div>
     </div>
+    footer-cl -->
+    
   </div>
+ <!-- footer ends --> 
+  
 </div>
 	<?php echo $this->element('site_tracker', array('cache' => array('config' => 'site_element_cache'), 'plugin' => 'site_tracker')); ?>
 	<?php echo $this->element('sql_dump'); ?>

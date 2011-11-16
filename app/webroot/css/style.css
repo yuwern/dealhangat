@@ -523,27 +523,6 @@ TOFIX to be replaced with moz-border
     height: 5px;
     padding: 0;
 }
-.footer-tl {
-	background:url(../img/footer-tl.png) no-repeat left top;
-}
-.footer-tr {
-	background:url(../img/footer-tr.png) no-repeat right top;
-}
-.footer-tm {
-	background:url(../img/footer-tm.png) repeat-x left top;
-	margin:0px 5px;
-	height:5px;
-}
-.footer-cl {
-	background:url(../img/footer-cl.png) repeat-y left top;
-}
-.footer-cr {
-	background:url(../img/footer-cr.png) repeat-y right top;
-}
-.footer-inner {
-	background:url(../img/footer-bg.png) repeat-x left top;
-	margin:0px 5px;
-}
 .deal-tl {
 	background:url(../img/side-2-bg-tl.png) no-repeat left top;
 }
@@ -587,35 +566,232 @@ TOFIX to be replaced with moz-border
 }
 
 /* FOOTER STYLES BEGIN */
+
+/* REMOVE
+body.subscription .footer-wrapper-inner {
+	background-color:#FFF;
+	height:auto;
+	margin:0 auto;
+	width:990px;
+	height:100px;
+	float:none;
+}
+#agriya p {
+	text-align:center;
+	float:left;
+}
+/* REMOVE FOOTER - ROUNDED EDGES
+.footer-tl {
+	background:url(../img/footer-tl.png) no-repeat left top;
+}
+.footer-tr {
+	background:url(../img/footer-tr.png) no-repeat right top;
+}
+.footer-tm {
+	background:url(../img/footer-tm.png) repeat-x left top;
+	margin:0px 5px;
+	height:5px;
+}
+.footer-cl {
+	background:url(../img/footer-cl.png) repeat-y left top;
+}
+.footer-cr {
+	background:url(../img/footer-cr.png) repeat-y right top;
+}
+ul.footer-nav li a span {
+	font-size:10px;
+}
+/* FOOTER - UNKNOWN 
+h6.logo {
+	float:right;
+	margin:32px 24px 0 0;
+}
+h6.logo a {
+	background:url(../img/blue-theme/logo-email.png) no-repeat left top;
+	width:186px;
+	height:47px;
+	display:block;
+	text-indent:-9999em;
+}
+*/
 #footer {
 	font-size:11px;
+}
+/* FOOTER WRAPPER */
+.footer-inner {
+	/* background:url(../img/footer-bg.png) repeat-x left top; */
+}
+/* FOOTER - TOTAL SAVED */
+#footer .total-list {
+	text-align:center;
+}
+#footer .total-list dl {
+
+}
+#footer .total-list dd {
+    background:#33cc33;
+    padding:3px 5px;
+}
+#footer .total-list dd span {
+      color:#fff;
+      font-size: 14px;
+      padding:1px;
+}
+/* FOOTER - COLUMNS */
+.footer-section1 {
+	float:left;
+	padding:10px 35px 0 11px;
+	width:170px;
+}
+.footer-section2 {
+	width:180px;
+	float:left;
+	padding:10px 40px 0 15px;
+}
+.footer-section3 {
+	width:170px;
+	float:left;
+	padding:10px 0 0 10px;
+}
+.footer-section4 {
+	width:150px;
+	float:left;
+	padding:10px 0 0 15px;
+}
+/* FOOTER LINKS - HEADER */
+.footer-section1 h6,.footer-section2 h6,.footer-section3 h6,.footer-section4 h6 {
+	background-color:#66cc33;
+	color:#fff;
+	font-size:12px;
+	font-weight:bold;
+	margin: 0 0 3px 0;
+	padding:5px 12px;
+}
+/* FOOTER HEADER BG 
+.footer-left {
+	background:url(../img/footer-menu-left.png) no-repeat left top;
+	padding:0 0 0 4px;
+	height:32px;
+}
+.footer-right {
+	background:url(../img/footer-menu-right.png) no-repeat right top;
+	height:32px;
+}*/
+/* FOOTER - DIV STYLES 
+body.subscription #footer {
+	background:#000C0F;
+	bottom:0;
+	font-size:12px;
+	left:0;
+	padding:5px 0;
+	position:absolute;
+	width:100%;
+	z-index:-1;
+}*/
+div.footer-r {
+	width:500px;
+	float:right;
+	color:#Afafaf;
+}
+div.footer-r p {
+	padding:6px 0px 0px 0px;
+	line-height:18px;
 }
 #footer+.ui-datepicker,.content+.ui-datepicker {
 	display:none;
 }
-#agriya {
-	width:955px;
-	margin:25px auto 0;
-	padding:10px 0 0 0;
-	border-top:1px solid #c1c5c7;
+/* FOOTER - LINKS */
+ul.footer-nav {}
+ul.footer-nav li {
+	border-bottom:1px dotted #c5ec11;
+	padding:1px 0;
 }
-#agriya p {
-	text-align:center;
-	color:#333;
-	float:left;
+ul.footer-nav li a {
+	color:#c5ec11;
+	background:url("../img/arrow-footer.png") no-repeat scroll left 4px transparent;
+	padding:0 0 0 13px;
+}
+ul.footer-nav li a:hover {
+	color:#006633;
+}
+ul.footer-nav li.face2 a {
+	background:url(../img/facebook-icon2.png) no-repeat right top;
+	height:16px;
+	margin:0 0 2px 0;
+}
+ul.footer-nav li.tweet2 a {
+	background:url(../img/twitter-icon-2.png) no-repeat right top;
+	height:16px;
+	margin:0 0 2px 0;
+}
+ul.footer-nav li.mail2 a {
+	background:url(../img/email-icon-2.png) no-repeat right top;
+	height:16px;
+	margin:0 0 2px 0;
+}
+ul.footer-nav li.rss2 a {
+	background:url(../img/rss-icon.png) no-repeat right top;
+	height:16px;
+	margin:0 0 2px 0;
+}
+ul.footer-nav li.face2 a,ul.footer-nav li.tweet2 a,ul.footer-nav li.mail2 a,ul.footer-nav li.rss2 a {
+	display:block;
+}
+/* FOOTER MOBILE STYLES */
+#footer a.mobile, #footer a.touch-mobile {
+	background:url("../img/mobile.png") no-repeat scroll left top transparent;
+	color:#FFFFFF;
+	display:block;
+	font-size:13px;
+	font-weight:bold;
+	height:24px;
+	margin:-22px 0 0;
+	padding:23px 0 0 30px;
+}
+#footer a.touch-mobile {
+	background:url("../img/touch-mobile.png") no-repeat scroll left top transparent;
+	}
+div.mobile-left-block{
+    float:left;
+    width:332px;
+}
+.mobile-left {
+    background: url("../img/mobile-bg-left.png") no-repeat scroll left top transparent;
+    float: right;
+    height: 32px;
+    margin: 25px 0 0;
+    padding: 0 0 0 5px;
+    width: 179px;
+}
+.mobile-right {
+	background:url("../img/mobile-bg-right.png") no-repeat scroll right top transparent;
+	height:29px;
+	padding:6px 0 0;
+}
+/* FOOTER - COPYRIGHT FINEPRINT - #AGRIYA */
+#agriya {
+	color:#c5ec11;
+	border-top:1px dotted #c5ec11;
+	border-bottom:1px dotted #c5ec11;
+	margin:25px 0;
+	padding:10px;
 }
 #agriya p a {
-	color:#333;
+	color:#c5ec11;
+	text-decoration:underline;
 }
+#agriya p.copy a:hover {
+	color:#006633;
+}
+/* FOOTER - UNDETERMINED */
 #agriya p.wiki-link {
-	font-weight:700;
 	margin:7px 0 0 8px
 }
 #agriya p.wiki-link a {
-	color:#4BC1DE;
+	color:#c5ec11;
 }
 #agriya p.wiki-link a:hover {
-	color:#000;
+	color:#006633;
 }
 #agriya p.powered {
 	width:300px;
@@ -652,153 +828,37 @@ TOFIX to be replaced with moz-border
 	top:7px;
 	float:left;
 }
-
-/* FOOTER MOBILE STYLES */
-#footer a.mobile, #footer a.touch-mobile {
-	background:url("../img/mobile.png") no-repeat scroll left top transparent;
-	color:#FFFFFF;
-	display:block;
-	font-size:13px;
-	font-weight:bold;
-	height:24px;
-	margin:-22px 0 0;
-	padding:23px 0 0 30px;
-}
-#footer a.touch-mobile {
-	background:url("../img/touch-mobile.png") no-repeat scroll left top transparent;
-	}
-div.mobile-left-block{
-    float:left;
-    width:332px;
-}
-.mobile-left {
-    background: url("../img/mobile-bg-left.png") no-repeat scroll left top transparent;
-    float: right;
-    height: 32px;
-    margin: 25px 0 0;
-    padding: 0 0 0 5px;
-    width: 179px;
-}
-.mobile-right {
-	background:url("../img/mobile-bg-right.png") no-repeat scroll right top transparent;
-	height:29px;
-	padding:6px 0 0;
-}
-.footer-left {
-	background:url(../img/footer-menu-left.png) no-repeat left top;
-	padding:0 0 0 4px;
-	height:32px;
-}
-.footer-right {
-	background:url(../img/footer-menu-right.png) no-repeat right top;
-	height:32px;
-}
-.footer-section1 {
+body.subscription #agriya {
+	border:none;
 	float:left;
-	padding:10px 35px 0 11px;
-	width:170px;
+	margin:17px 0 0;
+	padding:0;
+	width:440px;
 }
-.footer-section2 {
-	width:180px;
+body.subscription #agriya p {
 	float:left;
-	padding:10px 40px 0 15px;
-}
-.footer-section3 {
-	width:170px;
-	float:left;
-	padding:10px 0 0 10px;
-}
-.footer-section4 {
-	width:150px;
-	float:left;
-	padding:10px 0 0 15px;
-}
-.footer-section1 h6,.footer-section2 h6,.footer-section3 h6,.footer-section4 h6 {
-	color:#FFFFFF;
-	font-size:18px;
-	font-weight:normal;
-	padding:6px 0 0 5px;
-}
-ul.footer-nav {
-	padding:8px 0 0;
-}
-ul.footer-nav li {
-	border-bottom:1px dotted #697780;
-	margin:0 0 0 3px;
-	padding:3px 0 3px 0px;
-	font-size:11px;
-	font-weight:bold;
-}
-ul.footer-nav li a {
-	color:#878e93;
-	background:url("../img/arrow-footer.png") no-repeat scroll left 6px transparent;
-	padding:0 0 0 13px;
-}
-ul.footer-nav li a:hover {
-	color:#00b5c8;
-}
-ul.footer-nav li.face2 a {
-	background:url(../img/facebook-icon2.png) no-repeat right top;
-	height:16px;
-	margin:0 0 2px 0;
-}
-ul.footer-nav li.tweet2 a {
-	background:url(../img/twitter-icon-2.png) no-repeat right top;
-	height:16px;
-	margin:0 0 2px 0;
-}
-ul.footer-nav li.mail2 a {
-	background:url(../img/email-icon-2.png) no-repeat right top;
-	height:16px;
-	margin:0 0 2px 0;
-}
-ul.footer-nav li.rss2 a {
-	background:url(../img/rss-icon.png) no-repeat right top;
-	height:16px;
-	margin:0 0 2px 0;
-}
-ul.footer-nav li.face2 a,ul.footer-nav li.tweet2 a,ul.footer-nav li.mail2 a,ul.footer-nav li.rss2 a {
-	display:block;
-}
-ul.footer-nav li a span {
-	font-size:10px;
-}
-h6.logo {
-	float:right;
-	margin:32px 24px 0 0;
-}
-h6.logo a {
-	background:url(../img/blue-theme/logo-email.png) no-repeat left top;
-	width:186px;
-	height:47px;
-	display:block;
-	text-indent:-9999em;
-}
-p.copy {
+	padding:6px 0 2px 0px;
 	width:auto;
-	padding:5px 10px 0 0;
-	color:#4c4c4c;
+}
+body.subscription #agriya p a.company,body.subscription #agriya a.cssilize {
+	display:inline-block;
+}
+body.subscription div.power-cssilize-block #agriya p {
 	float:left;
 }
-p.copy a {
+body.subscription #agriya p a {
+	color:#000;
+	text-decoration:underline;
+}
+body.subscription #agriya p a:hover {
 	text-decoration:none;
-	color:#fff;
 }
-#agriya p.copy a:hover {
-	color: #00b5c8;
+body.subscription #agriya p.powered {
+	padding:9px 0 2px;
 }
-
-/* FOOTER - TOTAL SAVED */
-#footer dl.total-list {
-    margin: 10px 0 0 0;
-}
-#footer dl.total-list dd{
-    background:#33cc33;
-    -moz-border-radius:5px;
-    padding:1px 5px;
-}
-#footer dl.total-list dd span{
-      color:#fff;
+#pages-pre-launch #agriya {
+	border-top:none;
+	margin:0 auto;
 }
 /* FOOTER STYLES END */
 
@@ -2458,17 +2518,17 @@ div.admin-content .menu-block {
 /* "YOU ARE LOGGED IN AS ADMIN" */
 .admin-bar {
 	background:#00B5C8;
-	border:1px solid #fff;
 	color:#FFFFFF;
-	left:24%;
+	left:270px;
+	opacity:0.8;
+	filter:alpha(opacity=80); /* For IE8 and earlier */
 	padding:10px;
 	position:absolute;
-	width:200px;
-	top:43%;
+	width:170px;
 }
 .admin-content .admin-bar {
 	top:0px;
-	left:41%;
+	left:40%;
 	width:auto;
 }
 .admin-bar a {
@@ -2481,7 +2541,7 @@ div.admin-content .menu-block {
 .admin-bar h3 {
 	display:inline;
 	color:#fff;
-	font-size:14px;
+	font-size:12px;
 }
 .admin-sideone {
 	float:left;
@@ -4780,64 +4840,6 @@ div#deals-buy div.side2 ul li {
 form.normal #UserPaymentProfileCvv2Number,form.normal #DealCvv2Number,form.normal #UserCvv2Number,form.normal #GiftUserCvv2Number {
 	width:100px;
 }
-body.subscription #footer {
-	background:#000C0F;
-	bottom:0;
-	font-size:12px;
-	left:0;
-	padding:5px 0;
-	position:absolute;
-	width:100%;
-	z-index:-1;
-}
-body.subscription .footer-wrapper-inner {
-	height:auto;
-	margin:0 auto;
-	width:990px;
-	height:100px;
-	float:none;
-}
-body.subscription #agriya {
-	border:none;
-	float:left;
-	margin:17px 0 0;
-	padding:0;
-	width:440px;
-}
-body.subscription #agriya p {
-	color:#AFAFAF;
-	float:left;
-	padding:6px 0 2px 0px;
-	width:auto;
-}
-body.subscription #agriya p a.company,body.subscription #agriya a.cssilize {
-	display:inline-block;
-}
-body.subscription div.power-cssilize-block #agriya p {
-	float:left;
-}
-body.subscription #agriya p a {
-	color:#00B5C8;
-	text-decoration:underline;
-}
-body.subscription #agriya p a:hover {
-	text-decoration:none;
-}
-body.subscription #agriya p {
-	color:#AFAFAF;
-}
-body.subscription #agriya p.powered {
-	padding:9px 0 2px;
-}
-div.footer-r {
-	width:500px;
-	float:right;
-	color:#Afafaf;
-}
-div.footer-r p {
-	padding:6px 0px 0px 0px;
-	line-height:18px;
-}
 body.subscription div#main {
 	width:95%;
 	height:400px;
@@ -5857,10 +5859,6 @@ div.bg-img-subscription {
 	position:absolute;
 	top:-17px;
 	width:60px;
-}
-#pages-pre-launch #agriya {
-	border-top:none;
-	margin:0 auto;
 }
 div.pre-launch-form {
 	height: 552px;
