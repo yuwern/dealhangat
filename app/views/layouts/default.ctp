@@ -151,13 +151,11 @@ endif;
 	</div>
 
 	<div id="<?php echo $this->Html->getUniquePageId();?>" class="content">
-	
-   <div id="header">
+
+	<!-- HEADER BEGINS -->
+   	<div id="header">
     <div id="header-content">
-   
-     <div class="side1-cl">
-        <div class="side1-cr">
-            <div class="block1-inner">
+            
       <div class="clearfix">
         <h1>
                 <?php echo $this->Html->link(Configure::read('site.name'), array('controller' => 'deals', 'action' => 'index', 'admin' => false), array('title' => Configure::read('site.name'))); ?>
@@ -382,17 +380,9 @@ endif;
 			   <?php endif; ?>
         </div>
       </div>
-      	</div>
-		</div>
-		</div>
-        <div class="side1-bl">
-            <div class="side1-br">
-              <div class="side1-bm"> </div>
-            </div>
-      </div>
-    </div>
-  </div>
 
+    </div>
+  </div><!-- HEADER -->
 
   
         <div id="main" class="clearfix">
@@ -433,6 +423,7 @@ endif;
             				</div>
             				</div>
         				</div>
+        				
                         <div class="side1-bl">
                             <div class="side1-br">
                               <div class="side1-bm"> </div>
