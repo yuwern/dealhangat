@@ -446,9 +446,16 @@ div#gift_users-view_gift_card .block2 {
 }
 /* SIDEBAR STYLES */
 
-/* ROUND CORNER STYLES 
+/* ROUNDED CORNER STYLES 
 TOFIX to be replaced with moz-border
 */
+/* rounded side columns left right */
+.side1-cl {
+	background:url(../img/center-left.png) repeat-y left top;
+}
+.side1-cr {
+	background:url(../img/center-right.png) repeat-y right top;
+}
 .side1-tl {
 	background:url(../img/side-1-bg-tl.png) no-repeat left top;
 }
@@ -461,21 +468,6 @@ TOFIX to be replaced with moz-border
 .side1-tm,.side1-bm {
 	margin:0px 6px;
 	height:6px;
-}
-.side1-bl {
-	background:url(../img/side-1-bg-bl.png) no-repeat left bottom;
-}
-.side1-br {
-	background:url(../img/side-1-bg-br.png) no-repeat right bottom;
-}
-.side1-bm {
-	background:url(../img/side-1-bg-bmid.png) repeat-x left bottom;
-}
-.side1-cl {
-	background:url(../img/center-left.png) repeat-y left top;
-}
-.side1-cr {
-	background:url(../img/center-right.png) repeat-y right top;
 }
 .progress-tl {
 	background:url(../img/time-bg-tl.png) no-repeat left top;
@@ -566,54 +558,6 @@ TOFIX to be replaced with moz-border
 }
 
 /* FOOTER STYLES BEGIN */
-
-/* REMOVE
-body.subscription .footer-wrapper-inner {
-	background-color:#FFF;
-	height:auto;
-	margin:0 auto;
-	width:990px;
-	height:100px;
-	float:none;
-}
-#agriya p {
-	text-align:center;
-	float:left;
-}
-/* REMOVE FOOTER - ROUNDED EDGES
-.footer-tl {
-	background:url(../img/footer-tl.png) no-repeat left top;
-}
-.footer-tr {
-	background:url(../img/footer-tr.png) no-repeat right top;
-}
-.footer-tm {
-	background:url(../img/footer-tm.png) repeat-x left top;
-	margin:0px 5px;
-	height:5px;
-}
-.footer-cl {
-	background:url(../img/footer-cl.png) repeat-y left top;
-}
-.footer-cr {
-	background:url(../img/footer-cr.png) repeat-y right top;
-}
-ul.footer-nav li a span {
-	font-size:10px;
-}
-/* FOOTER - UNKNOWN 
-h6.logo {
-	float:right;
-	margin:32px 24px 0 0;
-}
-h6.logo a {
-	background:url(../img/blue-theme/logo-email.png) no-repeat left top;
-	width:186px;
-	height:47px;
-	display:block;
-	text-indent:-9999em;
-}
-*/
 #footer {
 	font-size:11px;
 }
@@ -1474,6 +1418,7 @@ p.deal-r {
 	width:298px;
 	padding:0 0 26px;
 }
+/* header background */
 .block1-inner,.block2-inner {
 	margin:0px 5px;
 	padding:5px 5px 4px 5px;
@@ -5956,11 +5901,66 @@ div.add-amount a {
 	width:12px;
 	margin:-35px 0 0;
 }
-/* header */
+/* REMOVE
+body.subscription .footer-wrapper-inner {
+	background-color:#FFF;
+	height:auto;
+	margin:0 auto;
+	width:990px;
+	height:100px;
+	float:none;
+}
+#agriya p {
+	text-align:center;
+	float:left;
+}
+ul.footer-nav li a span {
+	font-size:10px;
+}
+/* FOOTER - UNKNOWN 
+h6.logo {
+	float:right;
+	margin:32px 24px 0 0;
+}
+h6.logo a {
+	background:url(../img/blue-theme/logo-email.png) no-repeat left top;
+	width:186px;
+	height:47px;
+	display:block;
+	text-indent:-9999em;
+}
 
-/*
+/* HEADER
 .cities-index-block {
 	width:auto;
 	margin:auto 10px;
-}*/
-/* MYSTERY TOFIX */
+}
+
+/* ROUNDED EDGES
+.side1-bl {
+	background:url(../img/side-1-bg-bl.png) no-repeat left bottom;
+}
+.side1-br {
+	background:url(../img/side-1-bg-br.png) no-repeat right bottom;
+}
+.side1-bm {
+	background:url(../img/side-1-bg-bmid.png) repeat-x left bottom;
+}
+.footer-tl {
+	background:url(../img/footer-tl.png) no-repeat left top;
+}
+.footer-tr {
+	background:url(../img/footer-tr.png) no-repeat right top;
+}
+.footer-tm {
+	background:url(../img/footer-tm.png) repeat-x left top;
+	margin:0px 5px;
+	height:5px;
+}
+.footer-cl {
+	background:url(../img/footer-cl.png) repeat-y left top;
+}
+.footer-cr {
+	background:url(../img/footer-cr.png) repeat-y right top;
+}
+*/
