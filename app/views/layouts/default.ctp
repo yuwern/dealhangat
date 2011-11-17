@@ -586,6 +586,7 @@ endif;
             </div>
             
             <!-- FIX -->
+            <?php if(Configure::read('site.is_touch_app') or Configure::read('site.is_mobile_app')): ?>
             <div class="mobile-left-block">
 
               <div class="clearfix">
@@ -613,6 +614,7 @@ endif;
 			<?php endif; ?>
 			</div>
 			</div>
+            <?php endif; ?>
 			<!-- END OF FIX -->
 			
           </div>
