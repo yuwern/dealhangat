@@ -64,6 +64,7 @@ endif;
 // <--
 ?>
 </head>
+
 <?php	
 	$align = '';
 	$city_bgcolor = '';
@@ -102,8 +103,10 @@ endif;
 
 
 <body style="<?php echo $bgattachment.' '.$bgcolor;?>">
+
+<div id="container">
   
-  
+  <!-- FACEBOOK PLUGIN -->
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -112,18 +115,21 @@ endif;
     js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=147267432014750";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
-
+  <!-- FACEBOOK PLUGIN -->  
   
   
-	<div class="js-morecities1 top-slider1  hide">
+	<!-- DROPDOWN CITY SELECTOR -->  
+	<div class="top-slider1 js-morecities1 hide">
 	<div class="cities-index-block">
 		<?php 
 			echo $this->element('cities-index', array('cache' => array('key' => $city_id, 'config' => 'site_element_cache_20_min')));
         ?>
     </div>
     </div>
+	<!-- DROPDOWN CITY SELECTOR -->    
     
-	<div class="top-slider1 js-show-subscription hide ">
+	<!-- DROPDOWN MAILING LIST -->  
+	<div class="top-slider1 js-show-subscription hide">
 	<div class="clearfix header-subscription-block">
 	<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
         <div class="header-subscription-left-block">
@@ -149,8 +155,18 @@ endif;
 		endif;
 	?>
 	</div>
-
+	<!-- DROPDOWN MAILING LIST -->  
+	
+	
+	<!-- WRAPPER -->
+	<div id="wrapper">
+	
+	<!-- HEADER WRAPPER -->
+	<div id="header-wrapper">
+	
+	<!-- BODY CONTENT --> 	
 	<div id="<?php echo $this->Html->getUniquePageId();?>" class="content">
+
 
 	<!-- HEADER BEGINS -->
    	<div id="header">
@@ -158,23 +174,32 @@ endif;
             
       <div class="clearfix">
         <h1>
-                <?php echo $this->Html->link(Configure::read('site.name'), array('controller' => 'deals', 'action' => 'index', 'admin' => false), array('title' => Configure::read('site.name'))); ?>
-			</h1>
-            <p class="hidden-info"><?php echo __l('Collective Buying Power');?></p>
-         <?php if($this->Auth->sessionValid() && $this->Auth->user('user_type_id') == ConstUserTypes::Admin): ?>
+        	<?php echo $this->Html->link(Configure::read('site.name'), array('controller' => 'deals', 'action' => 'index', 'admin' => false), array('title' => Configure::read('site.name'))); ?>
+		</h1>
+        <p class="hidden-info"><?php echo __l('Collective Buying Power');?></p>
+        
+        
+        <?php if($this->Auth->sessionValid() && $this->Auth->user('user_type_id') == ConstUserTypes::Admin): ?>
             <div class="admin-bar">
                 <h3><?php echo __l('You are logged in as '); ?><?php echo $this->Html->link(__l('Admin'), array('controller' => 'users' , 'action' => 'stats' , 'admin' => true), array('title' => __l('Admin'))); ?></h3>
                 <div><?php echo $this->Html->link(__l('Logout'), array('controller' => 'users' , 'action' => 'logout', 'admin' => true), array('title' => __l('Logout'))); ?></div>
             </div>
      <?php endif; ?>
+     <!-- header right -->
         <div class="header-r">
           <div class="clearfix">
             <div class="global-block">
+            
                  <ul class="global-links-r">
                    <li class="down-arrow"><?php echo $this->Html->link(__l('Visit More Cities'), '#', array('title' => __l('Visit More Cities'), 'class' => "js-toggle-show {'container':'js-morecities1'}")); ?></li>
+                   
+					<!-- mailing list subscription -->
+					
 					<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
                         <li class="down-arrow"><?php echo $this->Html->link(sprintf(__l('Get Daily').' %s'.' '.__l('Alerts'), Configure::read('site.name')), '#', array('title' => sprintf(__l('Get Daily').' %s'.' '.__l('Alerts'), Configure::read('site.name')), 'class' => "js-toggle-show {'container':'js-show-subscription'}")); ?></li>
                     <?php endif; ?>
+					
+					
 					<?php if(Configure::read('referral.referral_enabled_option') == ConstReferralOption::GrouponLikeRefer):?>
 						<?php $class = ($this->request->params['controller'] == 'pages') && ($this->request->params['pass'][0] == 'refer_a_friend') ? ' class="active"' : null; ?>
                           <li <?php echo $class;?>><?php echo $this->Html->link(__l('Refer Friends, Get').' '.$this->Html->siteCurrencyFormat($this->Html->cCurrency(Configure::read('user.referral_amount'), false)), array('controller' => 'pages', 'action' => 'refer_a_friend'), array('title' => __l('Refer Friends, Get').' '. $this->Html->siteCurrencyFormat($this->Html->cCurrency(Configure::read('user.referral_amount'), false))));?></li>
@@ -191,8 +216,10 @@ endif;
                           <li <?php echo $class;?>><?php echo $this->Html->link($msg, array('controller' => 'pages', 'action' => 'refer_friend'), array('title' => $msg));?></li>
 					<?php endif; ?>
 					<?php $class = ($this->request->params['controller'] == 'contacts' && $this->request->params['action'] == 'add') ? ' class="active"' : null; ?>
-                    <li <?php echo $class;?>><?php echo $this->Html->link(__l('Contact Us'), array('controller' => 'contacts', 'action' => 'add', 'admin' => false), array('title' => __l('Contact Us')));?></li>
+                    <!-- <li <?php echo $class;?>><?php echo $this->Html->link(__l('Contact Us'), array('controller' => 'contacts', 'action' => 'add', 'admin' => false), array('title' => __l('Contact Us')));?></li> -->
               </ul>  
+			<!-- global links right --> 
+              
              </div>
           </div>
           <div class="city-block clearfix">
@@ -221,14 +248,17 @@ endif;
 
                      
       	
-							<div class="js-morecities top-slider  hide"> <?//php echo $this->element('cities-index', array('cache' => array('config' => 'site_element_cache')));?></div>
+							<div class="js-morecities top-slider hide"> <?//php echo $this->element('cities-index', array('cache' => array('config' => 'site_element_cache')));?></div>
 						
 
                 <?php endif;?>
             </div>
           </div>
         </div>
+     <!-- header right end -->   
+          
       </div>
+      
       <div class="clearfix">
       	<?php echo $this->element('lanaguge-change-block'); ?>
             <dl class="total-list clearfix">
@@ -237,7 +267,9 @@ endif;
                 	<dd><span><?php echo $this->Html->siteCurrencyFormat($this->Html->cCurrency($user_available_balance)); ?></span></dd>
                 <?php endif; ?>
             </dl>
-               </div>
+      </div>
+      <!-- change language end -->         
+               
             <?php if($this->Auth->sessionValid() && $this->Html->isWalletEnabled('is_enable_for_add_to_wallet')): ?>
          
                       <div class=" clearfix">
@@ -313,12 +345,11 @@ endif;
 				$reg_type_class='normal';
 			
           if (!$this->Auth->sessionValid()): ?>
-              <ul class="menu-link clearfix">
-                <li <?php if($this->request->params['controller'] == 'users' && $this->request->params['action'] == 'register') { echo 'class="active"'; } ?> ><?php echo $this->Html->link(__l('Join us'), array('controller' => 'users', 'action' => 'register', 'admin' => false), array('title' => __l('Join us'),'class'=>'login-link'));?></li>
-                <li <?php if($this->request->params['controller'] == 'users' && $this->request->params['action'] == 'login') { echo 'class="active"'; } ?>><?php echo $this->Html->link(__l('Sign in'), array('controller' => 'users', 'action' => 'login'), array('title' => __l('Sign in'),'class'=>'login-link'));?></li>
-              </ul>
+
 			  <div class="openid-block clearfix">
-              <h5><?php echo __l('Sign In using: '); ?></h5>
+
+              <!-- <h5><?php echo __l('Sign In using: '); ?></h5> -->
+
               <ul class="open-id-list">
                 <li class="face-book">
 				<?php if(Configure::read('facebook.is_enabled_facebook_connect') && !empty($fb_login_url)):  ?>
@@ -341,7 +372,18 @@ endif;
 				<li class="open-id"><?php 	echo $this->Html->link(__l('Sign in with OpenID'), array('controller' => 'users', 'action' => 'login','type'=>'openid'), array('class'=>'','title' => __l('Sign in with OpenID')));?></li>
 				<?php endif;?>
               </ul>
+              
 			  </div>
+
+
+              <ul class="menu-link clearfix">
+                <li <?php if($this->request->params['controller'] == 'users' && $this->request->params['action'] == 'register') { echo 'class="active"'; } ?> ><?php echo $this->Html->link(__l('Join us'), array('controller' => 'users', 'action' => 'register', 'admin' => false), array('title' => __l('Join us'),'class'=>'login-link'));?></li>
+                <li <?php if($this->request->params['controller'] == 'users' && $this->request->params['action'] == 'login') { echo 'class="active"'; } ?>><?php echo $this->Html->link(__l('Sign in'), array('controller' => 'users', 'action' => 'login'), array('title' => __l('Sign in'),'class'=>'login-link'));?></li>
+              </ul>
+			  
+
+			  
+			  
                <?php endif; ?>
             <?php if ($this->Auth->sessionValid()): ?>
               <p class="user-login-info">
@@ -382,7 +424,8 @@ endif;
       </div>
 
     </div>
-  </div><!-- HEADER -->
+  </div>  
+  	<!-- HEADER -->
 
   
         <div id="main" class="clearfix">
@@ -490,7 +533,7 @@ endif;
 			
 				</div>
 
- <div id="footer">
+<div id="footer">
  
     <!-- <div class="footer-tl">
       <div class="footer-tr">
@@ -501,12 +544,6 @@ endif;
     <div class="footer-cl">
       <div class="footer-cr">
       -->
-      
-        	<div class="clearfix">
-                <dl class="total-list clearfix">
-                <?php echo $this->element('total_saved', array('key' => Configure::read('lang_code'), 'cache' => array('config' => 'site_element_cache_2_min')));?>
-                 </dl>
-            </div>
       
         <div class="footer-inner clearfix">
           <div class="footer-wrapper-inner clearfix">
@@ -619,7 +656,8 @@ endif;
 			
           </div>
           <div id="agriya" class="clearfix">
-          	<p class="copy">&copy;<?php echo date('Y');?> <?php echo $this->Html->link(Configure::read('site.name'), Router::Url('/',true), array('title' => Configure::read('site.name'), 'escape' => false));?>. <?php echo __l('All rights reserved');?>.</p>
+			<p class="copy">&copy; 2011 Tawaran Hangat Sdn. Bhd. Semua Hak Cipta Terpelihara.</p>          
+          	<!-- <p class="copy">&copy;<?php echo date('Y');?> <?php echo $this->Html->link(Configure::read('site.name'), Router::Url('/',true), array('title' => Configure::read('site.name'), 'escape' => false));?>. <?php echo __l('All rights reserved');?>.</p> -->
           </div>
         </div>
       
@@ -628,10 +666,22 @@ endif;
     footer-cl -->
     
   </div>
- <!-- footer ends --> 
+<!-- footer ends --> 
   
 </div>
+	<!-- BODY CONTENT ENDS -->
+
+	</div>
+	<!-- HEADER WRAPPER ENDS -->
+
+	</div>
+	<!-- WRAPPER ENDS -->
+
+</div>
+<!-- CONTAINER ENDS -->
+
 	<?php echo $this->element('site_tracker', array('cache' => array('config' => 'site_element_cache'), 'plugin' => 'site_tracker')); ?>
 	<?php echo $this->element('sql_dump'); ?>
+
 </body>
 </html>
