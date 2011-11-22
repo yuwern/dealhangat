@@ -165,10 +165,6 @@ p.suggestion-link {
 p.suggestion-link a			{ color:#FFEA00; }
 p.suggestion-link a:hover	{ color:#FFF; }
 
-
-
-
-
 /* HEADER STYLES BEGIN */
 #header {
 	margin:0 0 15px 0;
@@ -184,10 +180,6 @@ p.suggestion-link a:hover	{ color:#FFF; }
 .global-block {
 	float:right;
 	width:auto;
-}
-div.global-links {
-	background:url(../img/blue-theme/l-edge.png) no-repeat left top;
-	float:left;
 }
 ul.global-links-r {
 	margin:0;
@@ -210,31 +202,33 @@ ul.global-links li a:hover,ul.global-links-r li a:hover, ul.global-links-r li.ac
 }
 
 /* HEADER - STACK002 - TODAY'S BEST DEAL IN... */
-.city-block {
-	background:url(../img/top-menu-border.png) no-repeat right top;
-}
-/* "TODAY'S BEST DEAL IN..." */
-.city-block h2,.city-block h3 {
-	color:#bfe413;
-	font-size:11px;
-	line-height:14px;
-	text-transform: uppercase;
-}
-/* "CITY NAME" */
+.city-block	{}
 .city-desc-block {
-	float:right;
+	background:#FFFF00;
 	text-align:right;
 	padding: 10px;
 }
+/* CITY NAME - "TODAY'S BEST DEAL IN..." */
+.city-block h2,.city-block h3 {
+	color:#bfe413;
+	font-size:11px;
+	text-transform: uppercase;
+}
+/* "CITY NAME" */
 div.city-desc-block a {
+	background:#ff0000;
 	color:#0c4013;
+	font-size:22px;
 	font-weight:bold;
-	font-size:16px;
-	padding: 8px 0 0 6px;
+	margin:45px 0 0 0;
+	padding: 10px 15px;
 	vertical-align:middle;
 }
-.city-block h2, div.city-desc-block a { float:left; }
-
+.city-block h2, div.city-desc-block a { 
+	background:#000;
+	display:block;
+	float:left; 
+}
 
 /* TOFIX - MYSTERY */
 div.city-info-block {
@@ -281,10 +275,10 @@ dl.total-list dd span {
 	padding:2px 0px;
 	font-weight:bold;
 }
-
 /* MAIN NAVIGATION BUTTONS */
-.menu-block	{}
-ul.menu		{	float:left; }
+.menu-block						{ }
+div.admin-content .menu-block	{ margin:10px auto 0; }
+ul.menu							{ float:left; }
 ul.menu li {
 /*	background:url("../img/menu-left.png") no-repeat left top; */
 	float:left;
@@ -299,7 +293,7 @@ ul.menu li a {
 	display:block;
 	font-size:14px;
 	font-weight:700;
-	padding: 8px 10px;
+	padding:8px 10px;
 }
 ul.menu li.active,ul.menu li:hover		{	/*	background:url("../img/menu-left-h.png") no-repeat left top; */ }
 ul.menu li.active a,ul.menu li:hover a	{	/*	background:url("../img/menu-right-h.png") no-repeat right top; */ }
@@ -579,12 +573,12 @@ TOFIX to be replaced with moz-border
 
 /* FOOTER STYLES BEGIN */
 #footer {
-	background:url(../img/footer-bg.png) repeat-x left bottom;
+/*	background:url(../img/footer-bg.png) repeat-x left bottom; */
 	font-size:11px;
 	margin:0;
 	padding:0;
 	position:absolute;
-	bottom:0; /* stick to bottom */
+	bottom:-200px; /* stick to bottom */
 }
 /* FOOTER WRAPPER */
 .footer-inner {}
@@ -721,8 +715,8 @@ div.mobile-left-block{
 }
 /* FOOTER - COPYRIGHT FINEPRINT - #AGRIYA */
 #agriya {
-	color:#bebebe;
-	margin:10px 0 0 10px;
+	color:#bfe413;
+	margin:20px 0 0 10px;
 }
 #agriya p a {
 	color:#c5ec11;
@@ -2461,9 +2455,6 @@ div.add-block1 a {
 	padding: 1px 2px 1px 20px;
 }
 /* ADMIN BAR STYLES BEGIN */
-div.admin-content .menu-block {
-	margin:10px auto 0;
-}
 /* "YOU ARE LOGGED IN AS ADMIN" */
 .admin-bar {
 	background:#00B5C8;
@@ -5903,6 +5894,10 @@ div.add-amount a {
 	margin:-35px 0 0;
 }
 /* REMOVE
+div.global-links {
+	background:url(../img/blue-theme/l-edge.png) no-repeat left top; 
+	float:left;
+}
 body.subscription .footer-wrapper-inner {
 	background-color:#FFF;
 	height:auto;

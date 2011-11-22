@@ -184,7 +184,8 @@ endif;
                 <h3><?php echo __l('You are logged in as '); ?><?php echo $this->Html->link(__l('Admin'), array('controller' => 'users' , 'action' => 'stats' , 'admin' => true), array('title' => __l('Admin'))); ?></h3>
                 <div><?php echo $this->Html->link(__l('Logout'), array('controller' => 'users' , 'action' => 'logout', 'admin' => true), array('title' => __l('Logout'))); ?></div>
             </div>
-     <?php endif; ?>
+		<?php endif; ?>
+     
      <!-- header right -->
         <div class="header-r">
           <div class="clearfix">
@@ -222,14 +223,20 @@ endif;
               
              </div>
           </div>
+          
+          
+          <!-- city block -->
           <div class="city-block clearfix">
-           	<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
-          <?php echo $this->element('../subscriptions/add', array('step' => 2,'cache' => array('config' => 'site_element_cache')));?>
-        <?php endif; ?>
+          
+			<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
+				<?php echo $this->element('../subscriptions/add', array('step' => 2,'cache' => array('config' => 'site_element_cache')));?>
+			<?php endif; ?>
+
+
+          <!-- city name -->
             <div class="city-desc-block clearfix">
               <?php if(!empty($city_name)): ?>
-                        <h2><?php echo __l("Today's Best Deals in"); ?>
-                      </h2>
+                        <h2><?php echo __l("Today's Best Deals in"); ?></h2>
                         	<?php
 								if (Cache::read('site.city_url', 'long') == 'prefix') {
 									echo $this->Html->link($this->Html->cText($city_name), array('controller' => 'deals', 'action' => 'index', 'city' => $city_slug), array('title' => $this->Html->cText($city_name, false),'class'=>'city-name' ,'escape' => false));
@@ -245,15 +252,18 @@ endif;
 									}
 								}
 							?>
-
-                     
       	
 							<div class="js-morecities top-slider hide"> <?//php echo $this->element('cities-index', array('cache' => array('config' => 'site_element_cache')));?></div>
 						
 
                 <?php endif;?>
             </div>
+            
           </div>
+          <!-- city block -->
+          
+          
+          
         </div>
      <!-- header right end -->   
           
