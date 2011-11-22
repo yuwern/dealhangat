@@ -209,22 +209,19 @@ ul.global-links li a:hover,ul.global-links-r li a:hover, ul.global-links-r li.ac
 	text-transform: uppercase;
 }
 .city-block h2, div.city-desc-block a { 
-	background:#000;
 	display:block;
 	float:left; 
 }
 /* "CITY NAME" */
 .city-desc-block {
-	background:#FFFF00;
 	text-align:right;
 	padding: 10px;
 }
 .city-desc-block a {
-	background:#ff0000;
 	color:#0c4013;
 	font-size:22px;
 	font-weight:bold;
-	margin:45px 0 0 0;
+	margin:0;
 	padding: 10px 15px;
 	vertical-align:middle;
 }
