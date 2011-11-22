@@ -272,7 +272,7 @@ dl.total-list dd span {
 	font-weight:bold;
 }
 /* MAIN NAVIGATION BUTTONS */
-.menu-block						{ }
+.menu-block						{ margin:12px 0 23px 0;}
 div.admin-content .menu-block	{ margin:10px auto 0; }
 ul.menu							{ float:left; }
 ul.menu li {
@@ -565,8 +565,6 @@ TOFIX to be replaced with moz-border
 	font-size:11px;
 	margin:0;
 	padding:0;
-	position:absolute;
-	bottom:-200px; /* stick to bottom */
 }
 /* FOOTER WRAPPER */
 .footer-inner {}
