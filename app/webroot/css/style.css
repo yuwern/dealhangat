@@ -203,19 +203,23 @@ ul.global-links li a:hover,ul.global-links-r li a:hover, ul.global-links-r li.ac
 
 /* HEADER - STACK002 - TODAY'S BEST DEAL IN... */
 .city-block	{}
-.city-desc-block {
-	background:#FFFF00;
-	text-align:right;
-	padding: 10px;
-}
-/* CITY NAME - "TODAY'S BEST DEAL IN..." */
 .city-block h2,.city-block h3 {
 	color:#bfe413;
 	font-size:11px;
 	text-transform: uppercase;
 }
+.city-block h2, div.city-desc-block a { 
+	background:#000;
+	display:block;
+	float:left; 
+}
 /* "CITY NAME" */
-div.city-desc-block a {
+.city-desc-block {
+	background:#FFFF00;
+	text-align:right;
+	padding: 10px;
+}
+.city-desc-block a {
 	background:#ff0000;
 	color:#0c4013;
 	font-size:22px;
@@ -223,11 +227,6 @@ div.city-desc-block a {
 	margin:45px 0 0 0;
 	padding: 10px 15px;
 	vertical-align:middle;
-}
-.city-block h2, div.city-desc-block a { 
-	background:#000;
-	display:block;
-	float:left; 
 }
 
 /* TOFIX - MYSTERY */
