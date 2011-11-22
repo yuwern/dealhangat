@@ -189,6 +189,17 @@ ul.global-links-r li {
 	float:left;
 	padding:8px;
 }
+ul.global-links-r li.referral {
+	margin:-8px 0 0 0;
+	height:45px;
+	width:225px;
+}
+ul.global-links-r li.referral a {
+	background:url("../img/global-referral.png") no-repeat top right; 
+	display:block;
+	height:45px;
+	text-indent:-99999em;
+}
 ul.global-links-r li a { 
 	color:#c3e713; 
 	font-weight:bold; 
@@ -202,31 +213,30 @@ ul.global-links li a:hover,ul.global-links-r li a:hover, ul.global-links-r li.ac
 }
 
 /* HEADER - STACK002 - TODAY'S BEST DEAL IN... */
-.city-block	{}
+.city-block	{
+	width:560px;
+	float:right;
+}
+/* "CITY NAME" */
 .city-block h2,.city-block h3 {
 	color:#bfe413;
 	font-size:11px;
 	text-transform: uppercase;
 }
-.city-block h2, div.city-desc-block a { 
-	display:block;
-	float:left; 
-}
-/* "CITY NAME" */
 .city-desc-block {
-	text-align:right;
-	padding: 10px;
+	display:block;
+	float:left;
 }
 .city-desc-block a {
+	background:url("../img/city-block-cities.png") no-repeat scroll right; 
 	color:#0c4013;
-	font-size:22px;
+	font-size:20px;
 	font-weight:bold;
-	margin:0;
-	padding: 10px 15px;
+	opacity:0.6;
+	filter:alpha(opacity=60); /* For IE8 and earlier */	
+	padding: 10px 35px 10px 10px;
 	vertical-align:middle;
 }
-
-/* TOFIX - MYSTERY */
 div.city-info-block {
 	float:left;
 	position:relative;
@@ -253,6 +263,7 @@ div.city-info-block span.cities-link {
 	color:#66cc33;
 	padding:0 0 0 4px;
 }
+/* TOFIX - MYSTERY */
 dl.total-list {
 	float:right;
 	padding:3px 0 0 0;
@@ -956,6 +967,7 @@ form.subscription {
 .city-block .subscriptions {
 	width:335px;
 	float:right;
+	margin: 20px 0 0 0;
 }
 .city-block .subscriptions form.subscription {
 	width:auto;
@@ -967,7 +979,7 @@ form.subscription div.input,form.subscription div.submit {
 form.subscription div.submit {
 	background:url("../img/subscrib-bg-left.png") no-repeat scroll left 5px transparent;
 	height:31px;
-	padding:5px 0 0 5px;
+	padding:5px 0 0 3px;
 	float:left;
 }
 form.subscription div.input label {
