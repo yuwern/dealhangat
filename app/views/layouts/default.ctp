@@ -192,6 +192,7 @@ endif;
             
                  <ul class="global-links-r">
                     <li><?php echo $this->element('lanaguge-change-block'); ?></li>
+
                     <!-- Referral benefits -->
 					<?php if(Configure::read('referral.referral_enabled_option') == ConstReferralOption::GrouponLikeRefer):?>
 						<?php $class = ($this->request->params['controller'] == 'pages') && ($this->request->params['pass'][0] == 'refer_a_friend') ? ' class="active"' : null; ?>
