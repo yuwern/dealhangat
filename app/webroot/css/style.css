@@ -506,9 +506,6 @@ TOFIX to be replaced with moz-border
 	border-left:1px solid #cad7db;
 	border-right:1px solid #cad7db;
 }
-.block2-br {
-	background:url(../img/block-2-bg-br.png) no-repeat right top;
-}
 .block2-tr {
 	background:url(../img/block-2-bg-tr.png) no-repeat right bottom;
 }
@@ -519,11 +516,6 @@ TOFIX to be replaced with moz-border
     background: url("../img/block2-top.png") no-repeat scroll right 1px transparent;
     height: 6px;
     padding: 0 0 0;
-}
-.block2-bottom {
-    background: url("../img/block2-top.png") no-repeat scroll right bottom transparent;
-    height: 5px;
-    padding: 0;
 }
 .deal-tl {
 	background:url(../img/side-2-bg-tl.png) no-repeat left top;
@@ -5929,6 +5921,14 @@ h6.logo a {
 }
 
 /* ROUNDED EDGES
+.block2-br {
+	background:url(../img/block-2-bg-br.png) no-repeat right top;
+}
+.block2-bottom {
+    background: url("../img/block2-top.png") no-repeat scroll right bottom transparent;
+    height: 5px;
+    padding: 0;
+}
 .side1-bl {
 	background:url(../img/side-1-bg-bl.png) no-repeat left bottom;
 }
