@@ -102,7 +102,7 @@ endif;
 ?>
 
 
-<body style="<?php echo $bgattachment.' '.$bgcolor;?>">
+<body>
 
 <div id="container">
   
@@ -184,23 +184,15 @@ endif;
                 <h3><?php echo __l('You are logged in as '); ?><?php echo $this->Html->link(__l('Admin'), array('controller' => 'users' , 'action' => 'stats' , 'admin' => true), array('title' => __l('Admin'))); ?></h3>
                 <div><?php echo $this->Html->link(__l('Logout'), array('controller' => 'users' , 'action' => 'logout', 'admin' => true), array('title' => __l('Logout'))); ?></div>
             </div>
-		<?php endif; ?>
-     
+     <?php endif; ?>
      <!-- header right -->
         <div class="header-r">
           <div class="clearfix">
             <div class="global-block">
             
                  <ul class="global-links-r">
-                   <li class="down-arrow"><?php echo $this->Html->link(__l('Visit More Cities'), '#', array('title' => __l('Visit More Cities'), 'class' => "js-toggle-show {'container':'js-morecities1'}")); ?></li>
-                   
-					<!-- mailing list subscription -->
-					
-					<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
-                        <li class="down-arrow"><?php echo $this->Html->link(sprintf(__l('Get Daily').' %s'.' '.__l('Alerts'), Configure::read('site.name')), '#', array('title' => sprintf(__l('Get Daily').' %s'.' '.__l('Alerts'), Configure::read('site.name')), 'class' => "js-toggle-show {'container':'js-show-subscription'}")); ?></li>
-                    <?php endif; ?>
-					
-					
+                    <li><?php echo $this->element('lanaguge-change-block'); ?></li>
+                    <!-- Referral benefits -->
 					<?php if(Configure::read('referral.referral_enabled_option') == ConstReferralOption::GrouponLikeRefer):?>
 						<?php $class = ($this->request->params['controller'] == 'pages') && ($this->request->params['pass'][0] == 'refer_a_friend') ? ' class="active"' : null; ?>
                           <li <?php echo $class;?>><?php echo $this->Html->link(__l('Refer Friends, Get').' '.$this->Html->siteCurrencyFormat($this->Html->cCurrency(Configure::read('user.referral_amount'), false)), array('controller' => 'pages', 'action' => 'refer_a_friend'), array('title' => __l('Refer Friends, Get').' '. $this->Html->siteCurrencyFormat($this->Html->cCurrency(Configure::read('user.referral_amount'), false))));?></li>
@@ -223,55 +215,24 @@ endif;
               
              </div>
           </div>
-          
-          
-          <!-- city block -->
           <div class="city-block clearfix">
-          
-			<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
-				<?php echo $this->element('../subscriptions/add', array('step' => 2,'cache' => array('config' => 'site_element_cache')));?>
-			<?php endif; ?>
-
-
-          <!-- city name -->
+           	<?php if($this->Html->isAllowed($this->Auth->user('user_type_id')) && $this->request->params['controller'] != 'subscriptions'): ?>
+          <?php echo $this->element('../subscriptions/add', array('step' => 2,'cache' => array('config' => 'site_element_cache')));?>
+        <?php endif; ?>
             <div class="city-desc-block clearfix">
               <?php if(!empty($city_name)): ?>
                         <h2><?php echo __l("Today's Best Deals in"); ?></h2>
-                        	<?php
-								if (Cache::read('site.city_url', 'long') == 'prefix') {
-									echo $this->Html->link($this->Html->cText($city_name), array('controller' => 'deals', 'action' => 'index', 'city' => $city_slug), array('title' => $this->Html->cText($city_name, false),'class'=>'city-name' ,'escape' => false));
-								} elseif (Cache::read('site.city_url', 'long') == 'subdomain') {
-									$subdomain = substr(env('HTTP_HOST'), 0, strpos(env('HTTP_HOST'), '.'));
-									$sitedomain = substr(env('HTTP_HOST'), strpos(env('HTTP_HOST'), '.'));
-									if (strlen($subdomain) > 0) {
-							?>
-										<a href="http://<?php echo $city_slug . $sitedomain; ?>" title="<?php echo $this->Html->cText($city_name, false); ?>"><?php echo $this->Html->cText($city_name); ?></a>
-							<?php
-									} else {
-										echo $this->Html->link($this->Html->cText($city_name), array('controller' => 'deals', 'action' => 'index', 'city' => $city_slug), array('title' => $this->Html->cText($city_name, false), 'escape' => false));
-									}
-								}
-							?>
-      	
-							<div class="js-morecities top-slider hide"> <?//php echo $this->element('cities-index', array('cache' => array('config' => 'site_element_cache')));?></div>
-						
-
-                <?php endif;?>
+                        <?php echo $this->Html->link($this->Html->cText($city_name), '#', array('title' => $this->Html->cText($city_name, false),'class' => "city-name js-toggle-show {'container':'js-morecities1'}", 'escape' => false)); ?>
+              <?php endif;?>
             </div>
-            
           </div>
-          <!-- city block -->
-          
-          
-          
         </div>
      <!-- header right end -->   
           
       </div>
       
       <div class="clearfix">
-      	<?php echo $this->element('lanaguge-change-block'); ?>
-            <dl class="total-list clearfix">
+      	            <dl class="total-list clearfix">
                 <?php if($this->Auth->sessionValid() && $this->Html->isWalletEnabled('is_enable_for_add_to_wallet')): ?>
                 <dt><?php echo __l('Balance: '); ?></dt>
                 	<dd><span><?php echo $this->Html->siteCurrencyFormat($this->Html->cCurrency($user_available_balance)); ?></span></dd>
