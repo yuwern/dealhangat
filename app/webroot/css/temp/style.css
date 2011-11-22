@@ -295,48 +295,6 @@ ul.menu-link li.active,ul.menu-link li:hover {
 ul.menu-link li.active a,ul.menu-link li:hover a {
 	background:url(../img/login-bg-right-h.png) no-repeat right top;
 }
-
-/* */
-
-.top-slider {
-	border-bottom:3px solid #00B5C8;
-	width:171px;
-	position:absolute;
-	background:#00B5C8;
-	top:28px;
-	right:0px;
-	height:110px;
-	overflow:auto;
-}
-div.top-slider1 {
-	background:#616261;
-	border-bottom:4px solid #A0CA4E;
-	font-size:13px;
-}
-div.top-slider1 form.subscription,div.cities-index-block {
-	width:973px;
-	margin:0px auto;
-}
-div.top-slider1 ol.cities-list {
-	border-bottom:none;
-	border-left:1px dashed #fff;
-}
-div.top-slider1 ol.cities-list li {
-	border-bottom:1px dashed #FFFFFF;
-	border-right:1px dashed #FFFFFF;
-	width:179px;
-	padding:7px;
-}
-div.top-slider1 form.subscription div.input label {
-	display:block;
-	text-align:right;
-	width:auto;
-	color:#fff;
-	margin:7px 0 0;
-}
-div.top-slider1 form.subscription div.input input {
-	margin-left:50px;
-}
 div.cities-info-block {
 	width:auto;
 	margin:0px auto;

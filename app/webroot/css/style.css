@@ -283,7 +283,7 @@ dl.total-list dd span {
 }
 
 /* MAIN NAVIGATION BUTTONS */
-.menu-block	{ }
+.menu-block	{}
 ul.menu		{	float:left; }
 ul.menu li {
 /*	background:url("../img/menu-left.png") no-repeat left top; */
@@ -293,9 +293,11 @@ ul.menu li {
 ul.menu li a {
 /*	background:url("../img/menu-right.png") no-repeat right top; */
 	background-color:#FFF;
+	-moz-border-radius:8px;
+	border-radius:8px;
 	color:#35af44;
 	display:block;
-	font-size:13px;
+	font-size:14px;
 	font-weight:700;
 	padding: 8px 10px;
 }
