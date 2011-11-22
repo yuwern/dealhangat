@@ -98,9 +98,9 @@
 			<?php $class = ($this->request->params['controller'] == 'email_templates') ? ' class="active"' : null; ?>
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Email Templates'), array('controller' => 'email_templates', 'action' => 'index'),array('title' => __l('Email Templates'))); ?></li>
 			<?php $class = ($this->request->params['controller'] == 'pages') ? ' class="active"' : null; ?>
-            <li <?php echo $class;?>><?php echo $this->Html->link(__l(' Manage Static Pages'), array('controller' => 'pages', 'action' => 'index', 'plugin' => NULL),array('title' => __l('Manage Static Pages')));?></li>
+            <li <?php echo $class;?>><?php echo $this->Html->link(__l('Manage Static Pages'), array('controller' => 'pages', 'action' => 'index', 'plugin' => NULL),array('title' => __l('Manage Static Pages')));?></li>
 			<?php $class = ($this->request->params['controller'] == 'blocks') ? ' class="active"' : null; ?>
-            <li <?php echo $class;?>><?php echo $this->Html->link(__l(' Manage Blocks'), array('controller' => 'blocks', 'action' => 'index', 'plugin' => NULL),array('title' => __l('Manage Blocks')));?></li>
+            <li <?php echo $class;?>><?php echo $this->Html->link(__l('Manage Blocks'), array('controller' => 'blocks', 'action' => 'index', 'plugin' => NULL),array('title' => __l('Manage Blocks')));?></li>
 			<?php $class = ($this->request->params['controller'] == 'transaction_types') ? ' class="active"' : null; ?>
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Transaction Types'), array('controller' => 'transaction_types', 'action' => 'index'),array('title' => __l('Transaction Types'))); ?></li>
 			<?php $class = ($this->request->params['controller'] == 'translations') ? ' class="active"' : null; ?>

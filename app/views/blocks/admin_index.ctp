@@ -5,12 +5,13 @@
 <div class="staticblock index">
 <div class="overflow-block">
 <?php echo $this->Html->link('Add Block', array('controller' => 'blocks', 'action' => 'add')); ?>
-<table>
+<table class="list">
     <tr>
         <th>Id</th>
         <th>Title</th>
         <th>Created</th>
-        <th>&nbsp;Region</th>
+        <th>Region</th>
+        <th>Manage</th>
     </tr>
 
     <!-- Here is where we loop through our $blocks array, printing out block info -->
