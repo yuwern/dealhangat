@@ -192,9 +192,10 @@ endif;
             
                  <ul class="global-links-r">
                     <li><?php echo $this->element('lanaguge-change-block'); ?></li>
+
                     <!-- Referral benefits -->
 					<?php if(Configure::read('referral.referral_enabled_option') == ConstReferralOption::GrouponLikeRefer):?>
-						<?php $class = ($this->request->params['controller'] == 'pages') && ($this->request->params['pass'][0] == 'refer_a_friend') ? ' class="active"' : null; ?>
+						<?php $class = ($this->request->params['controller'] == 'pages') && ($this->request->params['pass'][0] == 'refer_a_friend') ? ' class="active referral"' : ' class="referral"'; ?>
                           <li <?php echo $class;?>><?php echo $this->Html->link(__l('Refer Friends, Get').' '.$this->Html->siteCurrencyFormat($this->Html->cCurrency(Configure::read('user.referral_amount'), false)), array('controller' => 'pages', 'action' => 'refer_a_friend'), array('title' => __l('Refer Friends, Get').' '. $this->Html->siteCurrencyFormat($this->Html->cCurrency(Configure::read('user.referral_amount'), false))));?></li>
 					<?php elseif(Configure::read('referral.referral_enabled_option') == ConstReferralOption::XRefer):?>
 							<?php 
