@@ -222,7 +222,12 @@
 							endif;
 						?>
 					</div>
-					<?php if (!empty($gateway_options['paymentGateways'][ConstPaymentGateways::CreditCard]) || !empty($gateway_options['paymentGateways'][ConstPaymentGateways::AuthorizeNet])): ?>
+					<?php 
+					if (false):
+					/*
+					if (!empty($gateway_options['paymentGateways'][ConstPaymentGateways::CreditCard]) || !empty($gateway_options['paymentGateways'][ConstPaymentGateways::AuthorizeNet])): 
+					*/
+					?>
 						<div class="clearfix js-credit-payment <?php echo ($this->request->data['Deal']['payment_gateway_id'] == ConstPaymentGateways::CreditCard || (!empty($gateway_options['paymentGateways'][ConstPaymentGateways::AuthorizeNet]) && $is_show_credit_card)) ? '' : 'hide'; ?>">
 						  <div class="billing-left">
 						  <h3><?php echo __l('Billing Information'); ?></h3>
