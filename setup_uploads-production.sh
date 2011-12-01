@@ -1,4 +1,4 @@
-SOURCE="user@dealhangat.com:/var/www/public_live"
+SOURCE="user@dealhangat.com:~/public_live"
 
 rsync -avzpP $SOURCE/app/webroot/img/big_thumb app/webroot/img/
 rsync -avzpP $SOURCE/app/webroot/img/medium_big_thumb app/webroot/img/
