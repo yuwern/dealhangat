@@ -16,6 +16,9 @@ find app/tmp -type d -exec chmod 777 {} \;
 find app/tmp -type f -exec chmod 777 {} \;
 
 mkdir app/webroot/js
+mkdir app/webroot/cache
+find app/webroot/cache -type d -exec chmod 777 {} \;
+find app/webroot/cache -type f -exec chmod 777 {} \;
 mkdir app/webroot/img
 mkdir app/webroot/css
 mkdir app/webroot/files
