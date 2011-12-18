@@ -151,6 +151,15 @@
   <?php echo $this->element('deals-nearby_simple', array('deal_id' => $deal['Deal']['id'], 'cache' => array('config' => 'site_element_cache', 'key' => $deal['Deal']['id']))); ?>
 
 
+    <?php foreach ($blocks_left as $block): ?>
+        <?php echo $this->Block->display($block); ?>
+    <?php endforeach; ?>
+
+    <?php foreach ($blocks_bottom as $block): ?>
+        <?php echo $this->Block->display($block); ?>
+    <?php endforeach; ?>
+
+
     <?php foreach ($blocks_right as $block): ?>
         <?php echo $this->Block->display($block); ?>
     <?php endforeach; ?>
