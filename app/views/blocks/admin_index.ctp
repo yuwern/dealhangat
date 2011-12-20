@@ -9,6 +9,7 @@
     <tr>
         <th>Id</th>
         <th>Title</th>
+        <th>Language</th>
         <th>Created</th>
         <th>Region</th>
         <th>Manage</th>
@@ -22,6 +23,7 @@
         <td>
             <?php echo $this->Html->link($block['Block']['title'], array('controller' => 'blocks', 'action' => 'view', $block['Block']['id'])); ?>
         </td>
+        <td><?php echo $block['Block']['lang']; ?></td>
         <td><?php echo $block['Block']['created']; ?></td>
         <td>&nbsp; <?php echo $block['Block']['region']; ?></td>
         <td>

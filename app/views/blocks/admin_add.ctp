@@ -5,6 +5,10 @@
     <h2><?php echo __l('Add Block');?></h2>
     <?php
     echo $this->Form->input('title');
+
+    $languages = $this->Html->getLanguage();
+    echo $this->Form->input('lang', array('label' => 'Language', 'options' => $languages));
+        
     echo $this->Form->input('body', array('rows' => '3'));
 
     $regions = array('left', 'right', 'bottom');

@@ -1,0 +1,1 @@
+ALTER TABLE `blocks` ADD `lang` VARCHAR( 32 ) NULL DEFAULT NULL AFTER `region`;

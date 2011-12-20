@@ -66,7 +66,7 @@ class AppController extends Controller
     function beforeRender()
     {
 
-        $this->set('blocks_left', $this->Block->find('all', array('conditions' => array('Block.region' => 0))));
+        $this->set('blocks_left', $this->Block->find('all', array('conditions' => array('Block.region' => 0, 'Block.lang' => Configure::read('lang_code')))));
         $this->set('blocks_right', $this->Block->find('all', array('conditions' => array('Block.region' => 1))));
         $this->set('blocks_bottom', $this->Block->find('all', array('conditions' => array('Block.region' => 2))));
 

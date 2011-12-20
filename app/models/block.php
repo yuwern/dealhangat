@@ -7,6 +7,9 @@ class Block extends AppModel {
         'title' => array(
             'rule' => 'notEmpty'
         ),
+        'lang' => array(
+            'rule' => 'notEmpty'
+        ),
         'body' => array(
             'rule' => 'notEmpty'
         ),
