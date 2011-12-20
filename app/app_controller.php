@@ -67,8 +67,8 @@ class AppController extends Controller
     {
 
         $this->set('blocks_left', $this->Block->find('all', array('conditions' => array('Block.region' => 0, 'Block.lang' => Configure::read('lang_code')))));
-        $this->set('blocks_right', $this->Block->find('all', array('conditions' => array('Block.region' => 1))));
-        $this->set('blocks_bottom', $this->Block->find('all', array('conditions' => array('Block.region' => 2))));
+        $this->set('blocks_right', $this->Block->find('all', array('conditions' => array('Block.region' => 1, 'Block.lang' => Configure::read('lang_code')))));
+        $this->set('blocks_bottom', $this->Block->find('all', array('conditions' => array('Block.region' => 2, 'Block.lang' => Configure::read('lang_code')))));
 
         $this->set('meta_for_layout', Configure::read('meta'));
         $this->set('js_vars_for_layout', (isset($this->js_vars)) ? $this->js_vars : '');
