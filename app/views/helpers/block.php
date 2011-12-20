@@ -14,7 +14,8 @@ class BlockHelper extends AppHelper {
         
         $content .= '<p>' . $block['Block']['body'] . '</p>';
         $content .= '</div></div>';
-        $content .= ' <div class="side1-bl"><div class="side1-br"><div class="side1-bm"> </div></div></div></div>';
+        //$content .= ' <div class="side-bl"><div class="side1-br"><div class="side1-bm"> </div></div></div>';
+        $content .= '</div>';
         return $content;
     }
 }
