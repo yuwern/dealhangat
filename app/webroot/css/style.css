@@ -580,35 +580,48 @@ TOFIX to be replaced with moz-border
 /* FOOTER WRAPPER */
 .footer-inner {}
 
-/* FOOTER - TOTAL SAVED */
-#footer .total-list {}
-#footer .total-list dl {}
-#footer .total-list dd {
-    background:#33cc33;
-    padding:3px 5px;
-}
-#footer .total-list dd span {
-      color:#fff;
-      font-size: 14px;
-      padding:1px;
-}
 /* FOOTER - COLUMNS */
 .footer-section1, .footer-section2, .footer-section3, .footer-section4 {
 	float:left;
 	padding:10px 25px 0 10px;
 }
-.footer-section1 {	width:160px; }
-.footer-section2 {	width:200px; }
-.footer-section3 {	width:150px; }
-.footer-section4 {	width:200px; }
-
+.footer-section1 {	width:220px; }
+.footer-section2 {	width:250px; }
+.footer-section3 {	width:220px; }
+.footer-section4 {	width:150px; height:100px; background:url(../img/footer-logo.png) no-repeat center; }
+/* FOOTER - LINK TITLE */
 .footer-section1 h6,.footer-section2 h6,.footer-section3 h6,.footer-section4 h6 {
-	color:#fff;
+	color:#c5ec11;
 	font-size:15px;
 	font-weight:bold;
 	margin: 0 0 3px 0;
 	padding:5px 0;
 }
+/* FOOTER - TOTAL SAVED */
+#footer .total-list {}
+#footer .total-list-box {
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+    background:#c5ec11;
+    float:left;
+    padding:12px 15px;
+    margin: 0 10px 10px 10px;
+    text-align:center;
+    width: 440px;
+}
+#footer .total-list .title	{
+    color:#000;
+    font-size:11px;
+    letter-spacing:1px;
+	text-align:center;
+	text-transform:uppercase;
+}
+#footer .total-list .total-saved-value {
+    color:#000;
+    font-size:20px;
+    font-weight:bold;
+}
+
 /* FOOTER HEADER BG 
 .footer-left {
 	background:url(../img/footer-menu-left.png) no-repeat left top;
@@ -645,16 +658,16 @@ div.footer-r p {
 /* FOOTER - LINKS */
 ul.footer-nav {}
 ul.footer-nav li {
-	border-bottom:1px dotted #c5ec11;
+	border-bottom:1px dotted #FFF;
 	padding:1px 0;
 }
 ul.footer-nav li a {
-	color:#c5ec11;
+	color:#FFF;
 	background:url("../img/arrow-footer.png") no-repeat scroll left 4px transparent;
 	padding:0 0 0 13px;
 }
 ul.footer-nav li a:hover {
-	color:#006633;
+	color:#c5ec11;
 }
 ul.footer-nav li.face2 a {
 	background:url(../img/facebook-icon2.png) no-repeat right top;
@@ -716,11 +729,11 @@ div.mobile-left-block{
 	margin:20px 0 0 10px;
 }
 #agriya p a {
-	color:#c5ec11;
+	color:#FFF;
 	text-decoration:underline;
 }
 #agriya p.copy a:hover {
-	color:#006633;
+	color:#c5ec11;
 }
 /* FOOTER - UNDETERMINED */
 #agriya p.wiki-link {
