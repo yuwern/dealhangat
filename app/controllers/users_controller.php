@@ -1539,7 +1539,7 @@ class UsersController extends AppController
                 'admin' => false
             ) , true);
             $this->Session->write('fb_return_url', $fb_return_url);
-            $this->set('redirect_url', $this->facebook->getLoginUrl(array(
+            $this->redirect($this->facebook->getLoginUrl(array(
                 'redirect_uri' => Router::url(array(
                     'controller' => 'users',
                     'action' => 'oauth_facebook',
@@ -1547,10 +1547,6 @@ class UsersController extends AppController
                 ) , true) ,
                 'scope' => 'email,publish_stream'
             )));
-            $this->set('authorize_name', 'facebook');
-            $this->layout = 'redirect_page';
-            $this->pageTitle.= ' - ' . __l('Facebook');
-            $this->render('authorize');
         }
         // OpenID validation setting
         if (!empty($this->request->data) && (isset($this->request->data['User']['openid']))) {
