@@ -506,7 +506,25 @@ endif;
 				</div>
 
 <div id="footer">
- 
+
+			<!-- TOTAL SAVED -->
+			<div class="total-list">
+            
+            <?php $total_array = $this->Html->total_saved(); ?>
+
+				<div class="total-list-box">
+					<p class="total-saved-value"><?php echo $this->Html->siteCurrencyFormat($this->Html->cCurrency($total_array['total_saved'])); ?></p>
+					<p class="title"><?php echo __l('Total Saved: '); ?></p>
+		    	</div>
+		
+				<div class="total-list-box">
+					<p class="total-saved-value"><?php echo $this->Html->cInt($total_array['total_bought']); ?></p>
+					<p class="title"><?php echo __l('Total Deals Bought: '); ?></p>
+    			</div>
+            	
+            </div>
+            
+            
     <!-- <div class="footer-tl">
       <div class="footer-tr">
         <div class="footer-tm"> </div>
@@ -519,7 +537,8 @@ endif;
       
         <div class="footer-inner clearfix">
           <div class="footer-wrapper-inner clearfix">
-          
+
+            <div class="footer-section4"></div>          
             <div class="footer-section1">
               <!-- <div class="footer-left">
                 <div class="footer-right"> -->
@@ -593,8 +612,9 @@ endif;
     			     <li class="rss2"><?php echo $this->Html->link(__l('RSS'), array_merge(array('controller'=>'deals', 'action'=>'index', 'ext'=>'rss'), $cityArray), array('target' => '_blank','title'=>__l('RSS Feed'))); ?></li>
                </ul>
             </div>
+
             
-            <!-- FIX -->
+            <!-- TATE? FIX -->
             <?php if(Configure::read('site.is_touch_app') or Configure::read('site.is_mobile_app')): ?>
             <div class="mobile-left-block">
 
