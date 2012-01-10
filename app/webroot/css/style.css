@@ -1,7 +1,7 @@
 /* SVN:$Id:blue-theme.css 16996 2010-08-02 11:32:49Z josephine_065at09 $ */
 /*
 revised by: SZE
-11212011 : 1750
+10201012 : 1508
 /*
 
 /* GLOBAL STYLE */
@@ -2594,6 +2594,7 @@ a.affiliate-history,a.recent-activation,a.add,a.delete,a.edit,a.export,a.update,
 	background:url(../img/icon-add.gif) 0 0 no-repeat;
 	padding:0px 2px 3px 20px;
 	margin-right:16px;
+	color:#000;
 }
 a.buy-gift {
 	background:transparent url(../img/buy-gift.png) no-repeat scroll left top;
@@ -2637,6 +2638,7 @@ a.view {
 }
 a.add-wallet {
 	background:url(../img/icon-add-amount.png) no-repeat left top;
+	color:#000;
 }
 a.affiliate-settings {
 	background:url("../img/settings.png") no-repeat scroll left top transparent;
