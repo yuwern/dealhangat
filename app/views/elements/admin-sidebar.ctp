@@ -7,9 +7,8 @@
 		<ul class="admin-sub-links">
 			<?php $class = ($this->request->params['controller'] == 'user_profiles' ||  ($this->request->params['controller'] == 'users'  && ($this->request->params['action'] == 'admin_index' || $this->request->params['action'] == 'change_password' || $this->request->params['action'] == 'admin_add' )) ) ? ' class="active"' : null; ?>            
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Users'), array('controller' => 'users', 'action' => 'index'),array('title' => __l('Users'))); ?></li>
-			<?php $class = ( $this->request->params['controller'] == 'users') ? ' class="active"' : null; ?>
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Top Referrers'), array('controller' => 'users', 'action' => 'top_referrers'),array('title' => __l('Top Referrers'))); ?></li>
-            <?php $class = ($this->request->params['controller'] == 'user_logins') ? ' class="active"' : null; ?>
+      <?php $class = ($this->request->params['controller'] == 'user_logins') ? ' class="active"' : null; ?>
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('User Logins'), array('controller' => 'user_logins', 'action' => 'index'),array('title' => __l('User Logins'))); ?></li>
 			<?php $class = ($this->request->params['controller'] == 'user_comments') ? ' class="active"' : '';?>
 			<li <?php echo $class; ?>><?php echo $this->Html->link(__l('User Comments'), array('controller' => 'user_comments', 'action' => 'index'), array('title' => __l('User Comments'), 'escape' => false)); ?></li>
