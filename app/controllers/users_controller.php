@@ -2707,6 +2707,14 @@ class UsersController extends AppController
             )));
         }
     }
+    public function admin_top_referrers()
+    {
+        // echo "oi";
+        $this->set('top_referrers', $this->User->find('all', array(
+            'conditions' => array('User.referred_by_user_count >' => '0'),
+            'order' => array('User.referred_by_user_count' => 'desc')
+        )));
+    }
     public function admin_add()
     {
         $this->pageTitle = __l('Add New User/Admin');
