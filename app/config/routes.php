@@ -197,6 +197,13 @@ if (Cache::read('site.city_url', 'long') == 'prefix') {
     ) , array(
         'city' => '(?!' . $controllers . ')[^\/]*'
     ));
+    Router::connect('/:city/deals/anytime', array(
+        'controller' => 'deals',
+        'action' => 'index',
+        'type' => 'anytime'
+    ) , array(
+        'city' => '(?!' . $controllers . ')[^\/]*'
+    ));
 	Router::connect('/:city/deals/near', array(
         'controller' => 'deals',
         'action' => 'index',

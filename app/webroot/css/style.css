@@ -1,7 +1,7 @@
 /* SVN:$Id:blue-theme.css 16996 2010-08-02 11:32:49Z josephine_065at09 $ */
 /*
 revised by: SZE
-11212011 : 1750
+170112 : 1508
 /*
 
 /* GLOBAL STYLE */
@@ -263,6 +263,27 @@ div.city-info-block span.cities-link {
 	color:#66cc33;
 	padding:0 0 0 4px;
 }
+/* HEADER USER LOGIN */
+p.user-login-info span.user a.facebook-link img {
+	position:static;
+	float:left;
+}
+p.user-login-info {
+	float:right;
+}
+p.user-login-info a {
+	color:#000;
+	font-weight:bold;
+	font-size:12px;
+	text-transform:uppercase;
+}
+p.user-login-info a:hover {
+	color:#FFEA00;
+	text-transform:uppercase;
+}
+p.user-login-info span.user span.facebook a,p.user-login-info span.user span.twitter a,a.facebook-link {
+	padding:2px 2px 2px 20px;
+}
 /* TOFIX - MYSTERY */
 dl.total-list {
 	float:right;
@@ -346,8 +367,6 @@ ul.menu-link li.active,ul.menu-link li:hover {
 ul.menu-link li.active a,ul.menu-link li:hover a {
 	background:url(../img/login-bg-right-h.png) no-repeat right top;
 }
-
-
 /* DROPDOWN MAILING LIST */
 div.top-slider1 form.subscription div.input label {
 	display:block;
@@ -390,21 +409,11 @@ a.facebook-link,.facebook a,.user span.facebook a {
 	background:url(../img/icon-facebook.png) no-repeat left top;
 	padding:0 2px 0 24px;
 }
-p.user-login-info span.user span.facebook a,p.user-login-info span.user span.twitter a,a.facebook-link {
-	padding:2px 2px 2px 20px;
-}
 .twitter a,a.twitter-link {
 	background:url(../img/icon-twitter.png) no-repeat left top;
 }
 .user span.twitter a {
 	background:url(../img/icon-twitter.png) no-repeat left top;
-}
-p.user-login-info {
-	float:right;
-}
-p.user-login-info a {
-	font-weight:bold;
-	font-size:15px;
 }
 /* HEADER STYLES END */
 
@@ -2594,6 +2603,7 @@ a.affiliate-history,a.recent-activation,a.add,a.delete,a.edit,a.export,a.update,
 	background:url(../img/icon-add.gif) 0 0 no-repeat;
 	padding:0px 2px 3px 20px;
 	margin-right:16px;
+	color:#000;
 }
 a.buy-gift {
 	background:transparent url(../img/buy-gift.png) no-repeat scroll left top;
@@ -2637,6 +2647,7 @@ a.view {
 }
 a.add-wallet {
 	background:url(../img/icon-add-amount.png) no-repeat left top;
+	color:#000;
 }
 a.affiliate-settings {
 	background:url("../img/settings.png") no-repeat scroll left top transparent;
@@ -4331,11 +4342,6 @@ div#payment_types-admin_index table.list td {
 }
 div.connect_confirmation_cell {
 	display:none !important;
-}
-p.user-login-info span.user a.facebook-link img {
-	position:static;
-	display:block;
-	margin:2px 0px 0px 0px;
 }
 span.welcome-info {
 	margin:0px;
