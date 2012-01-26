@@ -272,7 +272,7 @@ p.user-login-info {
 	float:right;
 }
 p.user-login-info a {
-	color:#000;
+	color:#006110;
 	font-weight:bold;
 	font-size:12px;
 	text-transform:uppercase;
@@ -304,30 +304,34 @@ dl.total-list dd span {
 	font-weight:bold;
 }
 /* MAIN NAVIGATION BUTTONS */
-.menu-block						{ margin:12px 0 23px 0;}
-div.admin-content .menu-block	{ margin:10px auto 0; }
-ul.menu							{ float:left; }
-ul.menu li {
-/*	background:url("../img/menu-left.png") no-repeat left top; */
-	float:left;
-	padding:0 0 0 10px;
-}
-ul.menu li a {
-/*	background:url("../img/menu-right.png") no-repeat right top; */
+div.admin-content .menu-block, .menu-block { margin:10px 0 20px -7px; }
+
+/* MAIN NAVI - LEFT TABS */
+ul.menu			{ float:left; }
+ul.menu li		{ float:left; padding:0 0 0 8px; }
+ul.menu li a	{
 	background-color:#FFF;
 	-moz-border-radius:8px;
 	border-radius:8px;
 	color:#35af44;
 	display:block;
-	font-size:14px;
+	font-size:13px;
 	font-weight:700;
-	padding:8px 10px;
+	padding:10px 12px;
 }
-ul.menu li.active,ul.menu li:hover		{	/*	background:url("../img/menu-left-h.png") no-repeat left top; */ }
-ul.menu li.active a,ul.menu li:hover a	{	/*	background:url("../img/menu-right-h.png") no-repeat right top; */ }
+ul.menu li.active, ul.menu li:hover		{ }
+ul.menu li.active a, ul.menu li:hover a	{ }
+
+/* MAIN NAVI - VIRTUAL SHOP */
+ul.menu li.virtual-shop a {
+	background:#cff421 url("../img/virtual-store.png") no-repeat left bottom;
+	color:#006600;
+	padding-left:38px;
+}
+/* MAIN NAVI - RIGHT LINKS */
 ul.menu-link {
 	float:right;
-	margin:10px 0 0;
+	margin:11px 0 0 0;
 }
 /* LOGIN BUTTONS */
 ul.menu-link li {
@@ -431,7 +435,7 @@ a.facebook-link,.facebook a,.user span.facebook a {
 	width:22px;
 	height:424px;
 }
-/* SIDEBAR STYLES */
+/* RIGHT SIDEBAR */
 .side2 {
 	float:right;
 	width:220px;
@@ -474,12 +478,32 @@ div#gift_users-view_gift_card .block2 {
 	border:none;
 	background: none;
 }
-/* SIDEBAR STYLES */
-
-/* ROUNDED CORNER STYLES 
-TOFIX to be replaced with moz-border
-*/
-/* rounded side columns left right */
+/* RIGHT SIDEBAR */
+/* ROUNDED CORNER STYLES
+/* SIDEBAR RIGHT - FOLLOW TWITTER */
+.tweet-tl {
+	background:url(../img/side-2-bg-tl.png) no-repeat left top;
+}
+.tweet-tr {
+	background:url(../img/side-2-bg-tr.png) no-repeat right top;
+}
+.tweet-tm {
+	background:url(../img/side-2-bg-tmid.png) repeat-x;
+	margin:0 8px;
+	height:42px;
+}
+/* SIDEBAR RIGHT - BUSINESS */
+.business-tl {
+	background:url(../img/business-bg-tl.png) no-repeat left top;
+}
+.business-tr {
+	background:url(../img/business-bg-tr.png) no-repeat right top;
+}
+.business-tm {
+	background:url(../img/business-bg-tmid.png) repeat-x left top;
+	margin:0px 5px;
+	height: 61px;
+}
 .side1-cl {
 	background:url(../img/center-left.png) repeat-y left top;
 }
@@ -498,6 +522,17 @@ TOFIX to be replaced with moz-border
 .side1-tm,.side1-bm {
 	margin:0px 6px;
 	height:6px;
+}
+.deal-tl {
+	background:url(../img/side-2-bg-tl.png) no-repeat left top;
+}
+.deal-tr {
+	background:url(../img/side-2-bg-tr.png) no-repeat right top;
+}
+.deal-tm {
+	background:url(../img/side-2-bg-tmid.png) repeat-x left top;
+	height:42px;
+	margin:0px 6px;
 }
 .progress-tl {
 	background:url(../img/time-bg-tl.png) no-repeat left top;
@@ -537,47 +572,13 @@ TOFIX to be replaced with moz-border
     height: 6px;
     padding: 0 0 0;
 }
-.deal-tl {
-	background:url(../img/side-2-bg-tl.png) no-repeat left top;
-}
-.deal-tr {
-	background:url(../img/side-2-bg-tr.png) no-repeat right top;
-}
-.deal-tm {
-	background:url(../img/side-2-bg-tmid.png) repeat-x left top;
-	height:42px;
-	margin:0px 6px;
-}
 .side-deal-cl {
 	background:url(../img/side-deal-cl.png) repeat-y left top;
 }
 .side-deal-cr {
 	background:url(../img/side-deal-cr.png) repeat-y right top;
 }
-/* SIDEBAR RIGHT - FOLLOW TWITTER */
-.tweet-tl {
-	background:url(../img/side-2-bg-tl.png) no-repeat left top;
-}
-.tweet-tr {
-	background:url(../img/side-2-bg-tr.png) no-repeat right top;
-}
-.tweet-tm {
-	background:url(../img/side-2-bg-tmid.png) repeat-x;
-	margin:0 8px;
-	height:42px;
-}
-/* SIDEBAR RIGHT - BUSINESS */
-.business-tl {
-	background:url(../img/business-bg-tl.png) no-repeat left top;
-}
-.business-tr {
-	background:url(../img/business-bg-tr.png) no-repeat right top;
-}
-.business-tm {
-	background:url(../img/business-bg-tmid.png) repeat-x left top;
-	margin:0px 5px;
-	height: 61px;
-}
+
 
 /* FOOTER STYLES BEGIN */
 #footer {
