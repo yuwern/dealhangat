@@ -307,7 +307,7 @@ class DealsController extends AppController
             $order = array(
                 'Deal.end_date' => 'DESC'
             );
-        } elseif (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime_deals') {
+        } elseif (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime') {
             $conditions['Deal.is_anytime_deal'] = 1;
             $this->pageTitle = __l('Virtual Shop');
 			$sub_title = __l('Virtual Shop');
@@ -729,8 +729,10 @@ class DealsController extends AppController
                 $this->set('dealStatusesCount', $dealStatusesCount);
                 $this->set('dealStatuses', $dealStatuses);
                 $this->render('index_company_deals');
-            } else if (!empty($this->request->params['named']['type']) && ($this->request->params['named']['type'] == 'recent' or $this->request->params['named']['type'] == 'anytime')) {
+            } else if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'recent') {
                 $this->render('index_recent_deals');
+            } else if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime') {
+                $this->render('index_anytime_deals');
             }
         }
 		if (!$this->RequestHandler->prefers('json')) {
