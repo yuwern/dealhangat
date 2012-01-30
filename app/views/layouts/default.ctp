@@ -268,7 +268,7 @@ endif;
         	<?php if($this->Html->isAllowed($this->Auth->user('user_type_id'))): ?>
                 <li <?php if($this->request->params['controller'] == 'deals' && $this->request->params['action'] == 'index' && !isset($this->request->params['named']['type']) && !isset($this->request->params['named']['company'])) { echo 'class="active"'; } ?>><?php echo $this->Html->link(__l('Today\'s Deals'), array('controller' => 'deals', 'action' => 'index', 'admin' => false), array('title' => __l('Today\'s Deals')));?></li>
                 <li <?php if($this->request->params['controller'] == 'deals' && (isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'recent')) { echo 'class="active"'; } else { echo 'class=""';}?>><?php echo $this->Html->link(__l('Recent Deals'), array('controller' => 'deals', 'action' => 'index', 'admin' => false,'type' => 'recent'), array('title' => __l('Recent Deals')));?></li>
-                <li <?php if($this->request->params['controller'] == 'deals' && (isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime')) { echo 'class="active"'; } else { echo 'class="virtual-shop"';}?>><?php echo $this->Html->link(__l('Virtual Shop'), array('controller' => 'deals', 'action' => 'index', 'admin' => false,'type' => 'anytime'), array('title' => __l('Virtual Shop')));?></li>
+                <li <?php if($this->request->params['controller'] == 'deals' && (isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime')) { echo 'class="virtual-shop"'; } else { echo 'class="virtual-shop"';}?>><?php echo $this->Html->link(__l('Virtual Shop'), array('controller' => 'deals', 'action' => 'index', 'admin' => false,'type' => 'anytime'), array('title' => __l('Virtual Shop')));?></li>
             <?php endif; ?>
 				<li <?php if($this->request->params['controller'] == 'topics' or $this->request->params['controller'] == 'topic_discussions' ) { echo 'class="active"'; } else { echo 'class=""';}?>><?php echo $this->Html->link(__l('Discussion'), array('controller' => 'topics', 'action' => 'index', 'admin' => false), array('title' => __l('Discussion')));?></li>
 
@@ -434,6 +434,8 @@ endif;
                         <div class="side1-cr">
                             <div class="block1-inner">
                     			<?php endif; ?>
+
+                    			<!-- 2-col layout: main deals + sidebar -->
                     			<?php echo $content_for_layout;?>
                     				<?php if (!($this->request->params['controller'] == 'deals' && ($this->request->params['action'] == 'view' || ($this->request->params['action'] == 'index' && empty($this->request->params['named']['company']))))): ?>
             				</div>

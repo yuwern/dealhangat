@@ -326,7 +326,7 @@ ul.menu li.active a, ul.menu li:hover a	{ }
 ul.menu li.virtual-shop a {
 	background:#cff421 url("../img/virtual-store.png") no-repeat left bottom;
 	color:#006600;
-	padding-left:38px;
+	padding-left:32px;
 }
 /* MAIN NAVI - RIGHT LINKS */
 ul.menu-link {

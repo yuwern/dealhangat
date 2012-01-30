@@ -1,4 +1,7 @@
 <div class="side2">
+
+<!-- Gift -->
+<!--
   <div class="blue-bg deal-blue-bg clearfix">
     <div class="deal-tl">
       <div class="deal-tr">
@@ -10,9 +13,9 @@
     <div class="side1-cl">
       <div class="side1-cr">
         <div class="block1-inner blue-inner clearfix">
-          <!--<p>
-                    <span>$50</span><?//php echo __l('available information is here');?>
-                </p>-->
+		<p>
+        	<span>$50</span><?//php echo __l('available information is here');?>
+		</p>
           <?php echo $this->Html->link(__l('Buy a').' '.Configure::read('site.name').' '.__l('Gift Card'), array('controller' => 'gift_users', 'action' => 'add'), array('class' => 'buy', 'title' => __l('Buy a').' '.Configure::read('site.name').' '.__l('Gift Card'))); ?> </div>
       </div>
     </div>
@@ -22,6 +25,10 @@
       </div>
     </div>
   </div>
+-->
+<!-- Gift -->
+  
+<!-- Today's Main Deals -->  
   <?php  if(!empty($main_deals)): ?>
   <div class="blue-bg top clearfix">
     <div class="deal-tl">
@@ -85,6 +92,9 @@
     </div>
   </div>
   <?php endif; ?>
+<!-- Today's Main Deals -->    
+  
+<!-- Today's Side Deals -->    
   <?php if(Configure::read('deal.is_side_deal_enabled') && !empty($side_deals)): ?>
   <div class="blue-bg top clearfix">
     <div class="deal-tl">
@@ -148,7 +158,8 @@
     </div>
   </div>
   <?php endif; ?>
-  <?php echo $this->element('deals-nearby_simple', array('deal_id' => $deal['Deal']['id'], 'cache' => array('config' => 'site_element_cache', 'key' => $deal['Deal']['id']))); ?>
+<!-- Today's Side Deals -->    
+<?php echo $this->element('deals-nearby_simple', array('deal_id' => $deal['Deal']['id'], 'cache' => array('config' => 'site_element_cache', 'key' => $deal['Deal']['id']))); ?>
 
 
 
@@ -169,6 +180,8 @@
 
 
   
+
+<!-- Get Your Business On DH -->    
   <div class="blue-bg clearfix">
     <div class="business-tl">
       <div class="business-tr">
@@ -194,8 +207,43 @@
 
 
 
+<!-- Get Your Business On DH -->    
+
+<!-- Contact Us -->    
+  <div class="blue-bg clearfix">
+    <div class="business-tl">
+      <div class="business-tr">
+        <div class="business-tm">
+          <h3><?php echo sprintf(__l('Contact Us').' %s!', Configure::read('site.name')); ?></h3>
+        </div>
+      </div>
+    </div>
+    <div class="side1-cl">
+      <div class="side1-cr">
+        <div class="block1-inner blue-bg-inner clearfix">
+          <p class="normal">
+          
+          Tel: 03 6211 6207 (Weekdays 9am-5pm)<br/>
+          Email: support@dealhangat.com
+          
+          </p>
+		</div>
+      </div>
+    </div>
+    <div class="side1-bl">
+      <div class="side1-br">
+        <div class="side1-bm"> </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Contact Us -->  
+
+<!-- FB Likes -->    
   
- <?php
+<?php
 $facebook_like_box = Configure::read('facebook.like_box');
 if(!empty($facebook_like_box)):?>
   <div class="blue-bg clearfix">
@@ -220,6 +268,12 @@ if(!empty($facebook_like_box)):?>
     </div>
   </div>
 <?php endif;  ?>
+<!-- FB Likes -->    
+  
+
+<!-- FB Recent Activity -->
+<!--
+  
 <?php
   $facebook_feeds_code = Configure::read('facebook.feeds_code');
   if(!empty($facebook_feeds_code)):?>
@@ -245,6 +299,12 @@ if(!empty($facebook_like_box)):?>
     </div>
   </div>
 <?php endif;  ?>  
+-->
+<!-- FB Recent Activity -->    
+  
+
+<!-- Twitter -->    
+  
 <?php	if(Configure::read('twitter.is_twitter_feed_enabled')): ?>
   <div class="blue-bg1 clearfix">
     <div class="tweet-tl">
@@ -271,4 +331,8 @@ if(!empty($facebook_like_box)):?>
     </div>
   </div>
 <?php endif; ?> 
-</div>
+<!-- Twitter -->    
+  
+
+</div><!-- end of sidebar -->
+
