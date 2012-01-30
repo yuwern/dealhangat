@@ -1,7 +1,4 @@
 <div class="side2">
-
-
-
 <!-- Gift -->
 <!--
   <div class="blue-bg deal-blue-bg clearfix">
@@ -21,57 +18,25 @@
           <?php echo $this->Html->link(__l('Buy a').' '.Configure::read('site.name').' '.__l('Gift Card'), array('controller' => 'gift_users', 'action' => 'add'), array('class' => 'buy', 'title' => __l('Buy a').' '.Configure::read('site.name').' '.__l('Gift Card'))); ?> </div>
       </div>
     </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
   </div>
 -->
 <!-- Gift -->
 
 <!-- Virtual Store -->    
-  <div class="blue-bg clearfix">
-    <div class="business-tl">
-      <div class="business-tr">
-        <div class="business-tm">
-          <h3><?php echo __l('Virtual Store'); ?></h3>
-        </div>
-      </div>
-    </div>
-    <div class="side1-cl">
-      <div class="side1-cr">
-        <div class="block1-inner blue-bg-inner clearfix">
-          <p>
-	          <?php echo __l('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'); ?>
-          </p>
-		</div>
-      </div>
-    </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
-  </div>
-
-
-
+	<div class="sidebar-virtual-store">
+		<h3><?php echo __l('Virtual Store'); ?></h3>
+          <span class="button-new">&nbsp;</span>
+			<p>
+	          <?php echo __l('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'); ?>
+			</p>
+	</div>
 <!-- Virtual Store --> 
   
 <!-- Today's Main Deals -->  
   <?php  if(!empty($main_deals)): ?>
-  <div class="blue-bg top clearfix">
-    <div class="deal-tl">
-      <div class="deal-tr">
-        <div class="deal-tm">
-          <h3> <?php echo __l("Today's Main Deals");?> </h3>
-        </div>
-      </div>
-    </div>
-    <div class="side1-cl">
-      <div class="side1-cr">
-        <div class="block1-inner blue-bg-inner clearfix">
+  <div class="sidebar-deals">
+  		<h3><?php echo __l("Today's Main Deals");?></h3>
+
           <div class="side-deal">
             <ol class="side-deal-list">
               <?php
@@ -82,9 +47,9 @@
                 <div class="clearfix">
                   <div class="deal1-img"> <?php echo $this->Html->link($this->Html->showImage('Deal', (!empty($main_deal['Attachment'][0]) ? $main_deal['Attachment'][0] : ''), array('dimension' => 'small_big_thumb', 'alt' => sprintf(__l('[Image: %s]'), $this->Html->cText($main_deal['Deal']['name'], false)), 'title' => $this->Html->cText($main_deal['Deal']['name'], false))), array('controller' => 'deals', 'action' => 'view', $main_deal['Deal']['slug']),array('title' =>sprintf(__l('%s'),$main_deal['Deal']['name']), 'escape' => false));?> </div>
                   <div class="deal-button">
-                    <div class="deal-price clearfix">
-                      <div class="deal-price-l">
-                        <div class="deal-price-r clearfix">
+                  
+                    	<div class="deal-price clearfix">
+
                           <div class="deal-currency">
 								<?php if(!empty($main_deal['Deal']['is_subdeal_available'])): ?>								
                                     <?php echo $this->Html->siteCurrencyFormat($this->Html->cCurrency($main_deal['SubDeal'][0]['discounted_price']));?>
@@ -92,6 +57,7 @@
                                     <?php echo $this->Html->siteCurrencyFormat($this->Html->cCurrency($main_deal['Deal']['discounted_price']));?>
                                 <?php endif;?>
 						  </div>
+
                           <div class="deal-value-info"> 
                           	<span> 
 								<?php if(!empty($main_deal['Deal']['is_subdeal_available'])): ?>
@@ -101,11 +67,14 @@
 								<?php endif;?>
                           	</span> 
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                    <?php echo $this->Html->link(__l('View it'), array('controller' => 'deals', 'action' => 'view', $main_deal['Deal']['slug']),array('title' => __l('View it')), null, false);?> </div>
-                </div>
+                      
+                    	</div>
+                    
+                    	<?php echo $this->Html->link(__l('View it'), array('controller' => 'deals', 'action' => 'view', $main_deal['Deal']['slug']),array('title' => __l('View it')), null, false);?>
+                    
+                    </div><!-- deal-button -->
+                    
+                </div><!-- clearfix -->
               </li>
               <?php
 					endforeach;
@@ -113,14 +82,8 @@
              <li class="view-all"><?php echo $this->Html->link(__l('View all'), array('controller' => 'deals', 'action' => 'index', 'type' => 'main'),array('title' => __l('View all')), null, false);?></li>
             </ol>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
+        
+    
   </div>
   <?php endif; ?>
 <!-- Today's Main Deals -->    
@@ -213,57 +176,20 @@
   
 
 <!-- Get Your Business On DH -->    
-  <div class="blue-bg clearfix">
-    <div class="business-tl">
-      <div class="business-tr">
-        <div class="business-tm">
+  <div class="sidebar-business">
           <h3><?php echo sprintf(__l('Get Your Business on').' %s!', Configure::read('site.name')); ?></h3>
-        </div>
-      </div>
-    </div>
-    <div class="side1-cl">
-      <div class="side1-cr">
-        <div class="block1-inner blue-bg-inner clearfix">
-          <div class="new-img"></div>
           <p class="normal" ><?php echo __l('Learn More for the basics.'); ?> <?php echo sprintf(__l('about how').' %s '.__l('can help bring tonnes of customers to your door'), Configure::read('site.name'));?></p>
-          <?php echo $this->Html->link(__l('Learn More'), array('controller' => 'pages', 'action' => 'view','company', 'admin' => false), array('title' => __l('Learn More'),'class'=>'learn'));?> </div>
-      </div>
-    </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
+          <?php echo $this->Html->link(__l('Learn More'), array('controller' => 'pages', 'action' => 'view','company', 'admin' => false), array('title' => __l('Learn More'),'class'=>'learn'));?>
   </div>
-
-
-
 <!-- Get Your Business On DH -->    
 
 <!-- Contact Us -->    
-  <div class="blue-bg clearfix">
-    <div class="business-tl">
-      <div class="business-tr">
-        <div class="business-tm">
+  <div class="sidebar-contact">
           <h3><?php echo __l('Contact Us'); ?></h3>
-        </div>
-      </div>
-    </div>
-    <div class="side1-cl">
-      <div class="side1-cr">
-        <div class="block1-inner blue-bg-inner clearfix">
           <ul>
-          <li><?php echo __l('03 6211 6207'); ?><br/><?php echo __l('(Weekdays 9am-5pm)'); ?></li>
-          <li><?php echo __l('support@dealhangat.com'); ?></li>
+          <li class="sidebar-contact-tel"><?php echo __l('03 6211 6207'); ?><br/><span><?php echo __l('(Weekdays 9am-5pm)'); ?></span></li>
+          <li class="sidebar-contact-email"><?php echo __l('support@dealhangat.com'); ?></li>
           </ul>
-		</div>
-      </div>
-    </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
   </div>
 
 
@@ -275,30 +201,31 @@
 <?php
 $facebook_like_box = Configure::read('facebook.like_box');
 if(!empty($facebook_like_box)):?>
-  <div class="blue-bg clearfix">
-    <div class="deal-tl">
-      <div class="deal-tr">
-        <div class="deal-tm">
-          <h3><?php echo __l('Facebook'); ?></h3>
-        </div>
-      </div>
-    </div>
-    <div class="side1-cl">
-      <div class="side1-cr">
+  <div class="sidebar-social">
+	<h3><?php echo __l('Facebook'); ?></h3>
         <div class="block1-inner blue-bg-inner clearfix">
           <div class="facebook-block clearfix"> <?php echo $facebook_like_box;?> </div>
         </div>
-      </div>
-    </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
   </div>
 <?php endif;  ?>
 <!-- FB Likes -->    
   
+
+<!-- Twitter -->    
+  
+<?php	if(Configure::read('twitter.is_twitter_feed_enabled')): ?>
+  <div class="sidebar-social">
+	<h3>Twitter</h3>
+        <div class="block1-inner blue-bg-inner clearfix">
+          <?php	echo strtr(Configure::read('twitter.tweets_around_city'),array(
+    					'##CITY_NAME##' => ucwords($city_name),
+    				));
+                ?>
+        </div>
+  </div>
+<?php endif; ?> 
+<!-- Twitter -->    
+ 
 
 <!-- FB Recent Activity -->
 <!--
@@ -330,38 +257,7 @@ if(!empty($facebook_like_box)):?>
 <?php endif;  ?>  
 -->
 <!-- FB Recent Activity -->    
-  
-
-<!-- Twitter -->    
-  
-<?php	if(Configure::read('twitter.is_twitter_feed_enabled')): ?>
-  <div class="blue-bg1 clearfix">
-    <div class="tweet-tl">
-      <div class="tweet-tr">
-        <div class="tweet-tm">
-          <h3>Tweets Around</h3>
-        </div>
-      </div>
-    </div>
-    <div class="side1-cl">
-      <div class="side1-cr">
-        <div class="block1-inner blue-bg-inner clearfix">
-          <?php	echo strtr(Configure::read('twitter.tweets_around_city'),array(
-    					'##CITY_NAME##' => ucwords($city_name),
-    				));
-                ?>
-        </div>
-      </div>
-    </div>
-    <div class="side1-bl">
-      <div class="side1-br">
-        <div class="side1-bm"> </div>
-      </div>
-    </div>
-  </div>
-<?php endif; ?> 
-<!-- Twitter -->    
-  
+ 
 
 </div><!-- end of sidebar -->
 

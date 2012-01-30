@@ -438,7 +438,171 @@ a.facebook-link,.facebook a,.user span.facebook a {
 /* RIGHT SIDEBAR */
 .side2 {
 	float:right;
+	margin:0;
 	width:220px;
+}
+.side2 h3 {
+	color:#086700;
+	font-size:17px;
+	font-weight:bold;
+	padding:3px 0 15px 35px;
+}
+.button-new {
+	background:url("../img/button-new.png") no-repeat left top;
+	float:right;
+	height:20px;
+	margin:-32px 0 0 0;
+	width:50px;
+}
+.sidebar-virtual-store, .sidebar-deals, .sidebar-business, .sidebar-contact {
+	background-color:#FFF;
+	padding:20px 22px;
+	margin: 0 0 12px 0;
+}
+.sidebar-social {
+	background-color:#FFF;
+	padding: 20px 0 0 0;
+	margin: 0 0 12px 0;
+}	
+/* RIGHT SIDEBAR - VIRTUAL STORE */
+.sidebar-virtual-store {
+	background:#cff600 url("../img/virtual-store-bg.png") no-repeat left top;
+}
+.sidebar-virtual-store h3 {
+	background:url("../img/icon-virtual-store.png") no-repeat left top;
+}
+.sidebar-virtual-store p {
+	color:#086700;
+	font-size:12px;
+	line-height:17px;
+}
+/* RIGHT SIDEBAR - VIEW ALL DEALS */
+.sidebar-deals h3 {
+	background:url("../img/icon-viewall-deals.png") no-repeat left top;
+}
+.side-deal {}
+.side-deal h4 {
+	padding:6px 0 3px 0;
+	border-top:1px dotted #086700;
+}
+.side-deal h4 a {
+	font-weight:bold;
+	color:#086700;
+}
+.side-deal h4 a:hover {
+	color:#80b900;
+}
+.side-deal img {}
+.side-deal img:hover {
+	opacity:0.6;
+	filter:alpha(opacity=60);
+}
+ol.side-deal-list li {	
+	display:block; 
+}
+ol.side-deal-list li.view-all {
+	float:right;
+}
+ol.side-deal-list li.view-all a {
+	background:url("../img/view-all.png") no-repeat scroll left top;
+	padding:2px 5px 10px 21px;
+}
+/* VIEW DEAL BLOCK */
+.deal1-img {
+	float:left;
+	width:auto;
+}
+div.deal1-img img {
+	width:133px;
+	height:80px;
+}
+.deal-button {
+	background-color:#000;
+	color:#FFF;
+	text-align:right;
+	margin:0;
+}
+/* TO FIX
+.deal-button p {
+	float:left;
+	width:auto;
+	padding:9px 8px 7px 4px;
+	font-size:22px;
+	color:#fff;
+}
+.deal-button dl {
+	float:left;
+	width:60px;
+	font-size:12px;
+}
+.deal-button dl dt,.deal-button dl dd {
+	float:left;
+	padding:10px 0 7px 0;
+}
+.deal-button dl dd {
+	padding:10px 0 7px 3px;
+}
+*/
+.deal-button a {
+	font-size:12px;
+	color:#4b7799;
+	font-weight:bold;
+	text-decoration:underline;
+	float:right;
+	margin:4px 4px 0 0;
+}
+.deal-button a:hover {
+	color:#00b5c8;
+}
+/* DEAL BLOCK - CURRENCY & VALUE */
+div.deal-currency {
+	color:#fff;
+	font-weight:bold;
+	font-size:16px;
+	padding:10px 10px 0 10px;
+}
+div.deal-price-r div.deal-currency span {
+	color:#FFFFFF;
+	font-size:14px;
+	width:auto;
+}
+div.deal-value-info span {
+	font-size:11px;
+	padding:10px 10px 0 10px;
+}
+.deal-price-l {}
+.deal-price-r {}
+/* RIGHT SIDEBAR - BUSINESS */
+.sidebar-business h3 {
+	background:url("../img/icon-business.png") no-repeat left top;
+}
+.sidebar-business p {
+	color:#086700;
+	font-size:12px;
+	line-height:17px;
+}
+/* RIGHT SIDEBAR - CONTACT */
+.sidebar-contact h3 {
+	margin-left: -35px;
+}
+.sidebar-contact li {
+	padding: 3px 0 8px 0;
+	color:#086700;
+	font-size:17px;
+	padding-left:35px;
+}
+.sidebar-contact li.sidebar-contact-tel {
+	background:url("../img/icon-sidebar-tel.png") no-repeat left top;
+}
+li.sidebar-contact-tel span {
+	font-size:11px;
+}
+.sidebar-contact li.sidebar-contact-email {
+	background:url("../img/icon-sidebar-email.png") no-repeat left top;
+}
+/* RIGHT SIDEBAR - SOCIAL MEDIA */
+.sidebar-social h3 {
+	padding-left: 30px;
 }
 div.deal-view-inner-block .side2 {
 	float:left;
@@ -493,17 +657,6 @@ div#gift_users-view_gift_card .block2 {
 	height:42px;
 }
 /* SIDEBAR RIGHT - BUSINESS */
-.business-tl {
-	background:url(../img/business-bg-tl.png) no-repeat left top;
-}
-.business-tr {
-	background:url(../img/business-bg-tr.png) no-repeat right top;
-}
-.business-tm {
-	background:url(../img/business-bg-tmid.png) repeat-x left top;
-	margin:0px 5px;
-	height: 61px;
-}
 .side1-cl {
 	background:url(../img/center-left.png) repeat-y left top;
 }
@@ -572,13 +725,6 @@ div#gift_users-view_gift_card .block2 {
     height: 6px;
     padding: 0 0 0;
 }
-.side-deal-cl {
-	background:url(../img/side-deal-cl.png) repeat-y left top;
-}
-.side-deal-cr {
-	background:url(../img/side-deal-cr.png) repeat-y right top;
-}
-
 
 /* FOOTER STYLES BEGIN */
 #footer {
@@ -1444,8 +1590,8 @@ p.deal-r {
 	background:#fff;
 }
 .blue-bg-inner {
-	margin:0px 2px;
-	padding:0px 0 2px 0;
+	margin:0 2px;
+	padding:0 0 2px 0;
 }
 .block2-inner {
 	background:url(../img/block-2-bg-center.png) repeat-y left top;
@@ -1710,10 +1856,9 @@ h3.deal-header {
 	text-align:center;
 }
 .blue-bg h3,.blue-bg1 h3 {
-	color:#36404b;
-	font-size:16px;
+	color:#086700;
+	font-size:17px;
 	font-weight:bold;
-	line-height:20px;
 	padding:12px 0 0 8px;
 }
 .blue-bg1 h3 {
@@ -1984,35 +2129,8 @@ p.deal-on {
 	font-weight:bold;
 	text-transform:uppercase;
 }
-div.deal1-img img {
-	width:133px;
-	height:80px;
-}
-div.deal-currency {
-	color:#fff;
-	font-weight:bold;
-	font-size:15px;
-	margin:0px 0px 0px 0px;
-}
-div.deal-price-r div.deal-currency span {
-	color:#FFFFFF;
-	font-size:15px;
-	padding:0px 8px 0px 4px;
-	width:auto;
-}
-div.div.deal-value-info {
-	font-size:11px;
-}
-div.deal-price-r div.deal-value-info span {
-	font-size:11px;
-	display:inline;
-}
 div.gallery-block {
 	background:#F6F0D8;
-}
-ol.side-deal-list li {
-	border-top:1px solid #fff;
-	padding: 5px 0px 5px 0px;
 }
 /* DEAL VIEW STYLES END */
 
@@ -3719,63 +3837,10 @@ div.calendar-block div.side2-info-block,div.venue-show-map-block {
 div.ajax-login-block form#UserLoginForm div.input div.error-message,#gift_users-view_gift_card form#UserRegisterForm div.input div.error-message {
 	margin:5px 0 0 5px;
 }
-.side-deal {
-	padding:5px 0;
-	background:url(../img/side-deal-bg-center.png) repeat-x left top #eeeeee;
-}
 .detail {
 	background:url(../img/detail.png) repeat-x left top;
 	width:274px;
 	margin:0 0 8px -1px;
-}
-.deal1-img {
-	float:left;
-	width:auto;
-	padding:0 0 0 9px;
-}
-.deal-button {
-	float:left;
-	width:118px;
-	padding:3px 0 0 3px;
-}
-.deal-price-l {
-	background:url(../img/side-deal-left.png) no-repeat left top;
-	padding:0 0 0 6px;
-	height:35px;
-}
-.deal-price-r {
-	background:url(../img/side-deal-right.png) no-repeat right top;
-	height:35px;
-}
-.deal-button p {
-	float:left;
-	width:auto;
-	padding:9px 8px 7px 4px;
-	font-size:22px;
-	color:#fff;
-}
-.deal-button dl {
-	float:left;
-	width:60px;
-	font-size:12px;
-}
-.deal-button dl dt,.deal-button dl dd {
-	float:left;
-	padding:10px 0 7px 0;
-}
-.deal-button dl dd {
-	padding:10px 0 7px 3px;
-}
-.deal-button a {
-	font-size:12px;
-	color:#4b7799;
-	font-weight:bold;
-	text-decoration:underline;
-	float:right;
-	margin:4px 4px 0 0;
-}
-.deal-button a:hover {
-	color:#00b5c8;
 }
 .more {
 	background:url(../img/more-l.png) no-repeat left top;
@@ -3797,23 +3862,6 @@ div.ajax-login-block form#UserLoginForm div.input div.error-message,#gift_users-
 }
 .more a span:hover {
 	color:#00B5C8;
-}
-.side-deal h4 {
-	padding:0 0 4px 10px;
-}
-.side-deal h4 a {
-	font-weight:bold;
-	color:#333333;
-}
-.side-deal h4 a:hover {
-	color:#00b5c8;
-}
-.side-deal img {
-	margin:5px 0;
-}
-.side-deal img:hover {
-	opacity:0.6;
-	filter:alpha(opacity=60);
 }
 #pages-company .register-block .deal {
 	position:static;
@@ -5673,15 +5721,7 @@ ol.sub-deal-list li dl.list dt {
 ol.sub-deal-list li dl.list dd {
 	width:30%;
 }
-ol.side-deal-list li.view-all {
-	float:right;
-	margin:5px 5px 0;
-}
-ol.side-deal-list li.view-all a {
-	background:url("../img/view-all.png") no-repeat scroll left 4px;
-	display:block;
-	padding:2px 5px 0 21px;
-}
+
 .email_never_share {
 	color:#ACACAC;
 	font-size:11px;
@@ -5967,6 +6007,23 @@ h6.logo a {
 }
 .side1-bm {
 	background:url(../img/side-1-bg-bmid.png) repeat-x left bottom;
+}
+.side-deal-cl {
+	background:url(../img/side-deal-cl.png) repeat-y left top;
+}
+.side-deal-cr {
+	background:url(../img/side-deal-cr.png) repeat-y right top;
+}
+.business-tl {
+	background:url(../img/business-bg-tl.png) no-repeat left top;
+}
+.business-tr {
+	background:url(../img/business-bg-tr.png) no-repeat right top;
+}
+.business-tm {
+	background:url(../img/business-bg-tmid.png) repeat-x left top;
+	margin:0px 5px;
+	height: 61px;
 }
 .footer-tl {
 	background:url(../img/footer-tl.png) no-repeat left top;
