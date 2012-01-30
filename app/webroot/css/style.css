@@ -459,9 +459,9 @@ a.facebook-link,.facebook a,.user span.facebook a {
 	padding:20px 22px;
 	margin: 0 0 12px 0;
 }
-.sidebar-social {
+.sidebar-social-facebook, .sidebar-social-twitter {
 	background-color:#FFF;
-	padding: 20px 0 0 0;
+	padding:20px 0 0 0;
 	margin: 0 0 12px 0;
 }	
 /* RIGHT SIDEBAR - VIRTUAL STORE */
@@ -601,9 +601,15 @@ li.sidebar-contact-tel span {
 	background:url("../img/icon-sidebar-email.png") no-repeat left top;
 }
 /* RIGHT SIDEBAR - SOCIAL MEDIA */
-.sidebar-social h3 {
-	padding-left: 30px;
+.sidebar-social-facebook h3 {
+	background:url("../img/icon-sidebar-fb.png") no-repeat 5px top;
+	margin-left:15px;
 }
+.sidebar-social-twitter h3 {
+	background:url("../img/icon-sidebar-tw.png") no-repeat 5px top;
+	margin-left:15px;
+}
+
 div.deal-view-inner-block .side2 {
 	float:left;
 	margin:0 0 0 12px;

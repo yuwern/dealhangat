@@ -201,9 +201,9 @@
 <?php
 $facebook_like_box = Configure::read('facebook.like_box');
 if(!empty($facebook_like_box)):?>
-  <div class="sidebar-social">
+  <div class="sidebar-social-facebook">
 	<h3><?php echo __l('Facebook'); ?></h3>
-        <div class="block1-inner blue-bg-inner clearfix">
+        <div class="clearfix">
           <div class="facebook-block clearfix"> <?php echo $facebook_like_box;?> </div>
         </div>
   </div>
@@ -214,9 +214,9 @@ if(!empty($facebook_like_box)):?>
 <!-- Twitter -->    
   
 <?php	if(Configure::read('twitter.is_twitter_feed_enabled')): ?>
-  <div class="sidebar-social">
+  <div class="sidebar-social-twitter">
 	<h3>Twitter</h3>
-        <div class="block1-inner blue-bg-inner clearfix">
+        <div class="clearfix">
           <?php	echo strtr(Configure::read('twitter.tweets_around_city'),array(
     					'##CITY_NAME##' => ucwords($city_name),
     				));
