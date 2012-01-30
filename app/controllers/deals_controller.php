@@ -309,8 +309,8 @@ class DealsController extends AppController
             );
         } elseif (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime') {
             $conditions['Deal.is_anytime_deal'] = 1;
-            $this->pageTitle = __l('Virtual Shop');
-			$sub_title = __l('Virtual Shop');
+            $this->pageTitle = __l('Virtual Store');
+			$sub_title = __l('Virtual Store');
         } elseif (empty($this->request->params['named']['company'])) {
             /*if (Configure::read('deal.is_side_deal_enabled')) {
                 $conditions['Deal.is_side_deal'] = 0;

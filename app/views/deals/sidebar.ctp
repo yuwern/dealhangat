@@ -1,5 +1,7 @@
 <div class="side2">
-<!--
+
+
+
 <!-- Gift -->
 <!--
   <div class="blue-bg deal-blue-bg clearfix">
@@ -27,6 +29,35 @@
   </div>
 -->
 <!-- Gift -->
+
+<!-- Virtual Store -->    
+  <div class="blue-bg clearfix">
+    <div class="business-tl">
+      <div class="business-tr">
+        <div class="business-tm">
+          <h3><?php echo __l('Virtual Store'); ?></h3>
+        </div>
+      </div>
+    </div>
+    <div class="side1-cl">
+      <div class="side1-cr">
+        <div class="block1-inner blue-bg-inner clearfix">
+          <p>
+	          <?php echo __l('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'); ?>
+          </p>
+		</div>
+      </div>
+    </div>
+    <div class="side1-bl">
+      <div class="side1-br">
+        <div class="side1-bm"> </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- Virtual Store --> 
   
 <!-- Today's Main Deals -->  
   <?php  if(!empty($main_deals)): ?>
@@ -222,8 +253,8 @@
       <div class="side1-cr">
         <div class="block1-inner blue-bg-inner clearfix">
           <ul>
-          <li><?php echo __l('Tel: 03 6211 6207 (Weekdays 9am-5pm)'); ?></li>
-          <li><?php echo __l('Email: support@dealhangat.com'); ?></li>
+          <li><?php echo __l('03 6211 6207'); ?><br/><?php echo __l('(Weekdays 9am-5pm)'); ?></li>
+          <li><?php echo __l('support@dealhangat.com'); ?></li>
           </ul>
 		</div>
       </div>
