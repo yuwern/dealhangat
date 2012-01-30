@@ -1,5 +1,5 @@
 <div class="side2">
-
+<!--
 <!-- Gift -->
 <!--
   <div class="blue-bg deal-blue-bg clearfix">
@@ -214,19 +214,17 @@
     <div class="business-tl">
       <div class="business-tr">
         <div class="business-tm">
-          <h3><?php echo sprintf(__l('Contact Us').' %s!', Configure::read('site.name')); ?></h3>
+          <h3><?php echo __l('Contact Us'); ?></h3>
         </div>
       </div>
     </div>
     <div class="side1-cl">
       <div class="side1-cr">
         <div class="block1-inner blue-bg-inner clearfix">
-          <p class="normal">
-          
-          Tel: 03 6211 6207 (Weekdays 9am-5pm)<br/>
-          Email: support@dealhangat.com
-          
-          </p>
+          <ul>
+          <li><?php echo __l('Tel: 03 6211 6207 (Weekdays 9am-5pm)'); ?></li>
+          <li><?php echo __l('Email: support@dealhangat.com'); ?></li>
+          </ul>
 		</div>
       </div>
     </div>
