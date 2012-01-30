@@ -443,25 +443,25 @@ a.facebook-link,.facebook a,.user span.facebook a {
 }
 .side2 h3 {
 	color:#086700;
-	font-size:17px;
+	font-size:15px;
 	font-weight:bold;
-	padding:3px 0 15px 35px;
+	padding:2px 0 10px 35px;
 }
 .button-new {
 	background:url("../img/button-new.png") no-repeat left top;
 	float:right;
 	height:20px;
-	margin:-32px 0 0 0;
+	margin:-28px 0 0 0;
 	width:50px;
 }
 .sidebar-virtual-store, .sidebar-deals, .sidebar-business, .sidebar-contact {
-	background-color:#FFF;
-	padding:20px 22px;
+	background-color:#f6f0d8;
+	padding:18px;
 	margin: 0 0 12px 0;
 }
 .sidebar-social-facebook, .sidebar-social-twitter {
 	background-color:#FFF;
-	padding:20px 0 0 0;
+	padding:8px 0 0 0;
 	margin: 0 0 12px 0;
 }	
 /* RIGHT SIDEBAR - VIRTUAL STORE */
@@ -517,8 +517,7 @@ div.deal1-img img {
 	height:80px;
 }
 .deal-button {
-	background-color:#000;
-	color:#FFF;
+	color:#086700;
 	text-align:right;
 	margin:0;
 }
@@ -545,7 +544,7 @@ div.deal1-img img {
 */
 .deal-button a {
 	font-size:12px;
-	color:#4b7799;
+	color:#086700;
 	font-weight:bold;
 	text-decoration:underline;
 	float:right;
@@ -556,25 +555,27 @@ div.deal1-img img {
 }
 /* DEAL BLOCK - CURRENCY & VALUE */
 div.deal-currency {
-	color:#fff;
+	color:#086700;
 	font-weight:bold;
-	font-size:16px;
+	font-size:17px;
 	padding:10px 10px 0 10px;
 }
 div.deal-price-r div.deal-currency span {
-	color:#FFFFFF;
+	color:#086700;
 	font-size:14px;
 	width:auto;
 }
 div.deal-value-info span {
-	font-size:11px;
+	font-size:12px;
 	padding:10px 10px 0 10px;
+	text-align:right;
 }
 .deal-price-l {}
 .deal-price-r {}
 /* RIGHT SIDEBAR - BUSINESS */
 .sidebar-business h3 {
 	background:url("../img/icon-business.png") no-repeat left top;
+	padding:0 0 5px 32px;
 }
 .sidebar-business p {
 	color:#086700;
@@ -602,12 +603,12 @@ li.sidebar-contact-tel span {
 }
 /* RIGHT SIDEBAR - SOCIAL MEDIA */
 .sidebar-social-facebook h3 {
-	background:url("../img/icon-sidebar-fb.png") no-repeat 5px top;
-	margin-left:15px;
+	background:url("../img/icon-sidebar-fb.png") no-repeat 8px top;
+	margin-left:12px;
 }
 .sidebar-social-twitter h3 {
-	background:url("../img/icon-sidebar-tw.png") no-repeat 5px top;
-	margin-left:15px;
+	background:url("../img/icon-sidebar-tw.png") no-repeat 8px top;
+	margin-left:12px;
 }
 
 div.deal-view-inner-block .side2 {
