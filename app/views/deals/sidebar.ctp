@@ -192,7 +192,7 @@
           <h3><?php echo __l('Contact Us'); ?></h3>
           <ul>
           <li class="sidebar-contact-tel"><?php echo __l('03 6211 6207'); ?><br/><span><?php echo __l('(Weekdays 9am-5pm)'); ?></span></li>
-          <li class="sidebar-contact-email"><?php echo __l('support@dealhangat.com'); ?></li>
+          <li class="sidebar-contact-email"><a href="mailto:support@dealhangat.com" title="Email Kru DH"><?php echo __l('support@dealhangat.com'); ?></a></li>
           </ul>
   </div>
 

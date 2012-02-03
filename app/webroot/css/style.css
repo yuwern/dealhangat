@@ -565,7 +565,10 @@ div.deal-value-info span {
 }
 /* RIGHT SIDEBAR - CONTACT */
 .sidebar-contact h3 {
-	margin-left: -35px;
+	background:url("../img/icon-business.png") no-repeat left top;
+}
+.sidebar-contact ul {
+	padding:10px 0 0 0;
 }
 .sidebar-contact li {
 	padding: 3px 0 8px 0;
