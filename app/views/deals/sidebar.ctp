@@ -25,9 +25,11 @@
 <!-- Virtual Store -->    
 	<div class="sidebar-virtual-store">
 		<h3><?php echo __l('Virtual Store'); ?></h3>
-          <span class="button-new">&nbsp;</span>
+			<div class="button-new">
+          		<?php echo $this->Html->link(__l('Virtual Store'), array('controller' => 'deals', 'action' => 'index', 'admin' => false,'type' => 'anytime'), array('title' => __l('Virtual Store')));?>
+			</div>
 			<p>
-	          <?php echo __l('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'); ?>
+	          <?php echo __l('Nikmati diskaun hebat dan tawaran produk-produk menawan di Kedai DealHangat!'); ?>
 			</p>
 	</div>
 <!-- Virtual Store --> 
@@ -35,8 +37,10 @@
 <!-- Today's Main Deals -->  
   <?php  if(!empty($main_deals)): ?>
   <div class="sidebar-deals">
-  		<h3><?php echo __l("Today's Main Deals");?></h3>
-
+  		<h3>
+  			<?php echo $this->Html->link(__l("Today's Main Deals"), array('controller' => 'deals', 'action' => 'index', 'type' => 'main'),array('title' => __l("Today's Main Deals")), null, false);?>
+  		</h3>
+  		
           <div class="side-deal">
             <ol class="side-deal-list">
               <?php
@@ -203,9 +207,7 @@ $facebook_like_box = Configure::read('facebook.like_box');
 if(!empty($facebook_like_box)):?>
   <div class="sidebar-social-facebook">
 	<h3><?php echo __l('Facebook'); ?></h3>
-        <div class="clearfix">
-          <div class="facebook-block clearfix"> <?php echo $facebook_like_box;?> </div>
-        </div>
+		<div class="facebook-block clearfix"><?php echo $facebook_like_box;?></div>
   </div>
 <?php endif;  ?>
 <!-- FB Likes -->    
@@ -216,7 +218,7 @@ if(!empty($facebook_like_box)):?>
 <?php	if(Configure::read('twitter.is_twitter_feed_enabled')): ?>
   <div class="sidebar-social-twitter">
 	<h3>Twitter</h3>
-        <div class="clearfix">
+        <div class="twitter-block clearfix">
           <?php	echo strtr(Configure::read('twitter.tweets_around_city'),array(
     					'##CITY_NAME##' => ucwords($city_name),
     				));
