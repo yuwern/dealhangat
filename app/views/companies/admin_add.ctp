@@ -14,6 +14,8 @@
 		echo $this->Form->input('phone',array('label' => __l('Phone')));
 		echo $this->Form->input('url',array('label' => __l('URL'), 'info' => __l('eg. http://www.example.com')));
 		echo $this->Form->input('User.email',array('label' => __l('Email')));
+		echo $this->Form->input('operating_hours_ms',array('label' => __l('Operating Hours Malay')));		
+		echo $this->Form->input('operating_hours',array('label' => __l('Operating Hours')));		
 		echo $this->Form->input('is_online_account',array('label' =>__l('Online Account'), 'info' => __l('Only online company can login and make payment via site. Offline company can process manually. ')));
 	?>
 	</fieldset>

@@ -9,8 +9,8 @@ class Deal extends AppModel
                 'name'
             )
         ) ,
+		'i18n'=> array('fields' => array('name','description', 'coupon_condition','coupon_highlights', 'comment', 'private_note'))
     );
-    //$validate set in __construct for multi-language support
     //The Associations below have been created with all possible keys, those that are not needed can be removed
     public $belongsTo = array(
         'User' => array(
@@ -31,6 +31,14 @@ class Deal extends AppModel
         'DealStatus' => array(
             'className' => 'DealStatus',
             'foreignKey' => 'deal_status_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'counterCache' => true
+        ),
+        'DealCategory' => array(
+            'className' => 'DealCategory',
+            'foreignKey' => 'deal_category_id',
             'conditions' => '',
             'fields' => '',
             'order' => '',
@@ -227,6 +235,21 @@ class Deal extends AppModel
                 'allowEmpty' => false,
                 'message' => __l('Required')
             ) ,
+            'name_ms' => array(
+                'rule' => 'notempty',
+                'allowEmpty' => false,
+                'message' => __l('Required')
+            ) ,
+			'coupon_condition_ms' => array(
+                'rule' => 'notempty',
+                'allowEmpty' => false,
+                'message' => __l('Required')
+            ) ,
+			'coupon_highlights_ms' => array(
+                'rule' => 'notempty',
+                'allowEmpty' => false,
+                'message' => __l('Required')
+            ) ,			
             'original_price' => array(
                 'rule2' => array(
                     'rule' => array(
@@ -413,7 +436,13 @@ class Deal extends AppModel
                 'rule' => 'numeric',
                 'allowEmpty' => false,
                 'message' => __l('Required')
-            ) ,
+            ) ,            
+			'deal_category_id' => array(
+                'rule' => 'numeric',
+                'allowEmpty' => false,
+                'message' => __l('Required')
+            ) ,           
+
             'deal_status_id' => array(
                 'rule' => 'numeric',
                 'allowEmpty' => false,
@@ -480,7 +509,7 @@ class Deal extends AppModel
                 'allowEmpty' => false,
                 'message' => __l('Required')
             ) ,
-            'description' => array(
+            'description_ms' => array(
                 'rule' => 'notempty',
                 'allowEmpty' => false,
                 'message' => __l('Required')

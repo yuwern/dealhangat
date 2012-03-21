@@ -90,6 +90,9 @@ class UsersController extends AppController
         'User.is_show_new_card',
         'User.f',
         'User.profile_image_id',
+		'User.username',
+		'User.passwd',
+		'User.is_remember'
     );
 
     public function beforeFilter()
@@ -101,6 +104,10 @@ class UsersController extends AppController
         parent::beforeFilter();
         $this->disableCache();
     }
+	function login_popup(){
+		$this->layout=false;
+		$this->set('type','ajax');
+	}
     public function view($username = null)
     {
         $this->pageTitle = __l('User');
@@ -463,7 +470,26 @@ class UsersController extends AppController
                         $this->request->data['User']['user_type_id'] = ConstUserTypes::Company;
                     }
                     if ($this->User->save($this->request->data, false)) {
-                        $this->User->_createCimProfile($this->User->getLastInsertId());
+						if(!empty($this->request->data['UserProfile']['city_id'])){
+							$this->request->data['Subscription']['city_id']=$this->request->data['UserProfile']['city_id'];
+						}
+						$subscription = $this->User->Subscription->find('first', array(
+							'conditions' => array(
+								'Subscription.email' => $this->request->data['Subscription']['email'],
+								'Subscription.city_id' => $this->request->data['Subscription']['city_id']
+							) ,
+							'fields' => array(
+								'Subscription.id',
+								'Subscription.is_subscribed'
+							) ,
+							'recursive' => - 1
+						));						
+						$this->request->data['Subscription']['user_id']=$this->User->getLastInsertId();
+						$this->request->data['Subscription']['email']=$this->request->data['User']['email'];
+						if(empty($subscription)){
+							$this->User->Subscription->save($this->request->data, false);
+                        }
+						$this->User->_createCimProfile($this->User->getLastInsertId());
                         if (!empty($type)) {
                             if (!empty($this->request->data['City']['name'])) {
                                 $this->request->data['UserProfile']['city_id'] = $this->request->data['Company']['city_id'] = !empty($this->request->data['City']['id']) ? $this->request->data['City']['id'] : $this->User->Company->City->findOrSaveAndGetId($this->request->data['City']['name']);
@@ -1807,6 +1833,9 @@ class UsersController extends AppController
         if (!empty($this->request->params['named']['type']) and $this->request->params['named']['type'] == 'openid' && (Configure::read('user.is_enable_openid') || Configure::read('user.is_enable_gmail_openid') || Configure::read('user.is_enable_yahoo_openid'))) {
             $this->render('login_openid');
         }
+		if ($this->RequestHandler->isAjax()) {
+			$this->render('login_popup');
+		}
     }
 	public function fs_oauth_callback()
     {

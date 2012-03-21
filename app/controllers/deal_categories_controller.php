@@ -2,7 +2,19 @@
 class DealCategoriesController extends AppController
 {
     public $name = 'DealCategories';
-    public function admin_index()
+   public function beforeFilter()
+    {
+        $this->Security->disabledFields = array(
+            'DealCategory.index',
+        );
+        parent::beforeFilter();
+    }	
+    public function index()
+    {
+		$categories=$this->DealCategory->find('all');
+        $this->set('dealCategories', $categories);
+    }    
+	public function admin_index()
     {
         $this->_redirectGET2Named(array(
             'q'
@@ -41,8 +53,8 @@ class DealCategoriesController extends AppController
                 $this->Session->setFlash(__l('Deal subscription category could not be added. Please, try again.') , 'default', null, 'error');
             }
         }
-        $subscriptions = $this->DealCategory->Subscription->find('list');
-        $this->set(compact('subscriptions'));
+     //   $subscriptions = $this->DealCategory->Subscription->find('list');
+    //    $this->set(compact('subscriptions'));
     }
     public function admin_edit($id = null)
     {
@@ -60,14 +72,15 @@ class DealCategoriesController extends AppController
                 $this->Session->setFlash(__l('Deal subscription category could not be updated. Please, try again.') , 'default', null, 'error');
             }
         } else {
-            $this->request->data = $this->DealCategory->read(null, $id);
+            $this->DealCategory->Behaviors->detach('i18n');
+			$this->request->data = $this->DealCategory->read(null, $id);
             if (empty($this->request->data)) {
                 throw new NotFoundException(__l('Invalid request'));
             }
         }
         $this->pageTitle.= ' - ' . $this->request->data['DealCategory']['name'];
-        $subscriptions = $this->DealCategory->Subscription->find('list');
-        $this->set(compact('subscriptions'));
+      //  $subscriptions = $this->DealCategory->Subscription->find('list');
+      //  $this->set(compact('subscriptions'));
     }
     public function admin_delete($id = null)
     {

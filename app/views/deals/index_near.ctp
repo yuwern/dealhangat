@@ -170,7 +170,7 @@
                     ?>
                                        <?php elseif($deal['Deal']['deal_status_id'] == ConstDealStatus::Closed || $deal['Deal']['deal_status_id'] == ConstDealStatus::Canceled || $deal['Deal']['deal_status_id'] == ConstDealStatus::Expired || $deal['Deal']['deal_status_id'] == ConstDealStatus::PaidToCompany): ?>
                         <dl class="near-dl-list clearfix">
-                            <dt><?php echo __l('This deal ended at:');?></dt>
+                            <dt><?php //echo __l('This deal ended at:');?></dt>
                             <dd><?php echo $this->Html->cDateTime($deal['Deal']['end_date'])?></dd>
                          </dl>
                     <?php endif; ?>

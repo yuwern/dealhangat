@@ -9,6 +9,7 @@ class Company extends AppModel
                 'name'
             )
         ) ,
+		'i18n'=> array('fields' => array('operating_hours'))
     );
     //$validate set in __construct for multi-language support
     //The Associations below have been created with all possible keys, those that are not needed can be removed

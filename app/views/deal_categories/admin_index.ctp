@@ -36,7 +36,7 @@ foreach ($dealCategories as $dealCategory):
 		<td class="actions">
 		<div class="actions-block">
 			<div class="actions round-5-left">
-						<span><?php echo $this->Html->link(__l('Edit'), array('action' => 'edit', $dealCategory['DealCategory']['id']), array('class' => 'edit js-edit', 'title' => __l('Edit')));?></span> <span><?php echo $this->Html->link(__l('Delete'), array('action' => 'delete', $dealCategory['DealCategory']['id']), array('class' => 'delete js-delete', 'title' => __l('Delete')));?></span>
+						<span><?php echo $this->Html->link(__l('Edit'), array('controler'=> 'deal_categories','action' => 'edit', $dealCategory['DealCategory']['id']), array('class' => 'edit js-edit', 'title' => __l('Edit')));?></span> <span><?php echo $this->Html->link(__l('Delete'), array('action' => 'delete', $dealCategory['DealCategory']['id']), array('class' => 'delete js-delete', 'title' => __l('Delete')));?></span>
 		</div>
 					</div>
 					<?php echo $this->Form->input('DealCategory.'.$dealCategory['DealCategory']['id'].'.id', array('type' => 'checkbox', 'id' => "admin_checkbox_".$dealCategory['DealCategory']['id'], 'label' => false, 'class' => 'js-checkbox-list')); ?>

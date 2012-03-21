@@ -307,7 +307,13 @@
 		.mouseout(function () { $(this).removeClass(hover); });
 		
 		// Cache values needed for size calculations
+		var url = document.URL;
+		var param = document.URL.split('/');
+		if(param[3]=='welcome_to_dealhangat' || param[4]=='welcome_to_dealhangat' || param[4]=='' || param[3]==''){
+		interfaceHeight = $topBorder.height() + $bottomBorder.height() + $content.outerHeight(TRUE) - $content.height()-50;//Subtraction needed for IE6
+		}else{
 		interfaceHeight = $topBorder.height() + $bottomBorder.height() + $content.outerHeight(TRUE) - $content.height();//Subtraction needed for IE6
+		}
 		interfaceWidth = $leftBorder.width() + $rightBorder.width() + $content.outerWidth(TRUE) - $content.width();
 		loadedHeight = $loaded.outerHeight(TRUE);
 		loadedWidth = $loaded.outerWidth(TRUE);

@@ -220,11 +220,15 @@ class I18nBehavior extends ModelBehavior
     function _localizeScheme($model, $locale, $recursive, &$relation = null)
     {
         $model->locale = $locale;
-        if (isset($model->Behaviors->i18n) && isset($model->Behaviors->i18n->fields[$model->alias])) {
+        if (isset($model->Behaviors->i18n) && isset($model->Behaviors->i18n->fields[$model->alias])&& !empty($model->Behaviors->i18n->fields[$model->alias])) {
             foreach($model->Behaviors->i18n->fields[$model->alias] as $configName => & $configAlias) {
                 //ammend schema and store in config localized field name <name>_<locale> or <name>_def
                 $foundSpecific = false;
-                foreach($model->_schema as $shemaName => $v) {
+				//pr($model->_schema);
+                if(!empty($model->_schema)){
+				foreach($model->_schema as $shemaName => $v) {
+				//pr($v);
+			//	echo $shemaName.'-'.'-'.$configName.'</br>';
                     if (strpos('_' . $shemaName, $configName) == 1) { //is one of i18n fields
                         if ($configName . '_' . $this->default_langauge != $shemaName) { //not for default locale
                             if ($configName . '_' . $locale != $shemaName) { //not for current locale
@@ -234,11 +238,13 @@ class I18nBehavior extends ModelBehavior
                             } else {
                                 $foundSpecific = true;
                                 $configAlias = $configName . '_' . $locale;
+								echo $configAlias.'config alias';
                             }
                         }
                     }
                 }
-                /*	foreach($model->_schema as $shemaName => $v) {
+                }
+				/*	foreach($model->_schema as $shemaName => $v) {
                 if (strpos('_'.$shemaName, $configName) == 1) { //is one of i18n fields
                 if ($configName.'_'.DEFAULT_LANGUAGE != $shemaName) { //not for default locale
                 if ($configName.'_'.$locale != $shemaName) { //not for current locale
@@ -257,7 +263,7 @@ class I18nBehavior extends ModelBehavior
                     unset($model->_schema[$configName . '_' . $this->default_langauge]);
                 } else {
                     // siva_43ag07 // fixed to take 'name' field from database when DEFAULT_LANGUAGE is NULL
-                    if ($this->default_langauge != '' and array_key_exists($configName . '_' . $this->default_langauge, $model->_schema)) {
+                    if ($this->default_langauge != '' and !empty($model->_schema) and array_key_exists($configName . '_' . $this->default_langauge, $model->_schema)) {
                         $configAlias = $configName . '_' . $this->default_langauge;
                     } else {
                         $configAlias = $configName;

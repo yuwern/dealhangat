@@ -94,31 +94,38 @@
 				<?php echo $this->Form->end(); ?>
 			</div>
 		<?php elseif(preg_match('/subscribe/s',$this->request->url) ): ?>
-		<h2><?php echo $city_name ;?> <?php echo __l('Deal of the Day'); ?></h2>
-			<div class="form subscriptions-add">
-				<?php echo $this->Form->create('Subscription', array('id' => 'homeSubscriptionFrom', 'class' => 'normal'));?>
-					<h2 class="welcome-head"> <?php echo __l('Welcome to').' ';?><span><?php echo Configure::read('site.name'); ?></span></h2>
-						<div class="subscriptions-content">
-							<?php echo sprintf(__l('Every day, %s e-mails you one exclusive offer to do, see, taste, or experience something amazing in').' '.$city_name.' '.__l('at an unbeatable price.'),Configure::read('site.name')); ?>
-						</div>
-						
-						<div class="subscriptions-content-form round-10 clearfix">
-						<div class="signup-content"><?php echo __l('Sign up now for free, and prepare to discover') . ' ' . $city_name . ' ' . __l('at 40% to 90% off! '); ?></div>
-						<div class="clearfix">
-							<?php echo $this->Form->input('email',array('id' => 'homeEmail', 'label' => __l('Enter your Email address:'))); ?>
-							<?php echo $this->Form->input('city_id',array('id' => 'homeCityId', 'label' => __l('Choose your city:'), 'options' => $cities)); ?>
-								<div class="clearfix">
-							<?php echo $this->Form->submit(__l('Subscribe'));?>
-							</div>
-						</div>
-						<p class="subcription-info"><?php echo __l('(We\'ll never share your e-mail address) '); ?></p>
-						</div>
-
-						<?php echo $this->Form->end(); ?>
-							<div class="subscriptions-content subscriptions-offer-info">
-						<?php echo __l('Our daily offers are for:'); ?>
-						<?php echo __l('Restaurants, Spas, Concerts, Bars, Sporting Events, Classes, Salons,Adventures and so much more... '); ?>
-						</div>
+	<?php if(!empty($this->params['isAjax'])):?>
+			<div class="pop">
+    <?php else:?>
+			<div class="pop js-responses">
+    <?php endif;?>
+			  <div class="pop-bor">
+				<div class="rip"><?php echo __l('Welcome to');?></div>
+				  <p class="a-center"><?php echo $this->Html->image('login/pop_logo.png', array('width'=>180, 'height'=>87));?></p>
+				<p class="pop-text"><?php echo __l('Every day, DealHangat will e-mail you an amazing exclusive offers in Kuala Lumpur at unbeatable prices. Our daily deals are: Halal Restaurant, Spa, Concerts, Sporting Events, Classes, Salon, and more ...'); ?></p>
+				  <ul class="icon-list">
+					<li><?php echo $this->Html->image('login/icon1.png');?></li>
+					<li><?php echo $this->Html->image('login/icon2.png');?></li>
+					<li><?php echo $this->Html->image('login/icon3.png');?></li>
+					<li><?php echo $this->Html->image('login/icon4.png');?></li>
+					<li><?php echo $this->Html->image('login/icon5.png');?></li>
+					<li><?php echo $this->Html->image('login/icon6.png');?></li>
+					<li><?php echo $this->Html->image('login/icon7.png');?></li>
+					<li><?php echo $this->Html->image('login/icon8.png');?></li>
+					<li><?php echo $this->Html->image('login/icon9.png');?></li>
+				  </ul>
+					<div class="pop_login">
+						<?php echo $this->Form->create('Subscription', array('id' => 'homeSubscriptionFrom', 'class' => 'normal js-ajax-cb-form'));?>
+						<ul>
+							<li><?php echo $this->Form->input('email',array('id' => 'homeEmail', 'class'=>'js-home-email','div'=>false,'label' => __l('Enter your Email address:'))); ?></li>
+							<li><?php echo $this->Form->input('city_id',array('id' => 'homeCityId', 'div'=>false, 'label' => __l('Choose your city:'), 'options' => $cities)); ?></li>
+							<li>(<?php echo __l('We will never share your email address'); ?>)</li>
+							<li><?php echo $this->Form->submit(__l('Subscribe'));?></li>
+						</ul>
+					 <?php echo $this->Form->end(); ?>
+				  </div>
+				</div>
+			</div>							
 			</div>
 		<?php else: ?> 
 			<div class="subscriptions form clearfix">			

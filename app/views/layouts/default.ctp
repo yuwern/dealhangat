@@ -63,6 +63,46 @@ if (strpos(env('HTTP_USER_AGENT'), 'facebookexternalhit')===false):
 endif;
 // <--
 ?>
+	<script type="text/javascript">
+	// <![CDATA[
+		var timeout    = 50;
+		var closetimer = 0;
+		var ddmenuitem = 0;
+		
+		function ddmenu_open(){
+			ddmenu_canceltimer();
+		   	ddmenu_close();
+		   	ddmenuitem = $(this).find('ul').css('visibility', 'visible');
+		}
+		
+		function ddmenu_close(){ 
+			if(ddmenuitem) ddmenuitem.css('visibility', 'hidden');
+		}
+		
+		function ddmenu_timer(){
+			closetimer = window.setTimeout(ddmenu_close, timeout);
+		}
+		
+		function ddmenu_canceltimer(){  
+			if(closetimer){  
+				window.clearTimeout(closetimer);
+		        closetimer = null;
+		}}
+		
+		$(document).ready(function(){  
+			$('#ddmenu > li').bind('mouseover', ddmenu_open)
+		    $('#ddmenu > li').bind('mouseout',  ddmenu_timer)
+		});
+		
+		document.onclick = ddmenu_close;
+		
+		$(document).ready(function(){
+		$("ul#ddmenu").superfish({
+			pathClass:  'current'
+		});
+	});
+	// ]]>  
+	</script>
 </head>
 
 <?php	
@@ -264,9 +304,18 @@ endif;
         
       
       <div class="menu-block clearfix">
-        <ul class="menu clearfix">
+        <ul class="menu clearfix" id='ddmenu'>
         	<?php if($this->Html->isAllowed($this->Auth->user('user_type_id'))): ?>
-                <li <?php if($this->request->params['controller'] == 'deals' && $this->request->params['action'] == 'index' && !isset($this->request->params['named']['type']) && !isset($this->request->params['named']['company'])) { echo 'class="active"'; } ?>><?php echo $this->Html->link(__l('Today\'s Deals'), array('controller' => 'deals', 'action' => 'index', 'admin' => false), array('title' => __l('Today\'s Deals')));?></li>
+                <li <?php if($this->request->params['controller'] == 'deals' && $this->request->params['action'] == 'index' && !isset($this->request->params['named']['type']) && !isset($this->request->params['named']['company'])) { echo 'class="active"'; } ?>><?php echo $this->Html->link(__l('Today\'s Deals'), array('controller' => 'deals', 'action' => 'index', 'type'=>'all', 'admin' => false), array('title' => __l('Today\'s Deals'), 'class'=>'current'));?>
+					<ul>
+							<?php 
+							$category='';
+							if(!empty($this->params['named']['category'])){
+								$category=$this->params['named']['category'];
+							}
+							echo $this->element("view_category", array('category' => $category));?>
+					</ul>				
+				</li>
                 <li <?php if($this->request->params['controller'] == 'deals' && (isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'recent')) { echo 'class="active"'; } else { echo 'class=""';}?>><?php echo $this->Html->link(__l('Recent Deals'), array('controller' => 'deals', 'action' => 'index', 'admin' => false,'type' => 'recent'), array('title' => __l('Recent Deals')));?></li>
                 <li <?php if($this->request->params['controller'] == 'deals' && (isset($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime')) { echo 'class="virtual-store"'; } else { echo 'class="virtual-store"';}?>><?php echo $this->Html->link(__l('Virtual Store'), array('controller' => 'deals', 'action' => 'index', 'admin' => false,'type' => 'anytime'), array('title' => __l('Virtual Store')));?></li>
             <?php endif; ?>

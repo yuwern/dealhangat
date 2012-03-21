@@ -114,8 +114,10 @@ class DealsController extends AppController
     }
     public function index($city_slug = null)
     {
-        $has_near_by_deal = 0;
+		$has_near_by_deal = 0;
 		$sub_title = '';
+		//pr($this->request->params);
+		//die;
         // subdeal add redirect changes
         if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'success') {
             if ($this->Session->read('Deal.id')) {
@@ -144,6 +146,7 @@ class DealsController extends AppController
         if (!empty($this->request->data['Deal']['type'])) {
             $this->request->params['named']['type'] = $this->request->data['Deal']['type'];
         }
+        //category serach add
         $limit = (!empty($this->paginate['limit'])) ? $this->paginate['limit'] : 20;
         $city_conditions = array();
         if (!empty($this->request->params['named']['filter_id'])) {
@@ -178,7 +181,10 @@ class DealsController extends AppController
         if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'success') {
             $this->Session->setFlash(__l('Deal has been added.') , 'default', null, 'success');
         }
-        if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'near') {
+		if (!empty($this->params['named']['category'])) {
+            $conditions['Deal.deal_category_id'] = $this->params['named']['category'];
+        }		
+        if ((!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'near')||!empty($this->request->params['named']['category'])) {
             if (@$_SESSION['maxmaind_latitude'] == '') {
                 $this->setMaxmindInfo();
             }
@@ -229,7 +235,7 @@ class DealsController extends AppController
         } else {
             //home page deals
             if (empty($this->request->params['named']['company'])) {
-                $city_slug = $this->request->params['named']['city'];
+                $city_slug = (!empty($_COOKIE['CakeCookie']['city_slug'])) ? $_COOKIE['CakeCookie']['city_slug'] : Cache::read('site.default_city', 'long');
                 $city = $this->Deal->City->find('first', array(
                     'conditions' => array(
                         'City.slug' => $city_slug
@@ -311,7 +317,15 @@ class DealsController extends AppController
             $conditions['Deal.is_anytime_deal'] = 1;
             $this->pageTitle = __l('Virtual Store');
 			$sub_title = __l('Virtual Store');
-        } elseif (empty($this->request->params['named']['company'])) {
+        } elseif (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'all' || !empty($this->request->params['named']['category'])) {
+			$this->pageTitle = __l('All Deals');
+			$sub_title = __l('All Deals');
+			$conditions['Deal.is_anytime_deal'] = 0;
+            $conditions['Deal.deal_status_id'] = array(
+                ConstDealStatus::Open,
+                ConstDealStatus::Tipped,
+            );
+        }elseif (empty($this->request->params['named']['company'])) {
             /*if (Configure::read('deal.is_side_deal_enabled')) {
                 $conditions['Deal.is_side_deal'] = 0;
             }*/
@@ -405,10 +419,12 @@ class DealsController extends AppController
                     'fields' => array(
                         'Company.name',
                         'Company.slug',
+						'Company.phone',
                         'Company.id',
                         'Company.user_id',
                         'Company.url',
                         'Company.zip',
+                        'Company.operating_hours',
                         'Company.address1',
                         'Company.address2',
                         'Company.city_id',
@@ -733,7 +749,9 @@ class DealsController extends AppController
                 $this->render('index_recent_deals');
             } else if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'anytime') {
                 $this->render('index_anytime_deals');
-            }
+            }else if (!empty($this->request->params['named']['type']) && $this->request->params['named']['type'] == 'all' || !empty($this->request->params['named']['category'])) {
+                $this->render('index_all_deals');
+            }			
         }
 		if (!$this->RequestHandler->prefers('json')) {
 			if ((empty($this->request->params['named']['type']) || ($this->request->params['named']['type'] != 'geocity' && $this->request->params['named']['type'] != 'recent' && empty($this->request->params['named']['view']))) && empty($this->request->params['named']['company']) && ((!empty($deals) && (!isset($_COOKIE['CakeCookie']['is_subscribed']) && !$this->Auth->user() && Configure::read('site.enable_three_step_subscription'))) || empty($deals))) {
@@ -1074,7 +1092,9 @@ class DealsController extends AppController
                         'Company.user_id',
                         'Company.url',
                         'Company.zip',
-                        'Company.address1',
+                        'Company.operating_hours',
+                        'Company.phone',
+						'Company.address1',
                         'Company.address2',
                         'Company.city_id',
                         'Company.latitude',
@@ -1383,6 +1403,7 @@ class DealsController extends AppController
                 if (empty($this->request->data['Deal']['is_subdeal_available'])) {
                     $this->request->data['Deal']['sub_deal_count'] = 0;
                 }
+				$this->Deal->Behaviors->detach('i18n');
                 if ($this->Deal->save($this->request->data)) {
                     // normal deal that delete subdeals
                     if (empty($this->request->data['Deal']['is_subdeal_available'])) {
@@ -1564,6 +1585,7 @@ class DealsController extends AppController
                 $this->set('company_slug', $companyUser['Company']['slug']);
             }
             $conditions['Deal.id'] = $id;
+			$this->Deal->Behaviors->detach('i18n');
             $this->request->data = $this->Deal->find('first', array(
                 'conditions' => array(
                     $conditions,
@@ -1651,6 +1673,8 @@ class DealsController extends AppController
             'recursive' => - 1
         ));
         $this->set('subdeal', $subdeal);
+		$categories = $this->Deal->DealCategory->find('list');
+        $this->set(compact('cities','categories'));
         // Getting branch address for listing information //
         $company_id = (!empty($this->request->data['Deal']['company_id']) ? $this->request->data['Deal']['company_id'] : $company['Company']['id']);
         $branch_addresses = $this->Deal->getBranchAddresses($company_id);
@@ -1742,6 +1766,7 @@ class DealsController extends AppController
 				if(empty($this->request->data['Attachment']) && !$this->RequestHandler->isAjax()){
 			        $this->Deal->Behaviors->detach('ImageUpload');
 				}
+				$this->Deal->Behaviors->detach('i18n');
                 $this->Deal->save($this->request->data);
                 $deal_id = $this->Deal->getLastInsertId();
                 // Saving listing locations //
@@ -2024,7 +2049,8 @@ class DealsController extends AppController
             ));
             $this->set(compact('charities'));
         }
-        $this->set(compact('cities'));
+		$categories = $this->Deal->DealCategory->find('list');
+        $this->set(compact('cities','categories'));
         // Getting branch address for listing information //
         $companyid = (!empty($company['Company']['id']) ? $company['Company']['id'] : '');
         $company_id = (!empty($this->request->data['Deal']['company_id']) ? $this->request->data['Deal']['company_id'] : $companyid);
@@ -2598,6 +2624,7 @@ class DealsController extends AppController
                 if (empty($this->request->data['Deal']['is_subdeal_available'])) {
                     $this->request->data['Deal']['sub_deal_count'] = 0;
                 }
+				$this->Deal->Behaviors->detach('i18n');
                 if ($this->Deal->save($this->request->data)) {
                     if (empty($this->request->data['Deal']['is_subdeal_available'])) {
                         $this->Deal->deleteAll(array(
@@ -2740,6 +2767,7 @@ class DealsController extends AppController
                 }
             }
         } else {
+			$this->Deal->Behaviors->detach('i18n');
             $this->request->data = $this->Deal->find('first', array(
                 'conditions' => array(
                     'Deal.id' => $id
@@ -2839,6 +2867,8 @@ class DealsController extends AppController
         $this->set('subdeal', $subdeal);
         $companyid = (!empty($company['Company']['id']) ? $company['Company']['id'] : '');
         $company_id = (!empty($this->request->data['Deal']['company_id']) ? $this->request->data['Deal']['company_id'] : $companyid);
+		$categories = $this->Deal->DealCategory->find('list');
+        $this->set(compact('cities','categories'));
         $branch_addresses = $this->Deal->getBranchAddresses($company_id);
         $this->set('branch_addresses', $branch_addresses);
     }
@@ -4273,7 +4303,9 @@ class DealsController extends AppController
     
     public function processpayment($gateway_name, $return_details = null)
     {
-        
+       $this->log($gateway_name);
+	$this->log($_REQUEST);
+	$this->log($return_details);
         $this->loadModel('TempPaymentLog');
         //paypal ipn
         $return_details = $_REQUEST;

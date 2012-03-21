@@ -29,7 +29,7 @@ $config['site']['_hashSecuredActions'] = array(
     'my_account',
     'view_gift_card'
 );
-$config['site']['domain'] = 'dealhangat.dyndns.biz';
+$config['site']['domain'] = 'staging.dealhangat.com';
 $config['photo']['file'] = array(
     'allowedMime' => array(
         'image/jpeg',

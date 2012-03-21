@@ -412,7 +412,7 @@
               <div class="block2-inner clearfix">
                 <div class="block2-l">
                    <h3><?php echo __l('Description');?></h3>
-                    <?php echo $this->Html->cHtml($deal['Deal']['description']);?>
+                    <?php echo html_entity_decode($this->Html->cHtml($deal['Deal']['description']));?>
 					<?php if(Configure::read('charity.is_enabled') == 1 && $deal['Deal']['charity_percentage'] > 0):?>
                     <div class="charity-block clearfix">
                     	<h3><?php echo __l('Charity');?></h3>
@@ -514,8 +514,10 @@
                      <?php if($deal['Deal']['is_redeem_in_main_address'] == 1) : ?>
                             <address>
                             <?php echo $this->Html->cText($deal['Company']['address1']);?>
+                            <?php echo $this->Html->cText($deal['Company']['address2']);?>							
                             <?php echo !empty($deal['Company']['City']['name']) ? $this->Html->cText($deal['Company']['City']['name']) : '';?><?php echo !empty($deal['Company']['State']['name']) ? $this->Html->cText($deal['Company']['State']['name']) : '';?> <?php echo $this->Html->cText($deal['Company']['zip']);?>
-                            </address>
+
+							</address>
         			<?php endif; ?>
 				   <?php if(!empty($deal['Company']['CompanyAddress'])):?>
                             <div class="map-info-r">
@@ -551,7 +553,11 @@
                             </ol>
                        </div>
      			  <?php endif; ?>
-				 
+				  <ol>
+								<li><?php echo __l('Telephone');?>:<?php echo $deal['Company']['phone'];?></li>
+								<li><?php echo __l('Working Hours');?>:<?php echo $deal['Company']['operating_hours'];?></li>
+								<li><span title="<?php echo __l('Lat');?>:<?php echo $deal['Company']['longitude'];?><?php echo __l('Long:');?><?php echo $deal['Company']['latitude'];?>"><?php echo __l('GPS');?> </span></li>
+</ol>				 
                     <div class="map-block">
             			<?php $map_zoom_level = !empty($deal['Company']['map_zoom_level']) ? $deal['Company']['map_zoom_level'] : Configure::read('GoogleMap.static_map_zoom_level');?>
             			<?php

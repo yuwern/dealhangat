@@ -59,14 +59,15 @@ if (Cache::read('site.city_url', 'long') == 'prefix') {
 	} else{
 		Router::connect('/', array(
 			'controller' => 'deals',
-			'action' => 'index'
+			'action' => 'index',
 		) , array(
 			'city' => '(?!' . $controllers . ')[^\/]*'
 		));
 	}
 	Router::connect('/:city', array(
 		'controller' => 'deals',
-		'action' => 'index'
+		'action' => 'index',
+		'type' => 'all'
 	) , array(
 		'city' => '(?!' . $controllers . ')[^\/]*'
 	));
@@ -197,6 +198,13 @@ if (Cache::read('site.city_url', 'long') == 'prefix') {
     ) , array(
         'city' => '(?!' . $controllers . ')[^\/]*'
     ));
+    Router::connect('/:city/deals/all', array(
+        'controller' => 'deals',
+        'action' => 'index',
+        'type' => 'all'
+    ) , array(
+        'city' => '(?!' . $controllers . ')[^\/]*'
+    ));	
     Router::connect('/:city/deals/anytime', array(
         'controller' => 'deals',
         'action' => 'index',
@@ -317,7 +325,7 @@ if (Cache::read('site.city_url', 'long') == 'prefix') {
 	Router::connect('/welcome_to_'.$site_name, array(
         'controller' => 'deals',
         'action' => 'index',
-		'type' => 'geocity'
+		'type' => 'all'
     ));
 }
 if (Cache::read('site.city_url', 'long') == 'subdomain') {
@@ -365,6 +373,13 @@ if (Cache::read('site.city_url', 'long') == 'subdomain') {
     ) , array(
         'city' => '[^\/]*'
     ));
+    Router::connect('/deals/all/city::city', array(
+        'controller' => 'deals',
+        'action' => 'index',
+        'type' => 'all'
+    ) , array(
+        'city' => '[^\/]*'
+    ));	
     Router::connect('/deals/company/:company/city::city', array(
         'controller' => 'deals',
         'action' => 'index',

@@ -29,6 +29,8 @@
 			<?//php echo $this->Html->link($this->Html->showImage('Deal', $this->request->data['Attachment'][0], array('dimension' => 'normal_thumb', 'alt' => sprintf(__l('[Image: %s]'), $this->Html->cText($this->request->data['Deal']['name'], false)), 'title' => $this->Html->cText($this->request->data['Deal']['name'], false))), array('controller' => 'deals', 'action' => 'view',  $deal['Deal']['slug'], 'admin' => false), null, array('inline' => false)); ?>
 			<?php
 				echo $this->Form->input('id');
+				echo $this->Form->input('deal_category_id', array('empty'=>'Select', 'options'=>$categories));
+				echo $this->Form->input('name_ms',array('label' => __l('Name Malay')));
 				echo $this->Form->input('name',array('label' => __l('Name')));
 				echo $this->Form->input('company_id', array('label' => __l('Company'),'empty' => 'Please Select'));
 			?>
@@ -172,10 +174,11 @@
 	   <fieldset class="form-block round-5">
 			<legend class="round-5"><?php echo __l('Description'); ?></legend>
 			<?php
-				if($this->Auth->user('user_type_id') == ConstUserTypes::Admin):
+				/*if($this->Auth->user('user_type_id') == ConstUserTypes::Admin):
 					echo $this->Form->input('private_note', array('type' =>'textarea', 'label' => __l('Private Note'), 'info' => __l('This is for admin reference. It will not be displayed for other users.')));
-				endif;
+				endif;*/
 			?>
+			<?php echo $this->Form->input('description_ms', array('label' => __l('Description Malay'),'type' =>'textarea', 'class' => 'js-editor'));?>
 			<?php echo $this->Form->input('description', array('label' => __l('Description'),'type' =>'textarea', 'class' => 'js-editor'));?>
        </fieldset>
     </div> 
@@ -297,19 +300,23 @@
             
             
 		</fieldset>
-	   <fieldset class="form-block round-5">
+	   <!--fieldset class="form-block round-5">
         <legend class="round-5"><?php echo __l('Review'); ?></legend>
 		<?php
 			//echo $this->Form->input('Attachment.filename', array('type' => 'file', 'label' => __l('Product Image')));
-			echo $this->Form->input('review', array('label' => __l('Review'),'type' =>'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('review_ms', array('label' => __l('Review Malay'),'type' =>'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('review', array('label' => __l('Review'),'type' =>'textarea', 'class' => 'js-editor'));
 		?>
-		</fieldset>
+		</fieldset-->
         <fieldset class="form-block round-5">
         <legend class="round-5"><?php echo __l('Coupon'); ?></legend>
 		<?php
-			echo $this->Form->input('coupon_condition', array('label' => __l('Coupon Condition'),'type' =>'textarea', 'class' => 'js-editor'));
+			echo $this->Form->input('coupon_condition_ms', array('label' => __l('Coupon Condition Malay'),'type' =>'textarea', 'class' => 'js-editor'));
+			echo $this->Form->input('coupon_condition', array('label' => __l('Coupon Condition '),'type' =>'textarea', 'class' => 'js-editor'));
+			echo $this->Form->input('coupon_highlights_ms', array('label' => __l('Coupon Highlights Malay'),'type' =>'textarea', 'class' => 'js-editor'));
 			echo $this->Form->input('coupon_highlights', array('label' => __l('Coupon Highlights'),'type' =>'textarea', 'class' => 'js-editor'));
-			echo $this->Form->input('comment', array('label' => __l('Comment'),'type' =>'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('comment_ms', array('label' => __l('Comment Malay'),'type' =>'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('comment', array('label' => __l('Comment'),'type' =>'textarea', 'class' => 'js-editor'));
 		?>
         </fieldset>
         <fieldset class="form-block round-5">

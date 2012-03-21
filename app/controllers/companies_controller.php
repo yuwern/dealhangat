@@ -297,6 +297,7 @@ class CompaniesController extends AppController
             //pr($this->Company->City->validates());
             unset($this->Company->City->validate['City']);
             if ($this->Company->validates() && $this->Company->State->validates() && $this->Company->City->validates() && $this->Company->User->UserAvatar->validates() && $ini_upload_error) {
+				$this->Company->Behaviors->detach('i18n');
                 if ($this->Company->save($this->request->data, false)) {
                     if (!empty($this->request->data['UserProfile']['language_id'])) {
                         $this->Company->User->UserProfile->updateAll(array(
@@ -343,6 +344,7 @@ class CompaniesController extends AppController
             }
         } 
 		unset($this->Company->City->validate['City']);
+		$this->Company->Behaviors->detach('i18n');
 		$this->request->data = $this->Company->find('first', array(
 			'conditions' => array(
 				'Company.id = ' => $id,
@@ -626,6 +628,7 @@ class CompaniesController extends AppController
                         $this->Company->User->UserProfile->save($this->request->data);
                     }
                 }
+				$this->Company->Behaviors->detach('i18n');
                 if ($this->Company->save($this->request->data)) {
                     if (!empty($this->request->data['Company']['is_online_account'])) {
                         $email = $this->EmailTemplate->selectTemplate('Admin User Add');
@@ -712,6 +715,7 @@ class CompaniesController extends AppController
                 unset($this->Company->User->validate['email']['rule3']);
             }
             if ($this->Company->validates() && $this->Company->City->validates() && $this->Company->State->validates() && $this->Company->User->validates()) {
+			$this->Company->Behaviors->detach('i18n');
                 if ($this->Company->save($this->request->data)) {
                     $company = $this->Company->find('first', array(
                         'fields' => array(
@@ -744,6 +748,7 @@ class CompaniesController extends AppController
                 $this->Session->setFlash(__l('Company could not be updated. Please, try again.') , 'default', null, 'error');
             }
         } else {
+			$this->Company->Behaviors->detach('i18n');
             $this->request->data = $this->Company->find('first', array(
                 'conditions' => array(
                     'Company.id ' => $id,

@@ -35,7 +35,8 @@
 <!-- Virtual Store --> 
   
 <!-- Today's Main Deals -->  
-  <?php  if(!empty($main_deals)): ?>
+  <?php  //if(!empty($main_deals) || (!(empty($this->params['named']['type']) and $this->params['named']['type'] != 'all'))):
+if(!empty($main_deals) && empty($this->params['named']['type']) || (isset($this->params['named']['type']) && $this->params['named']['type'] != 'all')):?>
   <div class="sidebar-deals">
   		<h3>
   			<?php echo $this->Html->link(__l("Today's Main Deals"), array('controller' => 'deals', 'action' => 'index', 'type' => 'main'),array('title' => __l("Today's Main Deals")), null, false);?>

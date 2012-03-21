@@ -41,7 +41,7 @@ class AppController extends Controller
         'Security',
         'Auth',
         'XAjax',
-        'DebugKit.Toolbar',
+       // 'DebugKit.Toolbar',
         'Cookie',
         'Pdf'
     );
@@ -66,9 +66,13 @@ class AppController extends Controller
     function beforeRender()
     {
 
-        $this->set('blocks_left', $this->Block->find('all', array('conditions' => array('Block.region' => 0, 'Block.lang' => Configure::read('lang_code')))));
+        /*$this->set('blocks_left', $this->Block->find('all', array('conditions' => array('Block.region' => 0, 'Block.lang' => Configure::read('lang_code')))));
         $this->set('blocks_right', $this->Block->find('all', array('conditions' => array('Block.region' => 1, 'Block.lang' => Configure::read('lang_code')))));
-        $this->set('blocks_bottom', $this->Block->find('all', array('conditions' => array('Block.region' => 2, 'Block.lang' => Configure::read('lang_code')))));
+        $this->set('blocks_bottom', $this->Block->find('all', array('conditions' => array('Block.region' => 2, 'Block.lang' => Configure::read('lang_code')))));*/
+ 		$this->set('blocks_left',array() );
+        	$this->set('blocks_right',array() );
+        	$this->set('blocks_bottom',array());
+
 
         $this->set('meta_for_layout', Configure::read('meta'));
         $this->set('js_vars_for_layout', (isset($this->js_vars)) ? $this->js_vars : '');
@@ -585,7 +589,8 @@ class AppController extends Controller
             'cities/autocomplete',
             'states/autocomplete',
             'users/admin_login',
-            'users/admin_logout',
+            'users/admin_login',
+            'users/login_popup',
             'languages/change_language',
             'subscriptions/add',
             'subscriptions/index',
@@ -623,6 +628,7 @@ class AppController extends Controller
             'users/validate_user',
 			'affiliates/widget',
             'deals/widget',
+			'deal_categories/index',
         );
         $cur_page = $this->request->params['controller'] . '/' . $this->request->params['action'];
         if (!in_array($cur_page, $exception_array) && $this->request->params['action'] != 'flashupload') {

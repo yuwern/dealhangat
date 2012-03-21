@@ -1,9 +1,9 @@
 <?php
 class SettingsController extends AppController
 {
-    public $components = array(
+    /*public $components = array(
         'Cookie'
-    );
+    );*/
     public function beforeFilter()
     {
         $this->Security->disabledFields = array(

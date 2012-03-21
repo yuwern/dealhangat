@@ -209,6 +209,45 @@ $.fx.speeds._default = 1000;
             return false;
         });
     };
+    $.fn.fajaxcbform = function() {
+        $(this).livequery('submit', function(e) {
+            var $this = $(this);
+            $this.block();
+            $this.ajaxSubmit( {
+                beforeSubmit: function(formData, jqForm, options) {
+                    $('input:file', jqForm[0]).each(function(i) {
+                        if ($('input:file', jqForm[0]).eq(i).val()) {
+                            options['extraData'] = {
+                                'is_iframe_submit': 1
+                            };
+                        }
+                    });
+                    $this.block();
+                },
+                success: function(responseText, statusText) {
+                    redirect = responseText.split('*');
+                    if (redirect[0] == 'redirect') {
+                        location.href = redirect[1];
+                    } else if ($this.metadata().container) {
+                        $('.' + $this.metadata().container).html(responseText);
+                    } else {
+                        if($('div.js-preview-responses').length){
+                            $('div.js-preview-responses').html(responseText);
+                        }else{
+                            if(responseText.indexOf('successMessage') >= 0) {
+                                $this.unblock();
+                                $('.js-response').colorbox.close();
+                            } else {
+                                $this.parents('div.js-responses').eq(0).html(responseText);
+                            }
+                        }
+                    }
+                    $this.unblock();
+                }
+            });
+            return false;
+        });
+    };
     $.fn.fajaxaddform = function() {
         $(this).livequery('submit', function(e) {
             var $this = $(this);
@@ -512,6 +551,13 @@ function loadImages(r) {
         }
     }
 }
+
+//Javascript Email Validation
+function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
 //Main function, looks through the window frame-by-frame to get all the pictures failed to load
 function forceImages(r) {
     var errOccured = false;
@@ -597,10 +643,35 @@ jQuery(document).ready(function($) {
 	});	
 	// open thickbox
     $('a.js-thickbox').fcolorbox();
+	
+	//Colorbox for the first page 20/feb/2012
+	var url = document.URL;
+	var param = document.URL.split('/');
+	if(param[3]=='welcome_to_dealhangat' || param[4]=='welcome_to_dealhangat' || param[4]=='' || param[3]==''){
+		$.fn.colorbox({href:__cfg('path_absolute')+"/kuala-lumpur/subscribe",
+		scrolling:false,
+		});
+		//$.fn.colorbox.resize();
+	}
+	
+	//Subscription page validation
+	$('#homeSubscriptionFrom').livequery('submit', function(){
+		home_email=$('.js-home-email').val();
+		if(!validateEmail(home_email)){
+			$('.error-message').remove();
+			$('.js-home-email').parent().append('<div class="error-message" style="display:block; margin: 0px;">Dikehendaki</div>');
+			return false;
+		}else{
+			return true;
+		}
+	});
+	
     // common confirmation delete function
     $('a.js-delete').confirm();
     // bind form using ajaxForm
     $('form.js-ajax-form').fajaxform();
+    // bind colorbox form using ajaxForm
+    $('form.js-ajax-cb-form').fajaxcbform();
     $('#user_cash_withdrawals-index form.js-ajax-add-form').fajaxaddform();
     // bind form comment using ajaxForm
     $('#topics-add form.js-comment-form, #users-view form.js-comment-form, #companies-view form.js-comment-form').fcommentform();
@@ -624,7 +695,7 @@ jQuery(document).ready(function($) {
         var end_date = parseInt($(this).parents().find('.js-time').html());
         $(this).countdown( {
             until: end_date,
-            format: 'd H M S'
+            format: 'd H : M :S'
         });
     });
 	$('#js-redeem-all-branch').livequery('click', function() {
@@ -634,6 +705,27 @@ jQuery(document).ready(function($) {
 			$('.js-show-branch-addresses').show();
 		}
 	});
+	$('.js-image-timer').hover(function(){
+		$(this).parent().find('.dtime-box').show();
+	}, function() {
+		//$(this).parent().find('.dtime-box').slideUp();
+	});
+	$('.block1').livequery('mouseleave', function(){
+		$('.dtime-box').hide();
+	});
+	/* $('.js-image-timer').mouseenter(function(){
+		$(this).parent().find('.dtime-box').slideDown();
+	 }).mouseleave(function() {
+		$(this).parent().find('.dtime-box').slideUp();
+	}); */
+	/*  $('.js-image-timer').hover(function(){  
+        $('.dtime-box', this).stop().animate({top:'-260px'},{queue:false,duration:300});  
+    }, function() {  
+        $('.dtime-box', this).stop().animate({top:'0px'},{queue:false,duration:300});  
+    });  */
+	/* $('.side1-cr').livequery('mouseout', function() {
+		$('.dtime-box').hide();
+	}); */
    $('.js-enable-advance-payment').livequery('click', function() {
 		var sel_container = $(this).metadata().selected_container;
 		if ($(this).is(':checked')) {

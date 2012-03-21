@@ -34,7 +34,9 @@ else
 			<?php
 				echo $this->Form->input('user_id', array('type' => 'hidden'));
 				echo $this->Form->input('clone_deal_id', array('type' => 'hidden'));
+				echo $this->Form->input('deal_category_id', array('empty'=>'Select','options'=>$categories));
 				echo $this->Form->input('name',array('label' => __l('Name')));
+				echo $this->Form->input('name_ms',array('label' => __l('Name in Malay')));
 				if($this->Auth->user('user_type_id') == ConstUserTypes::Admin):
 					echo $this->Form->input('company_id', array('label' => __l('Company'),'empty' =>__l('Please Select')));
 					echo $this->Form->input('company_slug', array('type' => 'hidden'));
@@ -213,9 +215,11 @@ else
 			<legend class="round-5"><?php echo __l('Description'); ?></legend>
 			<?php
 				if($this->Auth->user('user_type_id') == ConstUserTypes::Admin):
-					echo $this->Form->input('private_note', array('type' =>'textarea', 'label' => __l('Private Note'), 'info' => __l('This is for admin reference. It will not be displayed for other users.')));
+					//echo $this->Form->input('private_note', array('type' =>'textarea', 'label' => __l('Private Note'), 'info' => __l('This is for admin reference. It will not be displayed for other users.')));
+					//echo $this->Form->input('private_note_ms', array('type' =>'textarea', 'label' => __l('Private Note Malay'), 'info' => __l('This is for admin reference. It will not be displayed for other users.')));
 				endif;
 				echo $this->Form->input('description', array('label' => __l('Description'),'type' =>'textarea', 'class' => 'js-editor'));
+				echo $this->Form->input('description_ms', array('label' => __l('Description Malay'),'type' =>'textarea', 'class' => 'js-editor'));
 			?>
 	   </fieldset>
 	</div><!-- End of validation part div -->	
@@ -309,18 +313,22 @@ else
 			</div>
 			<?php echo $this->Form->input('is_redeem_in_main_address', array('label' => __l('Can Redeem at Your Company Main Address?'), 'info' => __l('Uncheck this option, if you dont want to make the redeem location in your main company location. <br /><strong>Note:</strong> If all branch addresses unchecked, this option will automatically set as true')));?>
 		</fieldset>
-	   <fieldset class="form-block round-5">
-        <legend class="round-5"><?php echo __l('Review'); ?></legend>
+	   <!--fieldset class="form-block round-5">
+        <legend class="round-5"><?php //echo __l('Review'); ?></legend>
 		<?php
-			echo $this->Form->input('review', array('label' => __l('Review'),'type' => 'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('review', array('label' => __l('Review'),'type' => 'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('review', array('label' => __l('Review Malay'),'type' => 'textarea', 'class' => 'js-editor'));
 		?>
-		</fieldset>
+		</fieldset-->
        <fieldset class="form-block round-5">
         <legend class="round-5"><?php echo __l('Coupon'); ?></legend>
 		<?php
 			echo $this->Form->input('coupon_condition', array('label' => __l('Coupon Condition'),'type' =>'textarea', 'class' => 'js-editor'));
+			echo $this->Form->input('coupon_condition_ms', array('label' => __l('Coupon Condition Malay'),'type' =>'textarea', 'class' => 'js-editor'));
 			echo $this->Form->input('coupon_highlights', array('label' => __l('Coupon Highlights'),'type' =>'textarea', 'class' => 'js-editor'));
-			echo $this->Form->input('comment', array('label' => __l('Comment'),'type' =>'textarea', 'class' => 'js-editor'));
+			echo $this->Form->input('coupon_highlights_ms', array('label' => __l('Coupon Highlights Malay'),'type' =>'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('comment', array('label' => __l('Comment'),'type' =>'textarea', 'class' => 'js-editor'));
+			//echo $this->Form->input('comment_ms', array('label' => __l('Comment Malay'),'type' =>'textarea', 'class' => 'js-editor'));
 		?>
 		</fieldset>
        <fieldset class="form-block round-5">

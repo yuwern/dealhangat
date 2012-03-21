@@ -33,6 +33,8 @@
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Add Deal'), array('controller' => 'deals', 'action' => 'add'), array('title' => __l('Add Deal'))); ?></li>
 		    <?php $class = ($this->request->params['controller'] == 'deal_users') ? ' class="active"' : null; ?>
 			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Deal Coupons'), array('controller' => 'deal_users', 'action' => 'index'), array('title' => __l('Deal Coupons'))); ?></li>
+		    <?php $class = ($this->request->params['controller'] == 'deal_categories') ? ' class="active"' : null; ?>
+			<li <?php echo $class;?>><?php echo $this->Html->link(__l('Deal Category'), array('controller' => 'deal_categories', 'action' => 'index'), array('title' => __l('Deal Coupons'))); ?></li>
         </ul>
     </li>
     <?php $class = ($this->request->params['controller'] == 'gift_users') ? ' class="active"' : null; ?>

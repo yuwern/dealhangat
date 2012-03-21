@@ -18,6 +18,7 @@ class User extends AppModel
             'fields' => '',
             'order' => ''
         ) ,
+ 	
         'RefferalUser' => array(
             'className' => 'User',
             'foreignKey' => 'referred_by_user_id',
@@ -283,7 +284,20 @@ class User extends AppModel
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => '',
-        )
+        ),
+        'Subscription' => array(
+            'className' => 'Subscription',
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => '',
+        )		
     );
     public $hasOne = array(
         'UserProfile' => array(
@@ -332,7 +346,7 @@ class User extends AppModel
             'conditions' => '',
             'fields' => '',
             'order' => ''
-        )
+        ),
     );
     function __construct($id = false, $table = null, $ds = null)
     {
