@@ -104,10 +104,6 @@ class UsersController extends AppController
         parent::beforeFilter();
         $this->disableCache();
     }
-	function login_popup(){
-		$this->layout=false;
-		$this->set('type','ajax');
-	}
     public function view($username = null)
     {
         $this->pageTitle = __l('User');
@@ -469,8 +465,32 @@ class UsersController extends AppController
                     if (!empty($type)) {
                         $this->request->data['User']['user_type_id'] = ConstUserTypes::Company;
                     }
-                    if ($this->User->save($this->request->data, false)) {
-						if(!empty($this->request->data['UserProfile']['city_id'])){
+					//add directly to the balance amount for register
+					$this->request->data['User']['available_balance_amount'] = Configure::read('user.register_e_wallet_amount');                    
+                    
+					
+					if ($this->User->save($this->request->data, false)) {
+
+					//Add the amount informations to transaction table
+					$authorize_currency = $this->getAuthorizeConversionCurrency();
+					$site_currency_id = $authorize_currency['CurrencyConversion']['currency_id'];
+					$converted_currency_id = $authorize_currency['CurrencyConversion']['converted_currency_id'];
+					$conversion_rate = $authorize_currency['CurrencyConversion']['rate'];
+					$authorizenet_converted_amt = $this->User->_convertAuthorizeAmount(Configure::read('user.register_e_wallet_amount')); //Convert amount
+                    $data['Transaction']['converted_currency_id'] = $converted_currency_id;
+					$data['Transaction']['user_id'] = $this->User->getLastInsertId();
+                    $data['Transaction']['foreign_id'] = ConstUserIds::Admin;
+                    $data['Transaction']['class'] = 'SecondUser';
+                    $data['Transaction']['amount'] = Configure::read('user.register_e_wallet_amount');
+                    //$data['Transaction']['payment_gateway_id'] = ConstPaymentGateways::AuthorizeNet;
+                    $data['Transaction']['transaction_type_id'] = ConstTransactionTypes::AddFundToWallet;
+                    ///////Authorize.net currency conversion////////////////////////
+                    $data['Transaction']['currency_id'] = $site_currency_id;
+                    $data['Transaction']['converted_currency_id'] = $converted_currency_id;
+                    $data['Transaction']['converted_amount'] = $authorizenet_converted_amt;
+                    $data['Transaction']['rate'] = $conversion_rate;
+					$this->User->Transaction->save($data);					
+					if(!empty($this->request->data['UserProfile']['city_id'])){
 							$this->request->data['Subscription']['city_id']=$this->request->data['UserProfile']['city_id'];
 						}
 						$subscription = $this->User->Subscription->find('first', array(
@@ -2041,7 +2061,6 @@ class UsersController extends AppController
 			$this->redirect(Router::url('/', true));
 		}	
     }
-
     public function oauth_callback()
     {
         App::import('Xml');
@@ -4543,5 +4562,72 @@ class UsersController extends AppController
         $this->set('tmpCacheFileSize', bytes_to_higher(dskspace(TMP . 'cache')));
         $this->set('tmpLogsFileSize', bytes_to_higher(dskspace(TMP . 'logs')));
     }
+	public function credit_amount(){
+		echo ConstTransactionTypes::AddFundForFeacbookShare;
+		$this->autoRender=false;
+		$this->layout=false;
+		Configure::write('debug', 0);
+		//echo $this->request->data['id'];
+		$url=trim($_POST['id']);
+		$share=trim($_POST['share']);
+		$values = parse_url($url);
+		$slug = array_pop(explode('/',$values['path']));
+		$user_id=$this->Auth->user('id');
+		$deal=$this->User->DealUser->Deal->find('first', array('conditions' =>
+			array('slug'=>$slug),
+			'recursive'=>-1
+		));
+		$user_data=$this->User->UserFacebookLike->find('first', array('conditions' =>
+			array('UserFacebookLike.user_id'=>$user_id, 'UserFacebookLike.deal_id'=>$deal['Deal']['id'], 'UserFacebookLike.site'=>$share),
+			'recursive'=>-1
+			));
+		if(!empty($this->params['isAjax']) &&!empty($user_id) && !empty($deal) && empty($user_data)){
+		//$this->request->data['User']
+			$user=$this->User->find('first', array('conditions' =>
+				array('id'=>$user_id),
+				'recursive'=>-1
+			));
+			if(!empty($user)){
+				$facedata['UserFacebookLike']['user_id']=$user_id;
+				$facedata['UserFacebookLike']['deal_id']=$deal['Deal']['id'];
+				$facedata['UserFacebookLike']['site']=$share;
+				if($this->User->UserFacebookLike->save($facedata)){
+					$total = $this->User->UserFacebookLike->find('count', array('conditions'=>array('deal_id'=>$deal['Deal']['id'], 'site'=>$share)));
+					if($total==Configure::read('user.rewardcount')){
+							$authorize_currency = $this->getAuthorizeConversionCurrency();
+							$site_currency_id = $authorize_currency['CurrencyConversion']['currency_id'];
+							$converted_currency_id = $authorize_currency['CurrencyConversion']['converted_currency_id'];
+							$conversion_rate = $authorize_currency['CurrencyConversion']['rate'];
+							$authorizenet_converted_amt = $this->User->_convertAuthorizeAmount(Configure::read('user.register_e_wallet_amount')); //Convert amount
+							$data['Transaction']['converted_currency_id'] = $converted_currency_id;
+							$data['Transaction']['user_id'] = $user_id;
+							$data['Transaction']['foreign_id'] = ConstUserIds::Admin;
+							$data['Transaction']['class'] = 'SecondUser';
+							$data['Transaction']['amount'] = Configure::read('user.register_e_wallet_amount');
+							//$data['Transaction']['payment_gateway_id'] = ConstPaymentGateways::AuthorizeNet;
+							$data['Transaction']['transaction_type_id'] = ConstTransactionTypes::AddFundForFeacbookShare;
+							///////Authorize.net currency conversion////////////////////////
+							$data['Transaction']['currency_id'] = $site_currency_id;
+							$data['Transaction']['converted_currency_id'] = $converted_currency_id;
+							$data['Transaction']['converted_amount'] = $authorizenet_converted_amt;
+							$data['Transaction']['rate'] = $conversion_rate;
+							if($this->User->Transaction->save($data)){
+								$this->User->updateAll(array(
+									'User.available_balance_amount' => 'User.available_balance_amount +' . ConstTransactionTypes::AddFundForFeacbookShare,
+								), array(
+									'User.id' => $user_id
+								));	
+								$this->User->UserFacebookLike->deleteAll(array('deal_id'=>$deal['Deal']['id'], 'site'=>$share));
+								echo 'Credit';
+								exit;
+							}
+						}
+					echo "Success";
+				}
+			}
+		}else{
+			echo "Already Found";
+		}
+	}
 }
 ?>

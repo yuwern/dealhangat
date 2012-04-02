@@ -22,7 +22,10 @@ do {
 	        $data[]['Company'] = array(
 				__l('Name') => $Company['Company']['name'],
 				__l('Address') => !empty($address) ? $address: '',
-				__l('Email') => $Company['User']['email'],
+				__l('Bank Name') => $Company['Company']['bank_name'],
+				__l('Bank Account') => $Company['Company']['bank_account'],
+				__l('Bank Register Number') => $Company['Company']['bank_register_no'],
+				__l('User') => $Company['User']['email'],
 				__l('User') => $Company['User']['email'],
 				__l('URL') => $Company['Company']['url'],
 				__l('Profile Enabled') => $this->Html->cBool($Company['Company']['is_company_profile_enabled'], false),

@@ -221,8 +221,9 @@ class AppController extends Controller
         $default_city = Cache::read('site.default_city', 'long');
         if (($default_city = Cache::read('site.default_city', 'long')) === false) {
             Cache::write('site.default_city', Configure::read('site.city') , 'long');
-            $this->redirect(Router::url('/', true));
+            //$this->redirect(Router::url('/', true));
         }
+		
     }
     function beforeFilter()
     {

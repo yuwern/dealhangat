@@ -648,7 +648,7 @@ jQuery(document).ready(function($) {
 	var url = document.URL;
 	var param = document.URL.split('/');
 	if(param[3]=='welcome_to_dealhangat' || param[4]=='welcome_to_dealhangat' || param[4]=='' || param[3]==''){
-		$.fn.colorbox({href:__cfg('path_absolute')+"/kuala-lumpur/subscribe",
+		$.fn.colorbox({href:__cfg('path_absolute')+"/kuala-lumpur/users/login",
 		scrolling:false,
 		});
 		//$.fn.colorbox.resize();

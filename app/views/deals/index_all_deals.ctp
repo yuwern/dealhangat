@@ -1,3 +1,4 @@
+	<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 	<div class="deal-view-inner-block clearfix">
 	<div class="side1">
           <?php if(!empty($deals)): ?>
@@ -16,6 +17,7 @@
 					<!--span class="today-deal"><?php	//echo __l("Today's Deal").': ';?></span--> 
 					<?php
 						echo $this->Html->link($deal['Deal']['name'], array('controller' => 'deals', 'action' => 'view', $deal['Deal']['slug']),array('title' =>sprintf(__l('%s'),$deal['Deal']['name'])));
+						//echo $this->Form->input('hidden', array('class'=>'js-deal-id', 'value'=>$deal['Deal']['id']));
 					?>
 					</h2>
 				<p class="company-msg-info">
@@ -116,7 +118,6 @@
                             <li><fb:like href="<?php echo Router::url('/', true).$get_current_city.'/deal/'.$deal['Deal']['slug'];?>" layout="button_count" font="tahoma"></fb:like></li>
 							<li class="tw">
                             <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $bityurl;?>" data-text="<?php echo urlencode_rfc3986($deal['Deal']['name'], false);?>">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
                             <li><?php echo $this->Html->link(__l('Quick! Email a friend!'), 'mailto:?body='.__l('Check out the great deal on ').Configure::read('site.name').' - '.Router::url('/', true).$get_current_city.'/deal/'.$deal['Deal']['slug'].'&amp;subject='.__l('I think you should get ').Configure::read('site.name').__l(': ').$deal['Deal']['discount_percentage'].__l('% off at ').$deal['Company']['name'], array('target' => 'blank', 'title' => __l('Email'), 'class' => 'mail'));?></li>
                         </ul>
 						<span class="ket-btn">
@@ -130,21 +131,71 @@
 			</div>
 		  </div>
 		 <?php endforeach;?>
-		 <?php endif;?>
+		 <?php endif;
+		 $user_id=$this->Auth->user('id');
+		 ?>
 		  <div id="fb-root"></div>
+<script type="text/javascript" charset="utf-8">
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+
+twttr.events.bind('tweet', function(event) {
+   alert('hai');
+});
+</script>		  
 			<script type="text/javascript">
 			  window.fbAsyncInit = function() {
 				FB.init({appId: '147267432014750', status: true, cookie: true,
 						 xfbml: true});
-			  };
+				<?php if(!empty($user_id)) {?>
+				$( "#dialog:ui-dialog" ).dialog( "destroy" );
+				FB.Event.subscribe('edge.create',
+					function(response) {
+						$.ajax({
+							type: 'POST',
+							url: __cfg('path_absolute')+'users/credit_amount/',
+							cache: true,
+							data: {id:response, share:<?php echo ConstShare::Facebook; ?>},
+							success: function(data) {
+								$pay=data.search('Credit');
+								if($pay>-1){
+									$( "#dialog-message" ).dialog({
+										modal: true,
+										buttons: {
+											Ok: function() {
+												window.location.href = __cfg('path_absolute')+'transactions/';
+											}
+										}
+									});
+								}
+							}
+						});
+					}
+				);				  
+				<?php }?>
+			};
 			  (function() {
 				var e = document.createElement('script'); e.async = true;
-
 				e.src = document.location.protocol +
 				  '//connect.facebook.net/en_US/all.js';
 				document.getElementById('fb-root').appendChild(e);
 			  }());
 			</script> 
-	</div>
+			<?php if(!empty($user_id)) {?>
+			<div id="dialog-message" title="Congratulation" style="display:none">
+				<p>
+					<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+					Your are get the RM5 for the reward from Dealhangat. 
+				</p>
+				<p>
+					Thanks For Your Interest in the Product</b>.
+				</p>
+			</div>
+			<?php }?>
+</div>
 <?php echo $this->element('../deals/sidebar', array('deal' => $deal, 'get_current_city' => $get_current_city, 'cache' => array('config' => 'site_element_cache_1_min', 'key' => $deal['Deal']['id'])));?>                
 </div>

@@ -170,7 +170,10 @@
                                 <div class="actions round-5-left">
                                   <?php if(!empty($this->request->params['named']['filter_id']) && (($this->request->params['named']['filter_id'] == ConstDealStatus::Tipped) || ($this->request->params['named']['filter_id'] == ConstDealStatus::Closed) || ($this->request->params['named']['filter_id'] == ConstDealStatus::PaidToCompany))):?>
                                        <?php echo $this->Html->link(__l('Coupons CSV'), array('controller' => 'deals', 'action' => 'coupons_export',  'admin' => false,'deal_id:'.$deal['Deal']['id'],'ext' => 'csv'), array('class' => 'export', 'title' => __l('Coupons CSV')));?>
-                                        <span> <?php echo $this->Html->link(__l('Print'),array('controller' => 'deals', 'action' => 'deals_print', 'filter_id' => $this->request->params['named']['filter_id'],'page_type' => 'print', 'deal_id' => $deal['Deal']['id']),array('title' => __l('Print'), 'class'=>'print-icon'));?></span>
+                                        <span> <?php //
+										 echo $this->Html->link(__l('Word'), array_merge(array('controller' => 'deals', 'action' => 'index','city' => $city_slug, 'ext' => 'docx', 'admin' => true), $this->request->params['named']), array('title' => __l('Word Document'), 'class' => 'export'));
+										//echo $this->Html->link(__l('Print'),array('controller' => 'deals', 'action' => 'deals_print', 'filter_id' => $this->request->params['named']['filter_id'],'page_type' => 'print', 'deal_id' => $deal['Deal']['id']),array('title' => __l('Print'), 'class'=>'print-icon'));
+									?></span>
                                    <?php endif; ?>
                                   <?php if(!empty($deal['Deal']['deal_status_id']) && $deal['Deal']['deal_status_id'] != ConstDealStatus::PendingApproval && $deal['Deal']['deal_status_id'] != ConstDealStatus::Rejected && $deal['Deal']['deal_status_id'] != ConstDealStatus::Draft && $deal['Deal']['deal_status_id'] != ConstDealStatus::Upcoming) {?>
                                   <?php echo $this->Html->link(sprintf(__l('Quantity Sold  (%s)'),$this->Html->cInt($deal['Deal']['deal_user_count'], false)),array('controller'=>'deal_users', 'action'=>'index', 'deal_id'=>$deal['Deal']['id']), array('class' => 'edit js-edit coupon-sold', 'title' => __l('Quantity Sold')));?>

@@ -9,14 +9,14 @@ Options +FollowSymlinks
 #	RewriteRule (.*) http://www.%{HTTP_HOST}/$1 [L,R=301]
 
 #No WWW
-#	RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
-#	RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+	RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+	RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
 # If installed in root without setting DOCUMENT_ROOT:
-#	RewriteBase	/
+	RewriteBase	/dealhangat/
 
 # If installed in local or under a path say /dev1base/: (otherwise, doesn't need RewriteBase)
-	RewriteBase	/
+	RewriteBase	/dealhangat/
 
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
@@ -29,23 +29,3 @@ Options +FollowSymlinks
     	AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript text/css text/html
 </IfModule>
 
-# browser caching
-<IfModule mod_expires.c>
-	FileETag None
-	ExpiresActive On
-	ExpiresByType text/css "access plus 1 month"
-	ExpiresByType text/javascript "access plus 1 month"
-	ExpiresByType application/x-javascript "access plus 1 month"
-	ExpiresByType application/javascript "access plus 1 month"
-	ExpiresByType image/gif "access plus 1 month"
-	ExpiresByType image/jpeg "access plus 1 month"
-	ExpiresByType image/png "access plus 1 month"
-#	ExpiresByType video/x-flv "access plus 1 month"
-	ExpiresByType application/x-shockwave-flash "access plus 1 month"
-
-	# special MIME type for icons
-	AddType image/vnd.microsoft.icon .ico
-	# now we have icon MIME type, we can use it
-	# my favicon doesn't change much
-	ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
-</IfModule>

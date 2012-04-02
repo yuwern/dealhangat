@@ -297,6 +297,19 @@ class User extends AppModel
             'exclusive' => '',
             'finderQuery' => '',
             'counterQuery' => '',
+        ),       
+		'UserFacebookLike' => array(
+            'className' => 'UserFacebookLike',
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+            'conditions' => '',
+            'fields' => '',
+            'order' => '',
+            'limit' => '',
+            'offset' => '',
+            'exclusive' => '',
+            'finderQuery' => '',
+            'counterQuery' => '',
         )		
     );
     public $hasOne = array(
@@ -392,10 +405,10 @@ class User extends AppModel
                     'rule' => 'isUnique',
                     'message' => __l('Email address is already exist')
                 ) ,
-                'rule2' => array(
+                /*'rule2' => array(
                     'rule' => 'email',
                     'message' => __l('Must be a valid email')
-                ) ,
+                ) ,*/
                 'rule1' => array(
                     'rule' => 'notempty',
                     'message' => __l('Required')

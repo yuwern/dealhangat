@@ -305,6 +305,12 @@ class AffiliatesController extends AppController
         ));
         $this->pageTitle = __l('Affiliates');
         $conditions = array();
+        if (isset($this->request->params['named']['from_date']) || isset($this->request->params['named']['to_date'])) {
+            $conditions['DATE(Affiliate.created) BETWEEN ? AND ? '] = array(
+                _formatDate('Y-m-d H:i:s', $this->request->params['named']['from_date'], true) ,
+                _formatDate('Y-m-d H:i:s', $this->request->params['named']['to_date'], true)
+            );
+        }		
         if (isset($this->request->params['named']['q'])) {
             $this->request->data['Affiliate']['q'] = $this->request->params['named']['q'];
             $this->pageTitle.= sprintf(__l(' - Search - %s') , $this->request->params['named']['q']);
@@ -345,6 +351,16 @@ class AffiliatesController extends AppController
             }
             $this->request->params['named']['filter_id'] = !empty($this->request->data['Affiliate']['filter_id']) ? $this->request->data['Affiliate']['filter_id'] : '';
         }
+        if ($this->RequestHandler->prefers('csv')) {
+			$contain=array();
+            Configure::write('debug', 1);
+            $this->set('affiliate', $this);
+            $this->set('conditions', $conditions);
+            if (isset($this->request->data['Affiliate']['q'])) {
+                $this->set('q', $this->request->data['Affiliate']['q']);
+            }
+            $this->set('contain', $contain);
+        }else{		
         $filters = $this->Affiliate->AffiliateStatus->find('list', array());
         $this->Affiliate->recursive = 1;
         $this->paginate = array(
@@ -360,6 +376,7 @@ class AffiliatesController extends AppController
         }
         $this->set('affiliates', $this->paginate());
         $this->set(compact('filters'));
+		}
     }
     public function admin_delete($id = null)
     {
@@ -706,5 +723,86 @@ class AffiliatesController extends AppController
         }
         $this->set('affiliateWidgetSize', $affiliateWidgetSize);
     }
+	public function admin_export($hash = null)
+    {
+        Configure::write('debug', 0);
+        $conditions = array();
+        if (isset($this->request->params['named']['from_date']) || isset($this->request->params['named']['to_date'])) {
+            $conditions['DATE(User.created) BETWEEN ? AND ? '] = array(
+                _formatDate('Y-m-d H:i:s', $this->request->params['named']['from_date'], true) ,
+                _formatDate('Y-m-d H:i:s', $this->request->params['named']['to_date'], true)
+            );
+        }
+        if (!empty($this->request->params['named']['main_filter_id'])) {
+            if ($this->request->params['named']['main_filter_id'] == ConstMoreAction::OpenID) {
+                $conditions['User.is_openid_register'] = 1;
+                $this->pageTitle.= __l(' - Registered through OpenID ');
+            } else if ($this->request->params['named']['main_filter_id'] == ConstMoreAction::FaceBook) {
+                $conditions['User.fb_user_id != '] = NULL;
+                $this->pageTitle.= __l(' - Registered through FaceBook ');
+            } else if ($this->request->params['named']['main_filter_id'] == ConstUserTypes::User) {
+                $conditions['User.user_type_id'] = ConstUserTypes::User;
+                $conditions['User.fb_user_id = '] = NULL;
+                $conditions['User.is_openid_register'] = 0;
+            } else if ($this->request->params['named']['main_filter_id'] == ConstUserTypes::Admin) {
+                $conditions['User.user_type_id'] = ConstUserTypes::Admin;
+                $this->pageTitle.= __l(' - Admin ');
+            } else if ($this->request->params['named']['main_filter_id'] == 'all') {
+                $conditions['User.user_type_id != '] = ConstUserTypes::Company;
+                $this->pageTitle.= __l(' - All ');
+            }
+            $count_conditions = $conditions;
+        }
+        if (!empty($this->request->params['named']['filter_id'])) {
+            if ($this->request->params['named']['filter_id'] == ConstMoreAction::Active) {
+                $conditions['User.is_active'] = 1;
+                $this->pageTitle.= __l(' - Active ');
+            } else if ($this->request->params['named']['filter_id'] == ConstMoreAction::Inactive) {
+                $conditions['User.is_active'] = 0;
+                $this->pageTitle.= __l(' - Inactive ');
+            }
+        }
+        if (isset($this->request->params['named']['stat']) && $this->request->params['named']['stat'] == 'day') {
+            $conditions['TO_DAYS(NOW()) - TO_DAYS(User.created) <= '] = 0;
+            $this->pageTitle.= __l(' - Registered today');
+        }
+        if (isset($this->request->params['named']['stat']) && $this->request->params['named']['stat'] == 'week') {
+            $conditions['TO_DAYS(NOW()) - TO_DAYS(User.created) <= '] = 7;
+            $this->pageTitle.= __l(' - Registered in this week');
+        }
+        if (isset($this->request->params['named']['stat']) && $this->request->params['named']['stat'] == 'month') {
+            $conditions['TO_DAYS(NOW()) - TO_DAYS(User.created) <= '] = 30;
+            $this->pageTitle.= __l(' - Registered in this month');
+        }
+        if (!empty($hash) && isset($_SESSION['user_export'][$hash])) {
+            $user_ids = implode(',', $_SESSION['user_export'][$hash]);
+            if ($this->User->isValidUserIdHash($user_ids, $hash)) {
+                $conditions['User.id'] = $_SESSION['user_export'][$hash];
+            } else {
+                throw new NotFoundException(__l('Invalid request'));
+            }
+        }
+        if (isset($this->request->params['named']['q']) && !empty($this->request->params['named']['q'])) {
+            $conditions['User.username like'] = '%' . $this->request->params['named']['q'] . '%';
+        }
+        $affiliates = $this->Affiliate->find('all', array(
+            'conditions' => $conditions,
+            'recursive' => 1
+        ));
+        if (!empty($affiliates)) {
+            foreach($affiliates as $affiliate) {
+                $data[]['Affiliate'] = array(
+                    __l('Created') => $this->Html->cDateTimeHighlight($affiliate['Affiliate']['created']),
+                    __l('Affiliate User') => $affiliate['AffiliateUser']['username'],
+                    __l('User').'/'. __l('Deal') => $this->Html->cText($affiliate['DealUser']['Deal']['name']),
+                    __l('Type')=> $this->Html->cText($affiliate['AffiliateType']['name']),
+                    __l('Status')=> $this->Html->cText($affiliate['AffiliateStatus']['name']),
+                    __l('Commission')=> $this->Html->cFloat($affiliate['Affiliate']['commission_amount']),
+                    
+                );
+            }
+        }
+        $this->set('data', $data);
+    }	
 }
 ?>

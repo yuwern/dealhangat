@@ -33,7 +33,25 @@
     </tr>
 <?php
 if (!empty($affiliates)):
-
+?>
+<?php echo $this->Form->create('Affiliate' , array('action' => 'admin_index', 'type' => 'get', 'class' => 'normal search-form clearfix')); ?>
+	<div class="clearfix date-time-block">
+		<div class="input date-time clearfix">
+			<div class="js-datetime">
+				<?php echo $this->Form->input('from_date', array('label' => __l('From'), 'type' => 'date', 'minYear' => date('Y')-10, 'maxYear' => date('Y'), 'div' => false, 'empty' => __l('Please Select'), 'orderYear' => 'asc')); ?>
+			</div>
+		</div>
+		<div class="input date-time end-date-time-block clearfix">
+			<div class="js-datetime">
+				<?php echo $this->Form->input('to_date', array('label' => __l('To '),  'type' => 'date', 'minYear' => date('Y')-10, 'maxYear' => date('Y'), 'div' => false, 'empty' => __l('Please Select'), 'orderYear' => 'asc')); ?>
+			</div>
+		</div>
+	</div>  
+	<?php
+		echo $this->Form->submit(__l('Filter'));
+	?>
+<?php echo $this->Form->end(); ?>
+<?php echo $this->Html->link(__l('CSV'), array_merge(array('controller' => 'affiliates', 'action' => 'index','city' => $city_slug, 'ext' => 'csv', 'admin' => true), $this->request->params['named']), array('title' => __l('CSV'), 'class' => 'export'));
 $i = 0;
 foreach ($affiliates as $affiliate):
 	$class = null;

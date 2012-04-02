@@ -32,12 +32,21 @@
 				<fieldset class="form-block round-5">
 	               <legend class="round-5"><?php echo __l('PayPal'); ?></legend>
 					<?php echo $this->Form->input('User.UserProfile.paypal_account', array('label' => __l('PayPal Account'))); ?>
-				</fieldset>
+					<?php
+					echo $this->Form->input('bank_name_ms',array('label' =>__l('Bank Name Malay')));
+					echo $this->Form->input('bank_name',array('label' =>__l('Bank Name')));
+					echo $this->Form->input('bank_account_ms',array('label' =>__l('Bank Account Malay')));
+					echo $this->Form->input('bank_account',array('label' =>__l('Bank Account')));
+					echo $this->Form->input('bank_register_no_ms',array('label' =>__l('Registration Number or IC Number Malay')));
+					echo $this->Form->input('bank_register_no',array('label' =>__l('Registration Number or IC Number')));
+					?>
+					</fieldset>
 			<?php endif; ?>
            <fieldset class="form-block round-5">
                <legend class="round-5"><?php echo __l('Address'); ?></legend>
 					<?php
-						echo $this->Form->input('operating_hours_ms',array('label' => __l('Operating Hours Malay')));						 echo $this->Form->input('operating_hours',array('label' => __l('Operating Hours')));		
+						echo $this->Form->input('operating_hours_ms',array('label' => __l('Operating Hours Malay')));						
+						echo $this->Form->input('operating_hours',array('label' => __l('Operating Hours')));		
                         echo $this->Form->input('address1',array('label' => __l('Address1')));
                         echo $this->Form->input('address2',array('label' => __l('Address2')));
                         echo $this->Form->input('country_id',array('label' => __l('Country')));

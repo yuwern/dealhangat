@@ -531,6 +531,8 @@ class CompaniesController extends AppController
                 $this->set('q', $this->request->data['Company']['q']);
             }
             $this->set('contain', $contain);
+			//print_r($contain);
+			//die;
         } else {
             $this->paginate = array(
                 'conditions' => array(

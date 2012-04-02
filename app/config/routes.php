@@ -26,7 +26,7 @@
  * @lastmodified  $Date: 2008-11-03 23:57:56 +0530 (Mon, 03 Nov 2008) $
  * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-Router::parseExtensions('rss', 'csv', 'json', 'txt', 'pdf', 'kml', 'xml', 'mobile', 'js');
+Router::parseExtensions('rss', 'csv', 'json', 'txt', 'pdf', 'kml', 'xml', 'docx', 'mobile', 'js');
 // REST support controllers
 Router::mapResources(array(
     'deals'
