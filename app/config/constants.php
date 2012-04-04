@@ -209,8 +209,6 @@ class ConstTransactionTypes
     const CharityAdminRejecetedWithdrawalRequest = 44;
     const AmountTakenForCharity = 45;
 	const CharityAddFundToCharity = 47;
-	const AddFundForSignup = 48;
-	const AddFundForFeacbookShare = 49;	
 }
 // Setting for privacy setting
 class ConstPrivacySetting
@@ -274,11 +272,6 @@ class ConstProfileImage
 class ConstCurrencies
 {
     const USD = 1;
-}
-class ConstShare
-{
-    const Twitter = 1;
-	const Facebook = 2;
 }
 /*
 date_default_timezone_set('Asia/Calcutta');
