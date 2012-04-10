@@ -1,6 +1,6 @@
 <?php /* SVN: $Id: $ */ ?>
 <?php if(empty($this->request->params['isAjax'])) : ?>
-<div class="affiliates index">
+<div class="affiliates index ">
 <h2><?php echo __l('Affiliates');?></h2>
         <div class="clearfix add-block1 affiliate-links">
 			<?php echo $this->Html->link(__l('Affiliate  Requests'), array('controller' => 'affiliate_requests', 'action' => 'index'), array('class' => 'affiliate-application', 'title' => __l('Affiliate Requests'))); ?>
@@ -9,6 +9,7 @@
 			<?php echo $this->Html->link(__l('Settings'), array('controller' => 'settings', 'action' => 'index', '#Affiliate'),array('class' => 'affiliate-settings', 'title' => __l('Settings'))); ?>
 		</div>
 <?php echo $this->element('admin_affiliate_stat'); ?>
+
 <h3><?php echo __l('Commission History');?></h3>
     <div class="js-tabs">
         <ul class="clearfix">
@@ -21,6 +22,34 @@
         </ul>
     </div>
 <?php else : ?>
+ <div class="index js-response js-responses">
+<?php 
+echo $this->Form->create('Affiliate' , array('action' => 'admin_index','class' => 'normal clearfix js-ajax-form')); ?>
+       <div class="clearfix date-time-block">
+            <div class="input date-time clearfix">
+                <div class="js-datetime">
+                    <?php echo $this->Form->input('from_date', array('label' => __l('From'), 'type' => 'date', 'minYear' => date('Y')-10, 'maxYear' => date('Y'), 'div' => false, 'empty' => __l('Please Select'), 'orderYear' => 'asc')); ?>
+                </div>
+            </div>
+            <div class="input date-time end-date-time-block clearfix">
+                <div class="js-datetime">
+                    <?php echo $this->Form->input('to_date', array('label' => __l('To '),  'type' => 'date', 'minYear' => date('Y')-10, 'maxYear' => date('Y'), 'div' => false, 'empty' => __l('Please Select'), 'orderYear' => 'asc')); ?>
+                </div>
+            </div>
+        </div>
+      <?php
+        echo $this->Form->input('tab_check', array('type' => 'hidden','value' => !empty($this->request->data['Affiliate']['tab_check'])?$this->request->data['Affiliate']['tab_check'] :'all')); ?>
+       	  <div class="submit-block clearfix">
+            <?php
+            	echo $this->Form->submit(__l('Filter'));
+            ?>
+            </div>
+            <?php
+            	echo $this->Form->end();
+            ?>
+<?php if (!empty($affiliates)): ?>
+<?php echo $this->Html->link(__l('CSV'), array_merge(array('controller' => 'affiliates', 'action' => 'index','city' => $city_slug, 'ext' => 'csv', 'admin' => true), $this->request->params['named']), array('title' => __l('CSV'), 'class' => 'export'));  ?>
+<?php endif; ?>
 <?php echo $this->element('paging_counter');?>
 <table class="list">
     <tr>
@@ -34,24 +63,8 @@
 <?php
 if (!empty($affiliates)):
 ?>
-<?php echo $this->Form->create('Affiliate' , array('action' => 'admin_index', 'type' => 'get', 'class' => 'normal search-form clearfix')); ?>
-	<div class="clearfix date-time-block">
-		<div class="input date-time clearfix">
-			<div class="js-datetime">
-				<?php echo $this->Form->input('from_date', array('label' => __l('From'), 'type' => 'date', 'minYear' => date('Y')-10, 'maxYear' => date('Y'), 'div' => false, 'empty' => __l('Please Select'), 'orderYear' => 'asc')); ?>
-			</div>
-		</div>
-		<div class="input date-time end-date-time-block clearfix">
-			<div class="js-datetime">
-				<?php echo $this->Form->input('to_date', array('label' => __l('To '),  'type' => 'date', 'minYear' => date('Y')-10, 'maxYear' => date('Y'), 'div' => false, 'empty' => __l('Please Select'), 'orderYear' => 'asc')); ?>
-			</div>
-		</div>
-	</div>  
-	<?php
-		echo $this->Form->submit(__l('Filter'));
-	?>
-<?php echo $this->Form->end(); ?>
-<?php echo $this->Html->link(__l('CSV'), array_merge(array('controller' => 'affiliates', 'action' => 'index','city' => $city_slug, 'ext' => 'csv', 'admin' => true), $this->request->params['named']), array('title' => __l('CSV'), 'class' => 'export'));
+
+<?php 
 $i = 0;
 foreach ($affiliates as $affiliate):
 	$class = null;
@@ -103,6 +116,7 @@ if (!empty($affiliates)) {
 ?>
 <?php
 endif;
+
 if(empty($this->request->params['isAjax'])) : ?>
 </div>
 <?php endif; ?>
