@@ -85,11 +85,14 @@ else
 						<?php
 							echo $this->Form->input('original_price',array('label' => __l('Original Price'),'class' => 'js-price', $currecncy_place => '<span class="currency">'.Configure::read('site.currency'). '</span>'));
 						?>
-						<div class="two-col-form discount-form-block clearfix">
-							<?php echo $this->Form->input('discount_percentage', array('label' => __l('Discount (%)')));  ?>
-							<span class="sep-or"><?php echo __l('OR'); ?></span>
+							<?php echo $this->Form->input('discount_percentage', array('type'=>'hidden','label' => __l('Discount (%)')));  ?>
 							<?php echo $this->Form->input('discount_amount', array('label' => __l('Discount Amount'), $currecncy_place => '<span class="currency">'.Configure::read('site.currency'). '</span>')); ?>
-						</div>
+					
+					<!--	<div class="two-col-form discount-form-block clearfix">
+							<?php //echo $this->Form->input('discount_percentage', array('label' => __l('Discount (%)')));  ?>
+							<span class="sep-or"><?php // echo __l('OR'); ?></span>
+							<?php // echo $this->Form->input('discount_amount', array('label' => __l('Discount Amount'), $currecncy_place => '<span class="currency">'.Configure::read('site.currency'). '</span>')); ?>
+						</div> -->
 						<?php 
 							echo $this->Form->input('savings', array('type'=>'text',  'label' => __l('Savings for User'),  'readonly' => 'readonly', $currecncy_place => '<span class="currency">'.Configure::read('site.currency'). '</span>'));
 							echo $this->Form->input('discounted_price', array('label' => __l('Discounted Price for User'),'type'=>'text', 'readonly' => 'readonly', $currecncy_place => '<span class="currency">'.Configure::read('site.currency'). '</span>'));
@@ -116,9 +119,9 @@ else
 							</div>						
 						<?php endif; ?>
 					</div>
-					<div class="calculator-block round-5">
-					   <?php echo $this->element('../deals/budget_calculator', array('cache' => array('config' => 'site_element_cache', 'key' => $this->Auth->user('id')))); ?>
-					</div>
+					<!--<div class="calculator-block round-5">
+					   <?php // echo $this->element('../deals/budget_calculator', array('cache' => array('config' => 'site_element_cache', 'key' => $this->Auth->user('id')))); ?>
+					</div> -->
 				</div>   
 				<div class="page-info">
 					<?php

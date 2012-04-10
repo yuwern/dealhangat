@@ -121,11 +121,44 @@
                             <li><?php echo $this->Html->link(__l('Quick! Email a friend!'), 'mailto:?body='.__l('Check out the great deal on ').Configure::read('site.name').' - '.Router::url('/', true).$get_current_city.'/deal/'.$deal['Deal']['slug'].'&amp;subject='.__l('I think you should get ').Configure::read('site.name').__l(': ').$deal['Deal']['discount_percentage'].__l('% off at ').$deal['Company']['name'], array('target' => 'blank', 'title' => __l('Email'), 'class' => 'mail'));?></li>
                         </ul>
 						<span class="ket-btn">
-							<?php echo $this->Html->link(__l('+ Learn more'), array('controller' => 'deals', 'action' => 'view', $deal['Deal']['slug']),array('title' =>sprintf(__l('%s'),$deal['Deal']['name'])));?>
+								 <?php echo $this->Html->link(__l('+ Learn more'), '#', array('title' => __l('+ Learn more'),'class' => "js-toggle-show {'container':'js-learn-more".$deal['Deal']['id'] ."'}", 'escape' => false)); ?>
 						</span>
 						<div class="clearfix"></div>
-                      </div>				  
+                      </div>	
+					  <div  class="hide js-learn-more<?php echo $deal['Deal']['id']; ?>" >
+					  <div class="js-tabs">
+					  <ul>
+					  	<li><a href="#tabs-1<?php echo $deal['Deal']['id']; ?>"><?php echo __l('Description'); ?></a></li>
+					  	<li><a href="#tabs-2<?php echo $deal['Deal']['id']; ?>"><?php echo __l('The Fine Print'); ?></a></li>
+					  	<li><a href="#tabs-3<?php echo $deal['Deal']['id']; ?>"><?php echo __l('Highlights'); ?></a></li>
+					 </ul>
+					  <div classs="deal-description" id="tabs-1<?php echo $deal['Deal']['id']; ?>">
+					      <h3><?php echo __l('Description');?></h3>
+						  <?php echo html_entity_decode($this->Html->cHtml($deal['Deal']['description']));?>
+					   </div>
+					   <div class="fine-print-block" id="tabs-2<?php echo $deal['Deal']['id']; ?>">
+                        <h3><?php echo __l('The Fine Print');?></h3>
+                        <?php 
+						
+							  if(!empty($deal['Deal']['coupon_expiry_date']) && empty($deal['Deal']['is_subdeal_available'])){
+		                 		 echo __l('Expires '); 
+		                         echo  $this->Html->cDateTime($deal['Deal']['coupon_expiry_date']);
+							  }
+							  else if(!empty($deal['Deal']['is_subdeal_available']) && !empty($deal['SubDeal'][0]['coupon_expiry_date']) ){
+		                 		 echo __l('Expires '); 
+		                         echo  $this->Html->cDateTime($deal['SubDeal'][0]['coupon_expiry_date']);
+							  }	  
+							  echo ' '.$this->Html->cHtml($deal['Deal']['coupon_condition']);
+						?>
+                        <?php echo $this->Html->link(__l('Read the Deal FAQ'), array('controller' => 'pages', 'action' => 'view','faq', 'admin' => false), array('target'=>'_blank', 'title' => __l('Read the deal FAQ')));?> <?php echo __l(' for the basics.'); ?>
+                    </div>
+                      <div class="highlight-block"  id="tabs-3<?php echo $deal['Deal']['id']; ?>">
+                      <h3><?php echo __l('Highlights');?></h3>
+                      <?php echo $this->Html->cHtml($deal['Deal']['coupon_highlights']);?>
+                    </div>
+					</div>
 				  <!-- Share Box -->
+				</div>
 				</div>
 			  </div>
 			</div>
