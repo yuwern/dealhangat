@@ -1107,6 +1107,13 @@ form.normal div.error-message {
 	text-align:left;
 	font-size:12px;
 }
+form div.error-message {
+	color:#f06;
+	background:url(../img/icon-form-error.png) no-repeat scroll left center;
+	padding:0 0 0 20px;
+	text-align:left;
+	font-size:12px;
+}
 form.normal div.subscriptions-content-form div.error-message {
 	margin:0px;
 }
@@ -2470,7 +2477,7 @@ div.js-payment-gateway legend {
 	z-index:10000;
 	width:100%;
 	font-weight:bold;
-	text-align:left;
+	text-align:center;
 }
 div.flash-message-inner {
 	padding:20px 50px 20px 70px;
@@ -6209,32 +6216,48 @@ h6.logo a {
 }
 
 
-/*light box*/
+/*light box - latest update April-03*/
 
 .pop{ border:5px solid #fff; background:#CCC; width:790px; height:590px; z-index:150; top:50px; left:200px;}
+
 .pop-bor{ border:4px solid #fff; margin:1px; background:#FFF; width:780px; height:580px; background: url(../img/login/pop_bg.jpg); position:relative;}
 
-.close-btn{ background:url(../img/login/close_btn.png); width:36px; height:36px; position:absolute; top:-23px; right:20px; display:inline-block; text-indent:-99999px;}
+.close-btn{ background:url(img/close_btn.png); width:36px; height:36px; position:absolute; top:-23px; right:20px; display:inline-block; text-indent:-99999px;}
 
 .rip{ width:301px; height:54px; margin:20px auto 0 auto; background:url(../img/login/red-rip.png) no-repeat; color:#FFF; font-size:19px; font-weight:bold; text-align:center; line-height:34px;text-shadow: -1px 0 gray, 0 1px gray,1px 0 gray, 0 -1px gray}
 .a-center{ text-align:center;}
-.pop-text{ padding:5px 110px; font-size:14px; color:#FFF; font-weight:bold; letter-spacing:-0.02em; line-height:18px;}
+.pop-text{ padding:5px 100px; font-size:14px; color:#FFF; font-weight:bold; letter-spacing:-0.02em; line-height:18px;}
 
 .icon-list{ width:87%; margin:0 auto; padding:0; list-style:0;}
 .icon-list li{ padding:0 2px; margin:0;list-style:0; display: inline-block;*display: inline; }
 
-.pop_login{ width:588px; height:274px; margin:0 auto; background:url(../img/login/pop_login_bg.png) no-repeat;}
+.pop_login{ width:690px; height:290px; margin:0 auto; background:url(../img/login_bg.png) 0 -10px no-repeat;}
 
-.pop_login ul{ margin:0; padding:35px 50px 30px 42px;}
-.pop_login ul li{ list-style:none; margin:0; padding:0 0 15px 0;}
-.pop_login ul li input{ background:url(../img/login/pop_txt_bg.jpg) repeat-x; height:23px; padding:5px; border:1px solid #999; width:98%; font-size:16px; font-weight:bold;}
-.pop_login ul li select{ background:url(../img/login/pop_txt_bg.jpg) repeat-x; height:33px; padding:5px; border:1px solid #999; width:100%; font-size:16px; font-weight:bold;}
-.pop_login ul li label{ font-size:16px; font-weight:bold;}
-.pop_login ul li input[type="button"]{ background:url(../img/login/pop_login_btn.png) no-repeat; width:76px;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px;}
+.pop_login ul{ margin:0; padding:40px 23px 30px 42px; float:left; width:312px;}
+.pop_login ul li{ list-style:none; margin:0; padding:0 0 8px 0;}
+.pop_login ul li input{ background:url(../img/pop_txt_bg.jpg) repeat-x; padding:5px; border:1px solid #999; width:98%; font-size:16px; font-weight:bold;}
+.pop_login ul li select{ background:url(../img/pop_txt_bg.jpg) repeat-x; height:33px; padding:5px; border:1px solid #999; width:100%; font-size:16px; font-weight:bold;}
+.pop_login ul li input[type="checkbox"]{ width:auto !important; height:auto !important; margin:0 !important; background:none !important; padding:0 !important; border:0px;}
+.pop_login ul li label{ font-size:11px; font-weight:bold;}
+.pop_login ul li span{ font-size:11px; font-weight:bold; text-align:right;}
+.pop_login ul li a:hover{ text-decoration:underline;}
+.pop_login ul li strong{ font-size:16px; font-weight:bold;}
+.pop_login ul li input[type="submit"]{ background:url(../img/login/pop_login_btn.png) no-repeat; width:76px;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-family:arial; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px;}
+.pop_login ul li input.login-btn{ background:url(../img/login/login-but.png) no-repeat; width:64px;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px;}
+
+.pop_login ul li a.reg{ background:url(../img/login/pop_login_btn.png) no-repeat; width:78px;display:inline-block;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px; color:#000;}
+.pop_login ul li a.reg:hover{color:#208e20;}
+
+.pop_login ul li input:hover[type="submit"]{ color:#208e20;}
+
+.f-connect{ float:left; width:310px;border:0px solid #fff; min-height:100px; margin-top:18px;}
+.f-btn{ padding:45px 0 0 25px;}
+.rm{ background: url(../img/rm.png) no-repeat; height:74px; font-size:17px; color:#FFF; padding:0 0 0 60px; line-height:68px; font-weight:bold;text-shadow: -1px 0 gray, 0 1px gray,1px 0 gray, 0 -1px gray; margin:25px 0 0 0;}
+
 
 /*opera css*/
 @media all and (-webkit-min-device-pixel-ratio:10000), not all and (-webkit-min-device-pixel-ratio:0) {
-.pop_login ul li input[type="button"]{ background:url(../img/login/pop_login_btn.png) no-repeat; width:76px;padding:15px 0 15px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center;}
+.pop_login ul li input[type="submit"]{ background:url(../img/login/pop_login_btn.png) no-repeat; width:76px;padding:15px 0 15px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center;}
  }
  
  .pop_login ul li input .checkbox{
