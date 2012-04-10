@@ -1348,7 +1348,9 @@ class UsersController extends AppController
                     'recursive' => - 1
                 ));
                 $this->request->data['User']['id'] = $check_user['User']['id'];
-            }
+            }	
+			
+		
             $this->request->data['User']['password'] = $this->Auth->password($me['id'] . Configure::read('Security.salt'));
             if (!empty($check_user['User']['email'])) {
                 $this->request->data['User']['email'] = $check_user['User']['email'];
@@ -1361,6 +1363,8 @@ class UsersController extends AppController
 				$this->request->data['User']['fb_user_id'] = $me['id'];
 				$this->request->data['User']['fb_access_token'] = $me['access_token'];
 				$this->User->save($this->request->data, false);
+
+
 				if ($this->Auth->login($this->request->data)) {
 					if ($redirectUrl = $this->Session->read('Auth.redirectUrl')) {
 						$this->Session->delete('Auth.redirectUrl');
@@ -1413,9 +1417,29 @@ class UsersController extends AppController
                     'controller' => 'users',
                     'action' => 'register'
                 ));
-            }
+            }	
+			$this->request->data['User']['available_balance_amount'] = Configure::read('user.register_e_wallet_amount');   
             $this->User->save($this->request->data, false);
             $this->request->data['UserProfile']['user_id'] = $this->User->id;
+				//Add the amount informations to transaction table
+			 $authorize_currency = $this->getAuthorizeConversionCurrency();
+			 $site_currency_id = $authorize_currency['CurrencyConversion']['currency_id'];
+			 $converted_currency_id = $authorize_currency['CurrencyConversion']['converted_currency_id'];
+			 $conversion_rate = $authorize_currency['CurrencyConversion']['rate'];
+			 $authorizenet_converted_amt = $this->User->_convertAuthorizeAmount(Configure::read('user.register_e_wallet_amount')); //Convert amount
+			 $this->User->Transaction->create();
+             $data['Transaction']['converted_currency_id'] = $converted_currency_id;
+			 $data['Transaction']['user_id'] = $this->User->getLastInsertId();
+             $data['Transaction']['foreign_id'] = ConstUserIds::Admin;
+             $data['Transaction']['class'] = 'SecondUser';
+             $data['Transaction']['amount'] = Configure::read('user.register_e_wallet_amount');
+             $data['Transaction']['transaction_type_id'] = ConstTransactionTypes::AddFundToWallet;
+             ///////Authorize.net currency conversion////////////////////////
+              $data['Transaction']['currency_id'] = $site_currency_id;
+              $data['Transaction']['converted_currency_id'] = $converted_currency_id;
+              $data['Transaction']['converted_amount'] = $authorizenet_converted_amt;
+              $data['Transaction']['rate'] = $conversion_rate;
+			$this->User->Transaction->save($data,false);
             $this->User->UserProfile->save($this->request->data);
             if ($this->Auth->login($this->request->data)) {
                 // Affiliate Changes ( //

@@ -301,17 +301,14 @@ class AffiliatesController extends AppController
     {
         $this->_redirectGET2Named(array(
             'filter_id',
-            'q'
+            'q',
+			'from_date',
+			'to_date',
         ));
-        $this->pageTitle = __l('Affiliates');
+		$this->pageTitle = __l('Affiliates');
         $conditions = array();
-        if (isset($this->request->params['named']['from_date']) || isset($this->request->params['named']['to_date'])) {
-            $conditions['DATE(Affiliate.created) BETWEEN ? AND ? '] = array(
-                _formatDate('Y-m-d H:i:s', $this->request->params['named']['from_date'], true) ,
-                _formatDate('Y-m-d H:i:s', $this->request->params['named']['to_date'], true)
-            );
-        }		
-        if (isset($this->request->params['named']['q'])) {
+	
+      if (isset($this->request->params['named']['q'])) {
             $this->request->data['Affiliate']['q'] = $this->request->params['named']['q'];
             $this->pageTitle.= sprintf(__l(' - Search - %s') , $this->request->params['named']['q']);
         }
@@ -327,19 +324,31 @@ class AffiliatesController extends AppController
             $conditions['TO_DAYS(NOW()) - TO_DAYS(Affiliate.created) <= '] = 30;
             $this->pageTitle.= __l(' - Referred in this month');
         }
+		if(!empty($this->request->data['Affiliate']['tab_check'])){
+			$this->request->params['named']['filter_id'] = $this->request->data['Affiliate']['tab_check'];
+		}
         if (!empty($this->request->params['named']['filter_id'])) {
+		//  
             if ($this->request->params['named']['filter_id'] == ConstAffiliateStatus::Pending) {
                 $conditions['affiliate_status_id'] = ConstAffiliateStatus::Pending;
                 $this->pageTitle.= __l('- Pending');
+			    if(!empty( $this->request->data['Affiliate']['tab_check']))
+			    $this->request->data['Affiliate']['tab_check'] = $this->request->params['named']['filter_id'];
             } else if ($this->request->params['named']['filter_id'] == ConstAffiliateStatus::Canceled) {
                 $conditions['affiliate_status_id'] = ConstAffiliateStatus::Canceled;
-                $this->pageTitle.= __l('- Canceled');
+				if(!empty( $this->request->data['Affiliate']['tab_check']))
+			    $this->request->data['Affiliate']['tab_check'] = $this->request->params['named']['filter_id'];
+				$this->pageTitle.= __l('- Canceled');
             } else if ($this->request->params['named']['filter_id'] == ConstAffiliateStatus::PipeLine) {
                 $conditions['affiliate_status_id'] = ConstAffiliateStatus::PipeLine;
+				if(!empty( $this->request->data['Affiliate']['tab_check']))
+			    $this->request->data['Affiliate']['tab_check'] = $this->request->params['named']['filter_id'];
                 $this->pageTitle.= __l('- PipeLine');
             } else if ($this->request->params['named']['filter_id'] == ConstAffiliateStatus::Completed) {
                 $conditions['affiliate_status_id'] = ConstAffiliateStatus::Completed;
-                $this->pageTitle.= __l('- Completed');
+				if(!empty( $this->request->data['Affiliate']['tab_check']))
+			    $this->request->data['Affiliate']['tab_check'] = $this->request->params['named']['filter_id'];
+			    $this->pageTitle.= __l('- Completed');
             } else if ($this->request->params['named']['filter_id'] == 'All') {
                 $conditions['affiliate_status_id'] = array(
                     ConstAffiliateStatus::Pending,
@@ -349,18 +358,41 @@ class AffiliatesController extends AppController
                 );
                 $this->pageTitle.= __l('- All');
             }
-            $this->request->params['named']['filter_id'] = !empty($this->request->data['Affiliate']['filter_id']) ? $this->request->data['Affiliate']['filter_id'] : '';
+        //    $this->request->params['named']['filter_id'] = !empty($this->request->data['Affiliate']['filter_id']) ? $this->request->data['Affiliate']['filter_id'] : '';
         }
-        if ($this->RequestHandler->prefers('csv')) {
-			$contain=array();
-            Configure::write('debug', 1);
+	   if (isset($this->request->data['Affiliate']['from_date']) and isset($this->request->data['Affiliate']['to_date'])) {
+            $from_date = $this->request->data['Affiliate']['from_date']['year'] . '-' . $this->request->data['Affiliate']['from_date']['month'] . '-' . $this->request->data['Affiliate']['from_date']['day'] . ' 00:00:00';
+            $to_date = $this->request->data['Affiliate']['to_date']['year'] . '-' . $this->request->data['Affiliate']['to_date']['month'] . '-' . $this->request->data['Affiliate']['to_date']['day'] . ' 23:59:59';
+        }
+        if (!empty($this->request->data)) {
+            if ($from_date < $to_date) {
+               $conditions['Affiliate.created >='] = _formatDate('Y-m-d H:i:s', $from_date, true);
+               $conditions['Affiliate.created <='] = _formatDate('Y-m-d H:i:s', $to_date, true);
+            } else {
+                $this->Transaction->validationErrors['to_date'] = __l("'To date' should be greater than 'From date'.");
+                $this->Session->setFlash(__l('To date should greater than From date. Please, try again.') , 'default', null, 'error');
+            }
+        }
+
+		if ($this->RequestHandler->prefers('csv')) {
+          Configure::write('debug', 0);
+            $conditions = array();
+            if (!empty($this->request->params['named']['hash'])) {
+                $hash = $this->request->params['named']['hash'];
+            }
+            if (!empty($hash) && isset($_SESSION['export_affiliates'][$hash])) {
+                $ids = implode(',', $_SESSION['export_affiliates'][$hash]);
+                if ($this->Affiliate->isValidIdHash($ids, $hash)) {
+                    $conditions['Affiliate.id'] = $_SESSION['export_affiliates'][$hash];
+                } else {
+                    throw new NotFoundException(__l('Invalid request'));
+                }
+            }
             $this->set('affiliate', $this);
             $this->set('conditions', $conditions);
-            if (isset($this->request->data['Affiliate']['q'])) {
-                $this->set('q', $this->request->data['Affiliate']['q']);
-            }
-            $this->set('contain', $contain);
+
         }else{		
+
         $filters = $this->Affiliate->AffiliateStatus->find('list', array());
         $this->Affiliate->recursive = 1;
         $this->paginate = array(
@@ -374,7 +406,50 @@ class AffiliatesController extends AppController
                 'search' => $this->request->params['named']['q']
             ));
         }
+		  if (empty($this->request->data)) {
+            if (isset($this->request->params['named']['stat']) && $this->request->params['named']['stat'] == 'week') {
+                $this->request->data['Affiliate']['from_date'] = array(
+                    'year' => date('Y', strtotime("-7 days")) ,
+                    'month' => date('m', strtotime("-7 days")) ,
+                    'day' => date('d', strtotime("-7 days"))
+                );
+            } else if (isset($this->request->params['named']['stat']) && $this->request->params['named']['stat'] == 'month') {
+                $this->request->data['Affiliate']['from_date'] = array(
+                    'year' => date('Y', strtotime('-30 days')) ,
+                    'month' => date('m', strtotime('-30 days')) ,
+                    'day' => date('d', strtotime('-30 days'))
+                );
+            } else {
+                $this->request->data['Affiliate']['from_date'] = array(
+                    'year' => date('Y', strtotime('-90 days')) ,
+                    'month' => date('m', strtotime('-90 days')) ,
+                    'day' => date('d', strtotime('-90 days'))
+                );
+            }
+            $this->request->data['Affiliate']['to_date'] = array(
+                'year' => date('Y', strtotime('today')) ,
+                'month' => date('m', strtotime('today')) ,
+                'day' => date('d', strtotime('today'))
+            );
+        }
+		 $export_affiliates = $this->Affiliate->find('all', array(
+                'conditions' => $conditions,
+                'fields' => array(
+                    'Affiliate.id'
+                ) ,
+                'recursive' => - 1
+            ));
+            if (!empty($export_affiliates)) {
+                $ids = array();
+                foreach($export_affiliates as $export_affiliate) {
+                    $ids[] = $export_affiliate['Affiliate']['id'];
+                }
+                $hash = $this->Affiliate->getIdHash(implode(',', $ids));
+				$_SESSION['export_affiliates'][$hash] = $ids;
+                $this->set('export_hash', $hash);
+          }
         $this->set('affiliates', $this->paginate());
+
         $this->set(compact('filters'));
 		}
     }
