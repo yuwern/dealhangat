@@ -11,9 +11,9 @@ do {
         'recursive' => 1
     );
 
-    if(!empty($q)){
+ /*   if(!empty($q)){
         $affiliate->paginate['search'] = $q;
-    }
+    } */
     $Affiliates = $affiliate->paginate();
     if (!empty($Affiliates)) {
         $data = array();

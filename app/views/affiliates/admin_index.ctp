@@ -47,8 +47,9 @@ echo $this->Form->create('Affiliate' , array('action' => 'admin_index','class' =
             <?php
             	echo $this->Form->end();
             ?>
-<?php if (!empty($affiliates)): ?>
-<?php echo $this->Html->link(__l('CSV'), array_merge(array('controller' => 'affiliates', 'action' => 'index','city' => $city_slug, 'ext' => 'csv', 'admin' => true), $this->request->params['named']), array('title' => __l('CSV'), 'class' => 'export'));  ?>
+<?php if (!empty($affiliates)):
+?>
+<?php echo $this->Html->link(__l('CSV'), array('controller' => 'affiliates', 'action' => 'index', 'city' => $city_slug, 'hash' => $export_hash, 'ext' => 'csv', 'admin' => true), array('class' => 'export', 'title' => __l('CSV'), 'escape' => false)); ?>
 <?php endif; ?>
 <?php echo $this->element('paging_counter');?>
 <table class="list">
