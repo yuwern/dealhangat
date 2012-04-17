@@ -156,6 +156,17 @@ $.fx.speeds._default = 1000;
 									
 								}
 							}
+							if(formData[i]['name'] == "data[Deal][description_ms]"){
+								if(formData[i]['value'] == ''){
+									$('textarea', jqForm[0]).each(function(j) {
+										if ($('textarea', jqForm[0]).eq(j).attr('name') == 'data[Deal][description_ms]') {
+										   formData[i]['value'] = $('textarea', jqForm[0]).eq(j).val(); 
+										}
+										
+									});
+									
+								}
+							}
 						});	
 					},
                 success: function(responseText, statusText) {
@@ -645,7 +656,7 @@ jQuery(document).ready(function($) {
     $('a.js-thickbox').fcolorbox();
 	
 	//Colorbox for the first page 20/feb/2012
-	var url = document.URL;
+	/*var url = document.URL;
 	var param = document.URL.split('/');
 	if(param[3]=='welcome_to_dealhangat' || param[4]=='welcome_to_dealhangat' || param[4]=='' || param[3]==''){
 		$.fn.colorbox({href:__cfg('path_absolute')+"/kuala-lumpur/users/login",
@@ -653,7 +664,12 @@ jQuery(document).ready(function($) {
 		});
 		//$.fn.colorbox.resize();
 	}
-	
+	*/
+	$(".js-subscription-colorbox").livequery(function() {
+		$.fn.colorbox({href:__cfg('path_absolute')+"/kuala-lumpur/users/login",
+		scrolling:false,
+		});
+	});
 	//Subscription page validation
 	$('#homeSubscriptionFrom').livequery('submit', function(){
 		home_email=$('.js-home-email').val();
@@ -1039,9 +1055,8 @@ jQuery(document).ready(function($) {
     });
 	//End subscription
     $('a.js-toggle-show').livequery('click', function(){
-        $('.' + $(this).metadata().container).slideToggle('slow');
-		
-        if ($('.' + $(this).metadata().hide_container)) {
+	    $('.' + $(this).metadata().container).slideToggle('slow');
+	       if ($('.' + $(this).metadata().hide_container)) {
             $('.' + $(this).metadata().hide_container).hide('slow');
             $('.js-add-friend').show();
         }
