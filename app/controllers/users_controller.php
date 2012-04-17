@@ -4617,12 +4617,12 @@ class UsersController extends AppController
 				$facedata['UserFacebookLike']['site']=$share;
 				if($this->User->UserFacebookLike->save($facedata)){
 					$total = $this->User->UserFacebookLike->find('count', array('conditions'=>array('deal_id'=>$deal['Deal']['id'], 'site'=>$share)));
-					if($total==Configure::read('user.rewardcount')){
+					if($total==Configure::read('reward.rewardcount')){
 							$authorize_currency = $this->getAuthorizeConversionCurrency();
 							$site_currency_id = $authorize_currency['CurrencyConversion']['currency_id'];
 							$converted_currency_id = $authorize_currency['CurrencyConversion']['converted_currency_id'];
 							$conversion_rate = $authorize_currency['CurrencyConversion']['rate'];
-							$authorizenet_converted_amt = $this->User->_convertAuthorizeAmount(Configure::read('user.register_e_wallet_amount')); //Convert amount
+							$authorizenet_converted_amt = $this->User->_convertAuthorizeAmount(Configure::read('reward.amount')); //Convert amount
 							$data['Transaction']['converted_currency_id'] = $converted_currency_id;
 							$data['Transaction']['user_id'] = $user_id;
 							$data['Transaction']['foreign_id'] = ConstUserIds::Admin;
