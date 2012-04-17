@@ -1,5 +1,5 @@
 	<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
-	<div class="deal-view-inner-block clearfix">
+	<div class="deal-view-inner-block clearfix <?php if(!$this->Auth->sessionValid()){ ?>js-subscription-colorbox <?php } ?>">
 	<div class="side1">
           <?php if(!empty($deals)): ?>
 		  <?php 
