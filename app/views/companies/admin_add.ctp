@@ -47,11 +47,8 @@
 		<legend class="round-5"><?php echo __l('Paypal Account'); ?></legend>
             <?php echo $this->Form->input('User.UserProfile.paypal_account');?>
 		<?php
-		echo $this->Form->input('bank_name_ms',array('label' =>__l('Bank Name Malay')));
 		echo $this->Form->input('bank_name',array('label' =>__l('Bank Name')));
-		echo $this->Form->input('bank_account_ms',array('label' =>__l('Bank Account Malay')));
 		echo $this->Form->input('bank_account',array('label' =>__l('Bank Account')));
-		echo $this->Form->input('bank_register_no_ms',array('label' =>__l('Registration Number or IC Number Malay')));
 		echo $this->Form->input('bank_register_no',array('label' =>__l('Registration Number or IC Number')));
 		?>
 	</fieldset>
