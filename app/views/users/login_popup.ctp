@@ -30,13 +30,13 @@
 				<?php echo $this->Form->input('User.is_remember', array('type' => 'checkbox', 'div'=>false, 'label' => __l('Remember me on this computer.'), 'class'=>'checkbox')); ?>
 				<?php echo $this->Html->link(__l('Forgot your password?') , array('controller' => 'users', 'action' => 'forgot_password', 'admin' => false),array('title' => __l('Forgot your password?'))); ?>
 			</li>
-			<li><?php echo $this->Form->submit(__l('Login'), array('div'=>false)); ?>
-			<?php echo $this->Html->link(__l('Register?') , array('controller' => 'users', 'action' => 'register', 'admin' => false),array('title' => __l('User Registration?'), 'class'=>'reg')); ?>
+			<li><div class="float:left"><?php echo $this->Form->submit(__l('Login'), array('div'=>false)); ?>
+			<?php echo $this->Html->link(__l('Register?') , array('controller' => 'users', 'action' => 'register', 'admin' => false),array('title' => __l('User Registration?'), 'class'=>'reg')); ?></div>
 			</li>
 			<li><?php echo $this->Form->end(); ?>
 		</ul>
 		<div class="f-connect">
-			<div class="f-btn"><a href="/dealhangat/kuala-lumpur/users/facebook/login" title="Facebook Connect" onclick="javascript:void window.open('/dealhangat/kuala-lumpur/users/facebook/login','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;"><img src="/dealhangat/img/f-connect_2.png" width="234" height="71" alt="Facebook" /></a></div>
+			<div class="f-btn"><a href="/dealhangat/kuala-lumpur/users/facebook/login" title="Facebook Connect" onclick="javascript:void window.open('/dealhangat/kuala-lumpur/users/facebook/login','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;"><?php echo $this->Html->image('f-connect_2.png');?></div>
 			<div class="rm"><?php echo __l('Daftar hari ini, dapat RM 5!');?></div>
 		</div>
 		<div class="clearfix"></div>		
