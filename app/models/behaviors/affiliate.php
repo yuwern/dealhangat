@@ -157,7 +157,9 @@ class AffiliateBehavior extends ModelBehavior
                         $deal['Deal']['commission_percentage'] = $deal['SubDeal'][0]['commission_percentage'];
                         $deal['Deal']['discount_amount'] = $deal['SubDeal'][0]['discount_amount'];
                     }
-                    $deal_commission = ($deal['Deal']['discount_amount'] * $deal['Deal']['commission_percentage']) / 100;
+      //              $deal_commission = ($deal['Deal']['discount_amount'] * $deal['Deal']['commission_percentage']) / 100;
+		              $deal_commission = ($deal['Deal']['discount_amount']) / 100;
+
                     if (($affiliateType['AffiliateType']['affiliate_commission_type_id'] == ConstAffiliateCommissionType::Percentage)) {
                         $affiliate_commision_amount = ($deal_commission * $affiliateType['AffiliateType']['commission']) / 100;
                     } else {
