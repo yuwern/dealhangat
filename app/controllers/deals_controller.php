@@ -972,6 +972,74 @@ class DealsController extends AppController
         $this->set('data', $data);
         $this->set('deal_name', $deal_name);
     }
+	   //export deal listing in csv file
+    public function admin_coupons_document($deal_slug = null)
+    {
+	     if (empty($deal_slug)) {
+            throw new NotFoundException(__l('Invalid request'));
+        }
+		$this->layout='document';
+		$deal = $this->Deal->find('first',array(
+					'conditions' => array(
+						'Deal.slug'=> $deal_slug	
+					),
+					'contain' => array(
+						'Company' => array(
+							'fields' => array(
+								'Company.name',
+								'Company.bank_name',
+								'Company.bank_account',
+								'Company.bank_register_no',
+							)
+						)
+					),
+					'fields' => array(
+					  'Deal.id',
+					  'Deal.name_ms',
+					  'Deal.deal_user_count',
+					  'Deal.discounted_price',
+					  'Deal.commission_percentage',
+					) ,
+				)
+			);
+
+        $dealusers = $this->Deal->DealUser->find('all', array(
+            'conditions' => array(
+                'DealUser.deal_id' => $deal['Deal']['id'],
+                'DealUser.is_canceled' => 0
+            ) ,
+          'contain' => array(
+                'User' => array(
+                    'fields' => array(
+                        'User.user_type_id',
+                        'User.username',
+                        'User.id',
+                    )
+                ) ,
+                'Deal' => array(					
+                    'fields' => array(
+                        'Deal.id',
+						'Deal.company_id',
+                        'Deal.name',
+                        'Deal.coupon_start_date',
+                        'Deal.coupon_expiry_date'
+                    )
+                ) ,
+                'DealUserCoupon'
+            ) ,
+            'fields' => array(
+                'DealUser.id',
+                'DealUser.discount_amount',
+                'DealUser.quantity'
+            ) ,
+            'recursive' => 1
+        ));
+
+		$this->set('deal',$deal);
+		$this->set(compact('dealusers'));
+
+		
+	}
     function stats()
     {
         if ($this->Auth->user('user_type_id') == ConstUserTypes::Admin) {
@@ -1915,6 +1983,8 @@ class DealsController extends AppController
                         ) ,
                         'recursive' => 2
                     ));
+					$this->log('----------else ---------');
+					$this->log( $this->request->data);
                     $this->request->data['CloneAttachment'] = $cloneDeal['Attachment'];
                 }
             }
@@ -1972,6 +2042,9 @@ class DealsController extends AppController
                         'Deal.buy_max_quantity_per_user',
                         'Deal.coupon_condition',
                         'Deal.coupon_highlights',
+                        'Deal.coupon_condition_ms',
+                        'Deal.coupon_condition_ms',
+                        'Deal.coupon_highlights_ms',
                         'Deal.comment',
                         'Deal.meta_keywords',
                         'Deal.meta_description',
@@ -1981,6 +2054,8 @@ class DealsController extends AppController
                     ) ,
                     'recursive' => 2
                 ));
+				
+		
                 $this->request->data['Deal'] = $cloneDeal['Deal'];
                 $this->request->data['Deal']['clone_deal_id'] = $this->request->params['named']['clone_deal_id'];
                 $this->request->data['Deal']['company_slug'] = $cloneDeal['Company']['slug'];
@@ -2030,6 +2105,8 @@ class DealsController extends AppController
             $companies = $this->Deal->Company->find('list');
             $this->set(compact('companies'));
         }
+				$this->log('----------else 1---------');
+				$this->log( $this->request->data);
         $cities = $this->Deal->City->find('list', array(
             'conditions' => array(
                 'City.is_approved =' => 1
@@ -6063,5 +6140,8 @@ class DealsController extends AppController
             echo "Fail";
         }
     }
+	public function test(){
+
+	}
 }
 ?>
