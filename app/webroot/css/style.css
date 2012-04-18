@@ -1114,6 +1114,15 @@ form div.error-message {
 	text-align:left;
 	font-size:12px;
 }
+
+.pop_login ul li div.error-message {
+	color:#f06;
+	background:url(../img/icon-form-error.png) no-repeat scroll left center;
+	padding:0 0 0 20px;
+	text-align:left;
+	font-size:12px;position:absolute;right:0;top:-13px;
+}
+
 form.normal div.subscriptions-content-form div.error-message {
 	margin:0px;
 }
@@ -6234,7 +6243,7 @@ h6.logo a {
 .pop_login{ width:690px; height:290px; margin:0 auto; background:url(../img/login_bg.png) 0 -10px no-repeat;}
 
 .pop_login ul{ margin:0; padding:40px 23px 30px 42px; float:left; width:312px;}
-.pop_login ul li{ list-style:none; margin:0; padding:0 0 8px 0;}
+.pop_login ul li{ list-style:none; margin:0; padding:0 0 8px 0; position:relative;}
 .pop_login ul li input{ background:url(../img/pop_txt_bg.jpg) repeat-x; padding:5px; border:1px solid #999; width:98%; font-size:16px; font-weight:bold;}
 .pop_login ul li select{ background:url(../img/pop_txt_bg.jpg) repeat-x; height:33px; padding:5px; border:1px solid #999; width:100%; font-size:16px; font-weight:bold;}
 .pop_login ul li input[type="checkbox"]{ width:auto !important; height:auto !important; margin:0 !important; background:none !important; padding:0 !important; border:0px;}
@@ -6242,10 +6251,10 @@ h6.logo a {
 .pop_login ul li span{ font-size:11px; font-weight:bold; text-align:right;}
 .pop_login ul li a:hover{ text-decoration:underline;}
 .pop_login ul li strong{ font-size:16px; font-weight:bold;}
-.pop_login ul li input[type="submit"]{ background:url(../img/login/pop_login_btn.png) no-repeat; width:76px;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-family:arial; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px;}
+.pop_login ul li input[type="submit"]{ background:url(../img/login/pop_login_btn.png) no-repeat; width:76px;padding:5px 0 25px 0; border:0px solid #999;float:left;  font-size:12px; font-family:arial; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px;}
 .pop_login ul li input.login-btn{ background:url(../img/login/login-but.png) no-repeat; width:64px;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px;}
 
-.pop_login ul li a.reg{ background:url(../img/login/pop_login_btn.png) no-repeat; width:78px;display:inline-block;padding:5px 0 25px 0; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 0; text-align:center; *height:33px; color:#000;}
+.pop_login ul li a.reg{ background:url(../img/login/pop_login_btn.png) no-repeat; width:78px;display:inline-block;padding:5px 0 25px 0; float:left; border:0px solid #999;  font-size:12px; font-weight:bold; cursor:pointer; line-height:20px; margin:10px 0 0 5px; text-align:center; *height:33px; color:#000;}
 .pop_login ul li a.reg:hover{color:#208e20;}
 
 .pop_login ul li input:hover[type="submit"]{ color:#208e20;}
