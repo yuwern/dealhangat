@@ -995,14 +995,15 @@ class DealsController extends AppController
 					),
 					'fields' => array(
 					  'Deal.id',
-					  'Deal.name_ms',
+					  'Deal.name',
 					  'Deal.deal_user_count',
 					  'Deal.discounted_price',
 					  'Deal.commission_percentage',
+					  'Deal.end_date',
+					  'Deal.coupon_expiry_date',
 					) ,
 				)
 			);
-
         $dealusers = $this->Deal->DealUser->find('all', array(
             'conditions' => array(
                 'DealUser.deal_id' => $deal['Deal']['id'],

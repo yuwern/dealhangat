@@ -4587,7 +4587,6 @@ class UsersController extends AppController
         $this->set('tmpLogsFileSize', bytes_to_higher(dskspace(TMP . 'logs')));
     }
 	public function credit_amount(){
-		echo ConstTransactionTypes::AddFundForFeacbookShare;
 		$this->autoRender=false;
 		$this->layout=false;
 		Configure::write('debug', 0);
@@ -4597,9 +4596,16 @@ class UsersController extends AppController
 		$values = parse_url($url);
 		$slug = array_pop(explode('/',$values['path']));
 		$user_id=$this->Auth->user('id');
-		$deal=$this->User->DealUser->Deal->find('first', array('conditions' =>
-			array('slug'=>$slug),
-			'recursive'=>-1
+		$deal=$this->User->DealUser->Deal->find('first',
+			array('conditions' =>array(
+					'slug'=>$slug
+				),
+				'fields'=> array(
+				'Deal.id',
+				'Deal.slug',
+
+				),
+				'recursive'=>-1
 		));
 		$user_data=$this->User->UserFacebookLike->find('first', array('conditions' =>
 			array('UserFacebookLike.user_id'=>$user_id, 'UserFacebookLike.deal_id'=>$deal['Deal']['id'], 'UserFacebookLike.site'=>$share),
@@ -4627,7 +4633,7 @@ class UsersController extends AppController
 							$data['Transaction']['user_id'] = $user_id;
 							$data['Transaction']['foreign_id'] = ConstUserIds::Admin;
 							$data['Transaction']['class'] = 'SecondUser';
-							$data['Transaction']['amount'] = Configure::read('user.register_e_wallet_amount');
+							$data['Transaction']['amount'] = Configure::read('reward.amount');
 							//$data['Transaction']['payment_gateway_id'] = ConstPaymentGateways::AuthorizeNet;
 							$data['Transaction']['transaction_type_id'] = ConstTransactionTypes::AddFundForFeacbookShare;
 							///////Authorize.net currency conversion////////////////////////
@@ -4637,7 +4643,7 @@ class UsersController extends AppController
 							$data['Transaction']['rate'] = $conversion_rate;
 							if($this->User->Transaction->save($data)){
 								$this->User->updateAll(array(
-									'User.available_balance_amount' => 'User.available_balance_amount +' . ConstTransactionTypes::AddFundForFeacbookShare,
+									'User.available_balance_amount' => 'User.available_balance_amount +' . Configure::read('reward.amount'),
 								), array(
 									'User.id' => $user_id
 								));	
