@@ -36,7 +36,7 @@
 			<li><?php echo $this->Form->end(); ?>
 		</ul>
 		<div class="f-connect">
-			<div class="f-btn"><a href="/dealhangat/kuala-lumpur/users/facebook/login" title="Facebook Connect" onclick="javascript:void window.open('/dealhangat/kuala-lumpur/users/facebook/login','width=700,height=500,toolbar=0,menubar=0,location=0,status=1,scrollbars=1,resizable=1,left=0,top=0');return false;"><?php echo $this->Html->image('f-connect_2.png');?></div>
+			<div class="f-btn">	<?php echo $this->Html->link($this->Html->image('f-connect_2.png'), array('controller' => 'users', 'action' => 'login','type'=>'facebook'), array('target' => '_blank','title' => __l('Sign in with Facebook'), 'escape' => false)); ?></div>
 			<div class="rm"><?php echo __l('Daftar hari ini, dapat RM 5!');?></div>
 		</div>
 		<div class="clearfix"></div>		
