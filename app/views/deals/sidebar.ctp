@@ -33,6 +33,15 @@
 			</p>
 	</div>
 <!-- Virtual Store --> 
+
+<!-- Logo -->    
+	<div class="sidebar-business">
+		<h3><?php echo __l('Media Partners'); ?></h3>
+		<?php echo $this->Html->image('partner_utusan.png') ?><br/><br/>
+		<?php echo $this->Html->image('partner_kosmo.png') ?><br/><br/>
+		<?php echo $this->Html->image('partner_mangga.png') ?><br/>
+	</div>
+<!-- Logo --> 
   
 <!-- Today's Main Deals -->  
   <?php  //if(!empty($main_deals) || (!(empty($this->params['named']['type']) and $this->params['named']['type'] != 'all'))):
