@@ -35,11 +35,13 @@
 <!-- Virtual Store --> 
 
 <!-- Logo -->    
-	<div class="sidebar-business">
+	<div class="sidebar-contact">
 		<h3><?php echo __l('Media Partners'); ?></h3>
+		<p align="center">
 		<?php echo $this->Html->image('partner_utusan.png') ?><br/><br/>
 		<?php echo $this->Html->image('partner_kosmo.png') ?><br/><br/>
 		<?php echo $this->Html->image('partner_mangga.png') ?><br/>
+		</p>
 	</div>
 <!-- Logo --> 
   
