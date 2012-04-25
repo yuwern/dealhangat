@@ -33,8 +33,8 @@
 			<li><div class="float:left"><?php echo $this->Form->submit(__l('Login'), array('div'=>false)); ?>
 			<?php echo $this->Html->link(__l('Register?') , array('controller' => 'users', 'action' => 'register', 'admin' => false),array('title' => __l('User Registration?'), 'class'=>'reg')); ?></div>
 			</li>
-			<li><?php echo $this->Form->end(); ?>
-		</ul>
+			
+		</ul><?php echo $this->Form->end(); ?>
 		<div class="f-connect">
 			<div class="f-btn">	<?php echo $this->Html->link($this->Html->image('f-connect_2.png'), array('controller' => 'users', 'action' => 'login','type'=>'facebook'), array('target' => '_blank','title' => __l('Sign in with Facebook'), 'escape' => false)); ?></div>
 			<div class="rm"><?php echo __l('Daftar hari ini, dapat RM 5!');?></div>
