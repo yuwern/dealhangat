@@ -290,6 +290,7 @@ dl.total-list {
 	padding:3px 0 0 0;
 	margin:0 20px 0 0;
 }
+.total-list{width:100%;}
 dl.total-list dd,dl.total-list dt {
 	float:left;
 	padding:0 2px;
@@ -6242,7 +6243,7 @@ h6.logo a {
 
 .pop_login{ width:690px; height:290px; margin:0 auto; background:url(../img/login_bg.png) 0 -10px no-repeat;}
 
-.pop_login ul{ margin:0; padding:40px 23px 30px 42px; float:left; width:312px;}
+ .pop_login ul{ margin:0; padding:40px 23px 30px 42px; float:left; width:312px;}
 .pop_login ul li{ list-style:none; margin:0; padding:0 0 8px 0; position:relative;}
 .pop_login ul li input{ background:url(../img/pop_txt_bg.jpg) repeat-x; padding:5px; border:1px solid #999; width:98%; font-size:16px; font-weight:bold;}
 .pop_login ul li select{ background:url(../img/pop_txt_bg.jpg) repeat-x; height:33px; padding:5px; border:1px solid #999; width:100%; font-size:16px; font-weight:bold;}
