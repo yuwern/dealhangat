@@ -300,6 +300,26 @@ $.fx.speeds._default = 1000;
             return false;
         });
     };
+	  $.fn.fajaxaffiliate = function() {
+        $(this).livequery('submit', function(e) {
+            var $this = $(this);
+            $this.block();
+            $this.ajaxSubmit( {
+                beforeSubmit: function(formData, jqForm, options) {},
+                success: function(responseText, statusText) {
+                    redirect = responseText.split('*');
+                    if (redirect[0] == 'redirect') {
+                        location.href = redirect[1];
+                    } else if (responseText == 'success') {
+                        window.location.reload();
+                    } else {
+                        $this.parents('.js-affiliate-response').html(responseText);
+                    }
+                }
+            });
+            return false;
+        });
+    };
     $.fn.fcommentform = function() {
         $(this).livequery('submit', function(e) {
             var $this = $(this);
@@ -667,7 +687,7 @@ jQuery(document).ready(function($) {
 	*/
 	$(".js-subscription-colorbox").livequery(function() {
 		$.fn.colorbox({href:__cfg('path_absolute')+"/kuala-lumpur/users/login",
-		scrolling:false,
+		scrolling:false
 		});
 	});
 	//Subscription page validation
@@ -692,6 +712,7 @@ jQuery(document).ready(function($) {
     // bind form comment using ajaxForm
     $('#topics-add form.js-comment-form, #users-view form.js-comment-form, #companies-view form.js-comment-form').fcommentform();
     $('form.js-ajax-login').fajaxlogin();
+    $('form.js-ajax-affiliate').fajaxaffiliate();
     // bind upload form using ajaxForm
 	$('form.js-upload-form').fuploadajaxform();
     // jquery flash uploader function
@@ -1453,7 +1474,7 @@ jQuery(document).ready(function($) {
  });
 //End error
 // branch address add
-$('#CompanyAddressBranch , #CityNameBranch').livequery('blur', function() {
+$('#CompanyAddressBranch, #CityNameBranch').livequery('blur', function() {
         if ($('#CompanyAddressBranch').val() != '' || $('#CityNameBranch').val() != '') {
             if ($('#CompanyAddressBranch').val() != '' && $('#CityNameBranch').val() != '') {
                 var address = $('#CompanyAddressBranch').val() + ', ' + $('#CityNameBranch').val();
