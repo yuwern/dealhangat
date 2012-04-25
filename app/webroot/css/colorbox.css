@@ -91,7 +91,7 @@ float:none;
 	background:url(../img/colorbox/borderx.png) 0 -29px repeat-x;
 }
 #cboxContent {
-	background:#fff;
+	/*background:#fff;*/
 }
 #cboxLoadedContent {
 	margin-bottom:28px;
