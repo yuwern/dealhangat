@@ -167,33 +167,23 @@
 		 <?php endif;
 		 $user_id=$this->Auth->user('id');
 		 ?>
-		  <div id="fb-root"></div>
-<script type="text/javascript" charset="utf-8">
-  window.twttr = (function (d,s,id) {
-    var t, js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
-    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-  }(document, "script", "twitter-wjs"));
-
-twttr.events.bind('tweet', function(event) {
-   alert('hai');
-});
-</script>		  
-			<script type="text/javascript">
+	<!--	  <div id="fb-root"></div> -->
+	<script type="text/javascript">
 			  window.fbAsyncInit = function() {
-				FB.init({appId: '147267432014750', status: true, cookie: true,
+				FB.init({appId: <?php echo Configure::read('facebook.fb_api_key'); ?>, status: true, cookie: true,
 						 xfbml: true});
 				<?php if(!empty($user_id)) {?>
 				$( "#dialog:ui-dialog" ).dialog( "destroy" );
 				FB.Event.subscribe('edge.create',
-					function(response) {
+				function(response) {
 						$.ajax({
 							type: 'POST',
 							url: __cfg('path_absolute')+'users/credit_amount/',
 							cache: true,
 							data: {id:response, share:<?php echo ConstShare::Facebook; ?>},
 							success: function(data) {
+								if(data =='Already Shared')
+									alert(data);
 								$pay=data.search('Credit');
 								if($pay>-1){
 									$( "#dialog-message" ).dialog({
@@ -222,7 +212,7 @@ twttr.events.bind('tweet', function(event) {
 			<div id="dialog-message" title="Congratulation" style="display:none">
 				<p>
 					<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-					Your are get the RM5 for the reward from Dealhangat. 
+					Your are get the RM <?php echo Configure::read('reward.amount'); ?> for the reward from Dealhangat. 
 				</p>
 				<p>
 					Thanks For Your Interest in the Product</b>.
