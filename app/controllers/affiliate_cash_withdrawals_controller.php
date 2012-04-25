@@ -148,7 +148,8 @@ class AffiliateCashWithdrawalsController extends AppController
                     ));
                     $this->Session->setFlash('Affiliate cash withdrawal request has been added', 'default', null, 'success');
                     if ($this->RequestHandler->isAjax()) {
-                        $this->autoRender = false;
+							echo 'redirect*' .  Router::url('/', true) . 'affiliate_cash_withdrawals/index' . $this->request->data['User']['f'];
+							exit;
                     } else {
                         $this->redirect(array(
                             'action' => 'index',

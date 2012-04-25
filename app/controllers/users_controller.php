@@ -4611,8 +4611,7 @@ class UsersController extends AppController
 			array('UserFacebookLike.user_id'=>$user_id, 'UserFacebookLike.deal_id'=>$deal['Deal']['id'], 'UserFacebookLike.site'=>$share),
 			'recursive'=>-1
 			));
-		if(!empty($this->params['isAjax']) &&!empty($user_id) && !empty($deal) && empty($user_data)){
-		//$this->request->data['User']
+		if(!empty($this->params['isAjax']) &&!empty($user_id) && !empty($deal)){
 			$user=$this->User->find('first', array('conditions' =>
 				array('id'=>$user_id),
 				'recursive'=>-1
@@ -4623,7 +4622,7 @@ class UsersController extends AppController
 				$facedata['UserFacebookLike']['site']=$share;
 				if($this->User->UserFacebookLike->save($facedata)){
 					$total = $this->User->UserFacebookLike->find('count', array('conditions'=>array('deal_id'=>$deal['Deal']['id'], 'site'=>$share)));
-					if($total==Configure::read('reward.rewardcount')){
+						if($total==Configure::read('reward.rewardcount')){
 							$authorize_currency = $this->getAuthorizeConversionCurrency();
 							$site_currency_id = $authorize_currency['CurrencyConversion']['currency_id'];
 							$converted_currency_id = $authorize_currency['CurrencyConversion']['converted_currency_id'];
@@ -4647,7 +4646,7 @@ class UsersController extends AppController
 								), array(
 									'User.id' => $user_id
 								));	
-								$this->User->UserFacebookLike->deleteAll(array('deal_id'=>$deal['Deal']['id'], 'site'=>$share));
+								$this->User->UserFacebookLike->deleteAll(array('UserFacebookLike.deal_id'=>$deal['Deal']['id'], 'UserFacebookLike.site'=>1));
 								echo 'Credit';
 								exit;
 							}
@@ -4656,7 +4655,7 @@ class UsersController extends AppController
 				}
 			}
 		}else{
-			echo "Already Found";
+			echo "Already Shared";
 		}
 	}
 }
