@@ -1,19 +1,20 @@
 <?php /* SVN: $Id: index.ctp 1721 2010-04-17 11:06:44Z preethi_083at09 $ */ ?>
 <div class="userCashWithdrawals index js-response js-withdrawal_responses js-responses">
-<?php if(!empty($user['UserProfile']['paypal_account'])) { ?>
+<?php 
+/*if(!empty($user['UserProfile']['paypal_account'])) { */?>
         <?php echo $this->element('../affiliate_cash_withdrawals/add', array('cache' => array('config' => 'site_element_cache'))); ?>
-<?php }
+<?php/* }
 else
-{ ?>
-<div class="page-info">
+{ */?>
+<!--<div class="page-info">
 <b>
 <?php
  echo $this->Html->link(__l('Your Paypal account is empty, so click here to update your paypal account.'), array('controller' => 'user_profiles', 'action'=>'edit'), array('title' => __l('Edit paypal account')));
  ?>
  </b>
- </div>
+ </div>-->
 <?php
-}
+//}
 ?>
 <?php echo $this->element('paging_counter');?>
   <div class="overflow-block">
