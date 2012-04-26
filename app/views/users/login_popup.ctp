@@ -1,9 +1,9 @@
 <div class="js-login-response">
 <div class="pop">
   <div class="pop-bor">
-	<div class="rip"><?php echo __l('Selamat datang ke');?></div>
+	<div class="rip"><?php echo __l('Welcome to');?></div>
 	  <p class="a-center"><?php echo $this->Html->image('login/pop_logo.png', array('width'=>180, 'height'=>87));?></p>
-	<p class="pop-text"><?php echo __l("Setiap hari, DealHangat akan e-mel anda satu tawaran eksklusif yang menakjubkan di Kuala Lumpur pada harga yang tak terkalahkan. Deals harian kita adalah untuk:	Restoran Halal, Spa, Konsert, Acara Sukan, Kelas, Salon, dan banyak lagi ...");?></p>
+	<p class="pop-text"><?php echo __l("Every day, e-mel DealHangat will offer you an exclusive stunning in Kuala Lumpur at an unbeatable price. Daily Deals we are for: Halal Restaurant, Spa, Concert, Sport Events, Classes, Salon, and many more ...");?></p>
 	  <ul class="icon-list">
 		<li><?php echo $this->Html->image('login/icon1.png');?></li>
 		<li><?php echo $this->Html->image('login/icon2.png');?></li>
@@ -36,8 +36,8 @@
 			
 		</ul><?php echo $this->Form->end(); ?>
 		<div class="f-connect">
-			<div class="f-btn">	<?php echo $this->Html->link($this->Html->image('f-connect_2.png'), array('controller' => 'users', 'action' => 'login','type'=>'facebook'), array('target' => '_blank','title' => __l('Sign in with Facebook'), 'escape' => false)); ?></div>
-			<div class="rm"><?php echo __l('Daftar hari ini, dapat RM 5!');?></div>
+			<div class="f-btn">	<?php echo $this->Html->link($this->Html->image('f-connect_2.png'), array('controller' => 'users', 'action' => 'login','type'=>'facebook'), array('target' => '_blank','title' => __l('Sign up today, to RM').' '. Configure::read('user.register_e_wallet_amount').'!', 'escape' => false)); ?></div>
+			<div class="rm"><?php echo __l('Sign up today, to RM').' '. Configure::read('user.register_e_wallet_amount').'!';?></div>
 		</div>
 		<div class="clearfix"></div>		
 	  </div>
