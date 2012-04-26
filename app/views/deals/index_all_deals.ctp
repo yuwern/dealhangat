@@ -190,7 +190,8 @@
 										modal: true,
 										buttons: {
 											Ok: function() {
-												window.location.href = __cfg('path_absolute')+'transactions/';
+												window.location.href = __cfg('path_absolute')+'users/my_stuff#My_Transactions';
+												return false;
 											}
 										}
 									});
@@ -212,10 +213,10 @@
 			<div id="dialog-message" title="Congratulation" style="display:none">
 				<p>
 					<span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-					Your are get the RM <?php echo Configure::read('reward.amount'); ?> for the reward from Dealhangat. 
+					<?php echo __l('Your are get the RM'); ?> <?php echo Configure::read('reward.amount'); ?> <?php echo __l('for the reward from Dealhangat.'); ?> 
 				</p>
 				<p>
-					Thanks For Your Interest in the Product</b>.
+					<?php echo __l('Thanks For Your Interest in the Product'); ?></b>.
 				</p>
 			</div>
 			<?php }?>
