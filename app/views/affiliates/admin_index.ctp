@@ -109,12 +109,11 @@ else:
 endif;
 ?>
 </table>
-
-<?php
+ <div class="js-pagination"><?php
 if (!empty($affiliates)) {
     echo $this->element('paging_links');
 }
-?>
+?></div>
 <?php
 endif;
 
