@@ -3,7 +3,7 @@
   <div class="pop-bor">
 	<div class="rip"><?php echo __l('Welcome to');?></div>
 	  <p class="a-center"><?php echo $this->Html->image('login/pop_logo.png', array('width'=>180, 'height'=>87));?></p>
-	<p class="pop-text"><?php echo __l("Every day, e-mel DealHangat will offer you an exclusive stunning in Kuala Lumpur at an unbeatable price. Daily Deals we are for: Halal Restaurant, Spa, Concert, Sport Events, Classes, Salon, and many more ...");?></p>
+	<p class="pop-text"><?php echo __l("Every day, DealHangat will offer you an exclusive stunning in Kuala Lumpur at an unbeatable price. Daily Deals we are for: Halal Restaurant, Spa, Concert, Sport Events, Classes, Salon, and many more ...");?></p>
 	  <ul class="icon-list">
 		<li><?php echo $this->Html->image('login/icon1.png');?></li>
 		<li><?php echo $this->Html->image('login/icon2.png');?></li>
