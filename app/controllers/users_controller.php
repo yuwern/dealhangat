@@ -3037,7 +3037,7 @@ class UsersController extends AppController
                     'controller' => 'users',
                     'action' => 'index'
                 ) ,
-                'rowspan' => 6 - $rowspan_ct
+                'rowspan' => 5 - $rowspan_ct
             )
         );
         if (Configure::read('facebook.is_enabled_facebook_connect')) {
@@ -3074,7 +3074,7 @@ class UsersController extends AppController
                 'isSub' => 'User'
             )
         );
-		$models[] = array(
+		/*$models[] = array(
             'User' => array(
                 'display' => __l('Foursquare') ,
                 'link' => array(
@@ -3089,7 +3089,7 @@ class UsersController extends AppController
                 'alias' => 'UserFoursquare',
                 'isSub' => 'User'
             )
-        );
+        );*/
         if (Configure::read('user.is_enable_openid') || Configure::read('user.is_enable_gmail_openid') || Configure::read('user.is_enable_yahoo_openid')) {
             $models[] = array(
                 'User' => array(
@@ -3191,7 +3191,7 @@ class UsersController extends AppController
                 'isSub' => 'User'
             )
         );
-		$models[] = array(
+	/*	$models[] = array(
             'User' => array(
                 'display' => __l('Foursquare') ,
                 'link' => array(
@@ -3207,7 +3207,7 @@ class UsersController extends AppController
                 'isSub' => 'User'
             )
         );
-        if (Configure::read('user.is_enable_openid') || Configure::read('user.is_enable_gmail_openid') || Configure::read('user.is_enable_yahoo_openid')) {
+      */  if (Configure::read('user.is_enable_openid') || Configure::read('user.is_enable_gmail_openid') || Configure::read('user.is_enable_yahoo_openid')) {
             $models[] = array(
                 'User' => array(
                     'display' => __l('OpenID') ,
