@@ -171,7 +171,7 @@
                                   <?php if(!empty($this->request->params['named']['filter_id']) && (($this->request->params['named']['filter_id'] == ConstDealStatus::Tipped) || ($this->request->params['named']['filter_id'] == ConstDealStatus::Closed) || ($this->request->params['named']['filter_id'] == ConstDealStatus::PaidToCompany))):?>
                                        <?php echo $this->Html->link(__l('Coupons CSV'), array('controller' => 'deals', 'action' => 'coupons_export',  'admin' => false,'deal_id:'.$deal['Deal']['id'],'ext' => 'csv'), array('class' => 'export', 'title' => __l('Coupons CSV')));?>
                                         <span> <?php //
-										 echo $this->Html->link(__l('Word'), array('controller' => 'deals', 'action' => 'coupons_document',$deal['Deal']['slug'], 'admin' => true),array('title' => __l('Word Document'), 'class' => 'export'));
+										 echo $this->Html->link(__l('Word'), array('controller' => 'deals', 'action' => 'coupons_document',$deal['Deal']['id'], 'admin' => true),array('title' => __l('Word Document'), 'class' => 'export'));
 										//echo $this->Html->link(__l('Print'),array('controller' => 'deals', 'action' => 'deals_print', 'filter_id' => $this->request->params['named']['filter_id'],'page_type' => 'print', 'deal_id' => $deal['Deal']['id']),array('title' => __l('Print'), 'class'=>'print-icon'));
 									?></span>
                                    <?php endif; ?>
