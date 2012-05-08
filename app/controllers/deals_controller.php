@@ -722,7 +722,7 @@ class DealsController extends AppController
                     'company' => $company['Company']['slug'],
                     'admin' => false
                 ));
-            }
+            }
             if (!empty($this->request->params['named']['city'])) {
                 $get_current_city = $this->request->params['named']['city'];
             } else {
@@ -973,15 +973,15 @@ class DealsController extends AppController
         $this->set('deal_name', $deal_name);
     }
 	   //export deal listing in csv file
-    public function admin_coupons_document($deal_slug = null)
+    public function admin_coupons_document($deal_id = null)
     {
-	     if (empty($deal_slug)) {
+	     if (empty($deal_id)) {
             throw new NotFoundException(__l('Invalid request'));
         }
 		$this->layout='document';
 		$deal = $this->Deal->find('first',array(
 					'conditions' => array(
-						'Deal.slug'=> $deal_slug	
+						'Deal.id'=> $deal_id	
 					),
 					'contain' => array(
 						'Company' => array(
