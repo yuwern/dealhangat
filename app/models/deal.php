@@ -6,7 +6,7 @@ class Deal extends AppModel
     public $actsAs = array(
         'Sluggable' => array(
             'label' => array(
-                'name'
+                'name_ms'
             )
         ) ,
 		'i18n'=> array('fields' => array('name','description', 'coupon_condition','coupon_highlights', 'comment', 'private_note'))
@@ -510,6 +510,11 @@ class Deal extends AppModel
                 'message' => __l('Required')
             ) ,
             'description_ms' => array(
+                'rule' => 'notempty',
+                'allowEmpty' => false,
+                'message' => __l('Required')
+            ) ,			
+            'description' => array(
                 'rule' => 'notempty',
                 'allowEmpty' => false,
                 'message' => __l('Required')
