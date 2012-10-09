@@ -1,4 +1,4 @@
-<?php /* SVN: $Id: index.ctp 54285 2011-05-23 10:16:38Z aravindan_111act10 $ */ ?>
+<?php /* SVN: $Id: index.ctp 54285 2011-05-23 10:16:38Z aravindan_111act10 $ test */ ?>
 <div class="cities-info-block">
 	<ol class="cities-list clearfix" start="<?php echo $this->Paginator->counter(array(
 		'format' => '%start%'
